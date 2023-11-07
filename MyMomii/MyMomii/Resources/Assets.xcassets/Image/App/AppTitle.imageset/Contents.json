@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "title_mymomii_1x.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
