@@ -284,11 +284,12 @@
 			};
 			buildConfigurationList = 7D97FE242AF9DE4D000608DA /* Build configuration list for PBXProject "MyMomii" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 7D97FE202AF9DE4D000608DA;
 			packageReferences = (
