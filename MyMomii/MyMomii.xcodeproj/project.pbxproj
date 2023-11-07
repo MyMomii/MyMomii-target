@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D67F3F32AFA0BBC00F7931D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7D67F3F22AFA0BBC00F7931D /* .swiftlint.yml */; };
 		7D97FE2D2AF9DE4D000608DA /* MyMomiiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D97FE2C2AF9DE4D000608DA /* MyMomiiApp.swift */; };
 		7D97FE2F2AF9DE4D000608DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D97FE2E2AF9DE4D000608DA /* ContentView.swift */; };
 		7D97FE312AF9DE4E000608DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D97FE302AF9DE4E000608DA /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D67F3F22AFA0BBC00F7931D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7D97FE292AF9DE4D000608DA /* MyMomii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMomii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D97FE2C2AF9DE4D000608DA /* MyMomiiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMomiiApp.swift; sourceTree = "<group>"; };
 		7D97FE2E2AF9DE4D000608DA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 		7D97FE202AF9DE4D000608DA = {
 			isa = PBXGroup;
 			children = (
+				7D67F3F22AFA0BBC00F7931D /* .swiftlint.yml */,
 				7D97FE2B2AF9DE4D000608DA /* MyMomii */,
 				7D97FE2A2AF9DE4D000608DA /* Products */,
 			);
@@ -256,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D67F3F32AFA0BBC00F7931D /* .swiftlint.yml in Resources */,
 				7D97FE342AF9DE4E000608DA /* Preview Assets.xcassets in Resources */,
 				7D97FE312AF9DE4E000608DA /* Assets.xcassets in Resources */,
 			);
