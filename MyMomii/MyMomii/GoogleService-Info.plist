@@ -3,30 +3,28 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyAltZUtY0Fl3TwL9uKruKhlblAtLksK8Sw</string>
+	<string>AIzaSyBr3lRVFt2aePVrdhZtvn7Fs3ulbr05cew</string>
 	<key>GCM_SENDER_ID</key>
-	<string>183222676192</string>
+	<string>838112572466</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.AhnNyeong.MyMomii</string>
+	<string>com.AhnNyeong.MyMomii-target</string>
 	<key>PROJECT_ID</key>
-	<string>mymomii</string>
+	<string>mymomii-tar</string>
 	<key>STORAGE_BUCKET</key>
-	<string>mymomii.appspot.com</string>
+	<string>mymomii-tar.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:183222676192:ios:0a1aa7e14e3f14ea83fe85</string>
-	<key>DATABASE_URL</key>
-	<string>https://mymomii-default-rtdb.firebaseio.com</string>
+	<string>1:838112572466:ios:969527280a2c1fd6c3b82b</string>
 </dict>
 </plist>
