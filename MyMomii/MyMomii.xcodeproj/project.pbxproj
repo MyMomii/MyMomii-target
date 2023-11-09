@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D5D05452AFC80CB0004D3F4 /* Confetti_02.json in Resources */ = {isa = PBXBuildFile; fileRef = 7D5D05432AFC80CB0004D3F4 /* Confetti_02.json */; };
+		7D5D05462AFC80CB0004D3F4 /* Confetti_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 7D5D05442AFC80CB0004D3F4 /* Confetti_01.json */; };
+		7D5D054A2AFCA04C0004D3F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D5D05492AFCA04C0004D3F4 /* GoogleService-Info.plist */; };
 		7D67F3F32AFA0BBC00F7931D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7D67F3F22AFA0BBC00F7931D /* .swiftlint.yml */; };
 		7D67F4002AFA3B0900F7931D /* ModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F3FF2AFA3B0900F7931D /* ModelTest.swift */; };
 		7D67F4022AFA3B9B00F7931D /* TargetMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F4012AFA3B9B00F7931D /* TargetMainView.swift */; };
@@ -61,6 +64,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D5D05432AFC80CB0004D3F4 /* Confetti_02.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Confetti_02.json; sourceTree = "<group>"; };
+		7D5D05442AFC80CB0004D3F4 /* Confetti_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Confetti_01.json; sourceTree = "<group>"; };
+		7D5D05492AFCA04C0004D3F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../MacC-Team-AhnNyeong/AhnNyeong/AhnNyeong/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7D67F3F22AFA0BBC00F7931D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7D67F3FF2AFA3B0900F7931D /* ModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTest.swift; sourceTree = "<group>"; };
 		7D67F4012AFA3B9B00F7931D /* TargetMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetMainView.swift; sourceTree = "<group>"; };
@@ -155,6 +161,7 @@
 		7D97FE2B2AF9DE4D000608DA /* MyMomii */ = {
 			isa = PBXGroup;
 			children = (
+				7D5D05492AFCA04C0004D3F4 /* GoogleService-Info.plist */,
 				7D97FE3A2AF9DE9B000608DA /* Model */,
 				7DADB0522AFBD0A600A6846B /* LoFi */,
 				7D97FE3B2AF9DF0D000608DA /* UI */,
@@ -220,6 +227,8 @@
 		7D97FE3E2AF9DF46000608DA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7D5D05442AFC80CB0004D3F4 /* Confetti_01.json */,
+				7D5D05432AFC80CB0004D3F4 /* Confetti_02.json */,
 				7D97FE302AF9DE4E000608DA /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -339,8 +348,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D67F3F32AFA0BBC00F7931D /* .swiftlint.yml in Resources */,
+				7D5D05452AFC80CB0004D3F4 /* Confetti_02.json in Resources */,
+				7D5D05462AFC80CB0004D3F4 /* Confetti_01.json in Resources */,
 				7D97FE342AF9DE4E000608DA /* Preview Assets.xcassets in Resources */,
 				7D97FE312AF9DE4E000608DA /* Assets.xcassets in Resources */,
+				7D5D054A2AFCA04C0004D3F4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
