@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Mood2.png",
+      "filename" : "Frame 1101.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "mood_02_2x.png",
+      "filename" : "Frame 1101@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "mood_02_3x.png",
+      "filename" : "Frame 1101@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
