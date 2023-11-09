@@ -12,6 +12,7 @@ struct TargetMainView: View {
     @State var startDefaultBtnClick = false
     @State var calendarBtnClick = false
     @State var toSympView = false
+    @State var isLottieViewDone = false
     var body: some View {
         NavigationStack {
             ZStack {
@@ -23,9 +24,10 @@ struct TargetMainView: View {
                             Text("이김생리님")
                                 .heavy32Black400()
                         }
+                        .padding(.vertical, 20)
                         Spacer()
                     }
-                    .padding(EdgeInsets(top: 20, leading: 10, bottom: 20, trailing: 10))
+                    Spacer()
                     Button(action: {
                         startDefaultBtnClick = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -33,8 +35,8 @@ struct TargetMainView: View {
                         }
                     }, label: {
                         Image(startDefaultBtnClick ? "TargetDropPressed" : "TargetDrop")
-                            .padding(.top, 63)
                     })
+                    Spacer()
                     if startDefaultBtnClick {
                         Text("생리를 시작했어요!")
                             .bold30Coral500()
@@ -44,6 +46,7 @@ struct TargetMainView: View {
                             .bold30Black400()
                             .padding(.top, 40)
                     }
+                    Spacer()
                     Button(action: {
                         calendarBtnClick = true
                     }, label: {
@@ -52,7 +55,6 @@ struct TargetMainView: View {
                             .padding(.init(top: 10, leading: 15, bottom: 10, trailing: 15))
                             .background(RoundedRectangle(cornerRadius: 10).fill(.white).shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.15), radius: 4, x: 0, y: 4))
                     })
-                    .padding(.top, 40)
                     Spacer()
                 }
                 .padding(EdgeInsets(top: 30, leading: 16, bottom: 30, trailing: 16))
@@ -63,14 +65,18 @@ struct TargetMainView: View {
                     TargetMainView()
                 }
                 .background(Color.white300)
+                .zIndex(isLottieViewDone ? 9 : 0)
                 LottieView(animation: .named("Confetti_01"))
                     .resizable()
                     .configure { lottieAnimationView in
-                        lottieAnimationView.contentMode = .scaleToFill
+                        lottieAnimationView.contentMode = .scaleAspectFill
+                        lottieAnimationView.animationSpeed = 1.5
                     }
                     .playing()
+                    .animationDidFinish { _ in
+                        self.isLottieViewDone = true
+                    }
                     .ignoresSafeArea()
-
             }
         }
     }
