@@ -1,8 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "Mood3.png",
-      "idiom" : "universal"
+      "filename" : "mood_03_1x.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "mood_03_2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "mood_03_3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

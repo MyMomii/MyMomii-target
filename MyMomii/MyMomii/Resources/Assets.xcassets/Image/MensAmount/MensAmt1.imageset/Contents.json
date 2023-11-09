@@ -1,8 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "flow_low_1x.png",
-      "idiom" : "universal"
+      "filename" : "flow_01_1x.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "flow_01_2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "flow_01_3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {
