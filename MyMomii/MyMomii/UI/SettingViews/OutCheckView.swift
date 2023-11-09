@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct OutCheckView: View {
-    @Binding var selectedUserType: ContentView.LoginType
     @State var isCheckBtnPressed = false
     let isLogOut: Bool
     
@@ -31,12 +30,8 @@ struct OutCheckView: View {
                 }
                 .padding(.bottom, 49)
                 .onTapGesture {
-                    selectedUserType = .notyet
                     isCheckBtnPressed = true
                 }
-        }
-        .navigationDestination(isPresented: $isCheckBtnPressed) {
-            LoginTypeView(selectedUserType: $selectedUserType).navigationBarBackButtonHidden(true)
         }
         .padding(.horizontal, 16)
         .background(Color.white300)
