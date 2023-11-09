@@ -10,6 +10,7 @@
 		7D5D05452AFC80CB0004D3F4 /* Confetti_02.json in Resources */ = {isa = PBXBuildFile; fileRef = 7D5D05432AFC80CB0004D3F4 /* Confetti_02.json */; };
 		7D5D05462AFC80CB0004D3F4 /* Confetti_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 7D5D05442AFC80CB0004D3F4 /* Confetti_01.json */; };
 		7D5D054A2AFCA04C0004D3F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D5D05492AFCA04C0004D3F4 /* GoogleService-Info.plist */; };
+		7D5D054C2AFCA3060004D3F4 /* DeviceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5D054B2AFCA3050004D3F4 /* DeviceSize.swift */; };
 		7D67F3F32AFA0BBC00F7931D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7D67F3F22AFA0BBC00F7931D /* .swiftlint.yml */; };
 		7D67F4002AFA3B0900F7931D /* ModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F3FF2AFA3B0900F7931D /* ModelTest.swift */; };
 		7D67F4022AFA3B9B00F7931D /* TargetMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F4012AFA3B9B00F7931D /* TargetMainView.swift */; };
@@ -67,6 +68,7 @@
 		7D5D05432AFC80CB0004D3F4 /* Confetti_02.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Confetti_02.json; sourceTree = "<group>"; };
 		7D5D05442AFC80CB0004D3F4 /* Confetti_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Confetti_01.json; sourceTree = "<group>"; };
 		7D5D05492AFCA04C0004D3F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../MacC-Team-AhnNyeong/AhnNyeong/AhnNyeong/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7D5D054B2AFCA3050004D3F4 /* DeviceSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceSize.swift; sourceTree = "<group>"; };
 		7D67F3F22AFA0BBC00F7931D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7D67F3FF2AFA3B0900F7931D /* ModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTest.swift; sourceTree = "<group>"; };
 		7D67F4012AFA3B9B00F7931D /* TargetMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetMainView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		7D67F4092AFA3BBC00F7931D /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				7D5D054B2AFCA3050004D3F4 /* DeviceSize.swift */,
 				7D67F40A2AFA3BE000F7931D /* GestureModifier.swift */,
 				7D67F40B2AFA3BE000F7931D /* TextModifier.swift */,
 			);
@@ -393,6 +396,7 @@
 				7DADB0582AFBD0A700A6846B /* MensInfoStore.swift in Sources */,
 				7DADB05B2AFBD0A700A6846B /* EditView.swift in Sources */,
 				7D67F4162AFA3BED00F7931D /* SettingNotiView.swift in Sources */,
+				7D5D054C2AFCA3060004D3F4 /* DeviceSize.swift in Sources */,
 				7D67F4072AFA3BA600F7931D /* DailyEditView.swift in Sources */,
 				7DADB0592AFBD0A700A6846B /* MensInfo.swift in Sources */,
 				7D67F4022AFA3B9B00F7931D /* TargetMainView.swift in Sources */,

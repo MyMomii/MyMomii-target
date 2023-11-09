@@ -7,6 +7,65 @@
 
 import SwiftUI
 
+struct SympView: View {
+    @StateObject var mensInfoStore: MensInfoStore = MensInfoStore()
+    @State var mensSympSelected = 0
+    @State var mensAmtSelected = 0
+    @State var emoLvSelected = 0
+    let mensSympTitle = ["안 아파요", "아파요", "많이 아파요"]
+    let mensAmtTitle = ["적어요", "보통이에요", "많아요"]
+    let emoLvTitle = ["적어요", "보통이에요", "많아요"]
+    let dateformat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY년 M월 d일 HH:mm:ss"
+        return formatter
+    }()
+    var body: some View {
+            VStack(spacing: 20) {
+                TodayWithDayOfWeek()
+                    .padding(.top, 5)
+                symptomViewByDevice
+                HStack {
+                    Button(action: {
+                        mensInfoStore.addNewMensInfo(
+                            mensInfo: MensInfo(id: UUID().uuidString, imperID: "imperID", mensAmt: mensAmtTitle[mensAmtSelected],
+                                               mensSymp: mensSympTitle[mensSympSelected], emoLv: emoLvTitle[emoLvSelected], regDe: dateformat.string(from: Date())))
+                    }, label: {
+                        RoundedRectangle(cornerRadius: 61)
+                            .foregroundColor(.coral500)
+                            .overlay(
+                                Text("저장해요")
+                                    .bold24White50()
+                            )
+                            .frame(height: 65)
+                            .shadow(color: .black500.opacity(0.15), radius: 4, x: 0, y: 4)
+                    })
+                }
+                Spacer()
+            }
+            .padding(.horizontal, 16)
+            .background(Color.white300)
+            .navigationBarBackButtonHidden()
+    }
+
+    @ViewBuilder private var symptomViewByDevice: some View {
+        if DeviceSize.width < DeviceSize.iPhone14 {
+            ScrollView {
+                VStack(spacing: 20) {
+                    MensSympDetailView(mensSympSelected: $mensSympSelected, imgTitle: mensSympTitle)
+                    MensAmtDetailView(mensAmtSelected: $mensAmtSelected, imgTitle: mensAmtTitle)
+                    MoodDetailView(emoLvSelected: $emoLvSelected, imgTitle: emoLvTitle)
+                }
+                .padding(.bottom, 5)
+            }
+        } else {
+            MensSympDetailView(mensSympSelected: $mensSympSelected, imgTitle: mensSympTitle)
+            MensAmtDetailView(mensAmtSelected: $mensAmtSelected, imgTitle: mensAmtTitle)
+            MoodDetailView(emoLvSelected: $emoLvSelected, imgTitle: emoLvTitle)
+        }
+    }
+}
+
 struct MensSympDetailView: View {
     @Binding var mensSympSelected: Int
     let imgTitle: [String]
@@ -150,50 +209,6 @@ struct TodayWithDayOfWeek: View {
     var body: some View {
         Text("\(Image(systemName: "calendar")) \(dateformat.string(from: Date()))")
             .bold22Coral400()
-    }
-}
-
-struct SympView: View {
-    @StateObject var mensInfoStore: MensInfoStore = MensInfoStore()
-    @State var mensSympSelected = 0
-    @State var mensAmtSelected = 0
-    @State var emoLvSelected = 0
-    let mensSympTitle = ["안 아파요", "아파요", "많이 아파요"]
-    let mensAmtTitle = ["적어요", "보통이에요", "많아요"]
-    let emoLvTitle = ["적어요", "보통이에요", "많아요"]
-    let dateformat: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY년 M월 d일 HH:mm:ss"
-        return formatter
-    }()
-    var body: some View {
-            VStack(spacing: 20) {
-                TodayWithDayOfWeek()
-                    .padding(.top, 5)
-                MensSympDetailView(mensSympSelected: $mensSympSelected, imgTitle: mensSympTitle)
-                MensAmtDetailView(mensAmtSelected: $mensAmtSelected, imgTitle: mensAmtTitle)
-                MoodDetailView(emoLvSelected: $emoLvSelected, imgTitle: emoLvTitle)
-                HStack {
-                    Button(action: {
-                        mensInfoStore.addNewMensInfo(
-                            mensInfo: MensInfo(id: UUID().uuidString, imperID: "imperID", mensAmt: mensAmtTitle[mensAmtSelected],
-                                               mensSymp: mensSympTitle[mensSympSelected], emoLv: emoLvTitle[emoLvSelected], regDe: dateformat.string(from: Date())))
-                    }, label: {
-                        RoundedRectangle(cornerRadius: 61)
-                            .foregroundColor(.coral500)
-                            .overlay(
-                                Text("저장해요")
-                                    .bold24White50()
-                            )
-                            .frame(height: 65)
-                            .shadow(color: .black500.opacity(0.15), radius: 4, x: 0, y: 4)
-                    })
-                }
-                Spacer()
-            }
-            .padding(.horizontal, 16)
-            .background(Color.white300)
-            .navigationBarBackButtonHidden()
     }
 }
 
