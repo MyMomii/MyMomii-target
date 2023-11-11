@@ -598,4 +598,3 @@ struct Heavy32Black400: ViewModifier {
 #Preview {
     TextModifier()
 }
-
