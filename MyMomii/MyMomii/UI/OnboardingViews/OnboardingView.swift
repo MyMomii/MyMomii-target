@@ -24,7 +24,7 @@ struct OnboardingView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .background(Color.coral300)
+        .background(Color.coral200)
     }
 }
 
