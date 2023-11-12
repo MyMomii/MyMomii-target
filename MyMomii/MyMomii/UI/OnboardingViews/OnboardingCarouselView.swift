@@ -25,49 +25,48 @@ struct CarouselView: View {
             VStack {
                 TabView(selection: $selectedImageIndex) {
                     ForEach(0..<imageNames.count, id: \.self) { index in
-                        //                    ZStack {
-                        //                        Image("\(imageNames[index])")
-                        //                            .resizable()
-                        //                            .tag(index)
-                        //                            .frame(width: 300, height: 560)
-                        //                    }
-                        //                        .shadow(color: .black.opacity(0.15), radius: 4, x: 0, y: 2)
-                        Rectangle()
-                            .frame(width: 340, height: 560)
-                            .cornerRadius(20)
-                            .overlay {
+                        ZStack(alignment: .topLeading) {
+                            if DeviceSize.width < DeviceSize.iPhone14 {
                                 Image("\(imageNames[index])")
                                     .resizable()
                                     .tag(index)
-                                    .frame(width: 350, height: 560)
+                                    .frame(width: 280, height: 365)
+                            } else {
+                                Image("\(imageNames[index])")
+                                    .resizable()
+                                    .tag(index)
+                                    .frame(width: 340, height: 560)
                             }
+                        }
                             .shadow(color: .black.opacity(0.15), radius: 4, x: 0, y: 2)
                     }
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                HStack {
-                    ForEach(0..<imageNames.count, id: \.self) { index in
-                        Circle()
-                            .fill(Color.white.opacity(selectedImageIndex == index ? 1 : 0.33))
-                            .frame(width: 16, height: 8)
-                            .onTapGesture {
-                                selectedImageIndex = index
-                            }
-                    }
-                }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 Button(action: {
                     goToMain = true
                 }, label: {
-                    Rectangle()
-                        .frame(width: 358, height: 58)
-                        .foregroundColor(isLastImage ? .white200: .coral100)
-                        .cornerRadius(61)
-                        .overlay {
-                            Text("시작하기")
-                                .bold18Coral500()
-                        }
+                    if DeviceSize.width < DeviceSize.iPhone14 {
+                        Rectangle()
+                            .frame(width: 288, height: 58)
+                            .foregroundColor(isLastImage ? .white200: .coral100)
+                            .cornerRadius(61)
+                            .overlay {
+                                Text("시작하기")
+                                    .bold18Coral500()
+                            }
+                    } else {
+                        Rectangle()
+                            .frame(width: 358, height: 58)
+                            .foregroundColor(isLastImage ? .white200: .coral100)
+                            .cornerRadius(61)
+                            .overlay {
+                                Text("시작하기")
+                                    .bold18Coral500()
+                            }
+                    }
+                    
                 })
-                .padding(.vertical, 10)
+                .padding(.bottom, 20)
                 .disabled(!isLastImage)
                 .navigationDestination(isPresented: $goToMain) {
                     TargetMainView()
@@ -77,6 +76,7 @@ struct CarouselView: View {
         }
     }
 }
+
 #Preview {
     OnboardingCarouselView()
 }
