@@ -5,6 +5,7 @@
 //  Created by qwd on 11/13/23.
 //
 
+import FirebaseAuth
 import SwiftUI
 
 struct OnboardingCarouselView: View {
@@ -20,6 +21,8 @@ struct CarouselView: View {
         return selectedImageIndex == imageNames.count - 1
     }
     @State var goToMain = false
+    @EnvironmentObject private var authModel: AuthViewModel
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -44,6 +47,7 @@ struct CarouselView: View {
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 Button(action: {
                     goToMain = true
+//                    authModel.signInAnonymously()
                 }, label: {
                     if DeviceSize.width < DeviceSize.iPhone14 {
                         Rectangle()
@@ -64,7 +68,6 @@ struct CarouselView: View {
                                     .bold18Coral500()
                             }
                     }
-                    
                 })
                 .padding(.bottom, 20)
                 .disabled(!isLastImage)
