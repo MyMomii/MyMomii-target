@@ -62,7 +62,7 @@
 		7DADB0592AFBD0A700A6846B /* MensInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADB0552AFBD0A600A6846B /* MensInfo.swift */; };
 		7DADB05A2AFBD0A700A6846B /* ImperMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADB0562AFBD0A600A6846B /* ImperMainView.swift */; };
 		7DADB05B2AFBD0A700A6846B /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADB0572AFBD0A600A6846B /* EditView.swift */; };
-		DE4140572AFF72C300A20CC9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4140562AFF72C300A20CC9 /* OnboardingView.swift */; };
+		DE4140572AFF72C300A20CC9 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4140562AFF72C300A20CC9 /* LaunchScreenView.swift */; };
 		DE895D962B01BB8400FB2226 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE895D952B01BB8400FB2226 /* AuthViewModel.swift */; };
 		DE895D982B01BB9B00FB2226 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE895D972B01BB9B00FB2226 /* AuthenticationView.swift */; };
 		DEC525E92B0170DC008C0B1B /* OnboardingCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC525E82B0170DC008C0B1B /* OnboardingCarouselView.swift */; };
@@ -97,7 +97,7 @@
 		7DADB0552AFBD0A600A6846B /* MensInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MensInfo.swift; sourceTree = "<group>"; };
 		7DADB0562AFBD0A600A6846B /* ImperMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImperMainView.swift; sourceTree = "<group>"; };
 		7DADB0572AFBD0A600A6846B /* EditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
-		DE4140562AFF72C300A20CC9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		DE4140562AFF72C300A20CC9 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		DE895D952B01BB8400FB2226 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		DE895D972B01BB9B00FB2226 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		DEC525E82B0170DC008C0B1B /* OnboardingCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCarouselView.swift; sourceTree = "<group>"; };
@@ -268,7 +268,7 @@
 		DE4140552AFF72B200A20CC9 /* OnboardingViews */ = {
 			isa = PBXGroup;
 			children = (
-				DE4140562AFF72C300A20CC9 /* OnboardingView.swift */,
+				DE4140562AFF72C300A20CC9 /* LaunchScreenView.swift */,
 				DEC525E82B0170DC008C0B1B /* OnboardingCarouselView.swift */,
 				DE895D952B01BB8400FB2226 /* AuthViewModel.swift */,
 				DE895D972B01BB9B00FB2226 /* AuthenticationView.swift */,
@@ -431,7 +431,7 @@
 				DE895D962B01BB8400FB2226 /* AuthViewModel.swift in Sources */,
 				7D67F41B2AFA3BED00F7931D /* OutCheckView.swift in Sources */,
 				7D67F4062AFA3BA600F7931D /* SympView.swift in Sources */,
-				DE4140572AFF72C300A20CC9 /* OnboardingView.swift in Sources */,
+				DE4140572AFF72C300A20CC9 /* LaunchScreenView.swift in Sources */,
 				DE895D982B01BB9B00FB2226 /* AuthenticationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

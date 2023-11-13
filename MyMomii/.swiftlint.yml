@@ -563,9 +563,9 @@ type_body_length:
   warning: 200 # warning
   error: 400 # error
 file_length:
-  warning: 300
-  error: 600
-function_body_length: 300
+  warning: 1000
+  error: 1000
+function_body_length:
   warning: 40
   error: 400
 

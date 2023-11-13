@@ -21,8 +21,8 @@ struct MyMomiiApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-            AuthenticationView().environmentObject(AuthViewModel())
+            ContentView()
+//            AuthenticationView().environmentObject(AuthViewModel())
         }
     }
 }

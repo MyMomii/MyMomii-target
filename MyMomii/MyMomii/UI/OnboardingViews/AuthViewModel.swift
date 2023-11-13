@@ -12,7 +12,8 @@ final class AuthViewModel: ObservableObject {
     @Published var user: User?
     func listenToAuthState() {
         Auth.auth().addStateDidChangeListener { [ weak self ] _, user in
-            guard self != nil else { return
+            guard self != nil else { 
+                return
             }
         }
         self.user = user
@@ -24,6 +25,7 @@ final class AuthViewModel: ObservableObject {
         do {
             try Auth.auth().signOut()
         } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)}
+            print("Error signing out: %@", signOutError)
+        }
     }
 }

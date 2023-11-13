@@ -52,7 +52,7 @@ struct CarouselView: View {
                     if DeviceSize.width < DeviceSize.iPhone14 {
                         Rectangle()
                             .frame(width: 288, height: 58)
-                            .foregroundColor(isLastImage ? .white200: .coral100)
+                            .foregroundColor(isLastImage ? .white200 : .coral100)
                             .cornerRadius(61)
                             .overlay {
                                 Text("시작하기")
@@ -61,7 +61,7 @@ struct CarouselView: View {
                     } else {
                         Rectangle()
                             .frame(width: 358, height: 58)
-                            .foregroundColor(isLastImage ? .white200: .coral100)
+                            .foregroundColor(isLastImage ? .white200 : .coral100)
                             .cornerRadius(61)
                             .overlay {
                                 Text("시작하기")
