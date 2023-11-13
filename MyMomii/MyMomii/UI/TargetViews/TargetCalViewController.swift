@@ -118,6 +118,54 @@ class TargetCalViewController: UIViewController, FSCalendarDelegate {
         configureUI()
         configureCalendar()
     }
+
+    func calculateAverageConsecutiveDays(array: [Date], defulatPeriod: Int = 28) {
+        guard array.count > 0 else { return }
+
+        var periodDaysCount = 1
+        var totalPeriodDays: [Int] = []
+        var totalGap: [Int] = []
+        var currentGap: Int?
+        var lastStartDay = array.first ?? Date()
+
+        for index in 1..<array.count {
+            let previousDate = Calendar.current.date(byAdding: .day, value: -1, to: array[index])!
+            if Calendar.current.isDate(array[index-1], equalTo: previousDate, toGranularity: .day) {
+                periodDaysCount += 1
+            } else {
+                totalPeriodDays.append(periodDaysCount)
+                periodDaysCount = 1
+
+                if let gap = currentGap {
+                    totalGap.append(gap + totalPeriodDays[totalPeriodDays.count-2] - 1)
+                }
+
+                currentGap = Calendar.current.dateComponents([.day], from: array[index-1], to: array[index]).day
+
+                lastStartDay = array[index]
+            }
+        }
+
+        totalPeriodDays.append(periodDaysCount)
+        if let gap = currentGap {
+            totalGap.append(gap + totalPeriodDays[totalPeriodDays.count-2] - 1)
+        }
+
+        let periodGap = Int(Double(totalPeriodDays.reduce(0,+))/Double(totalPeriodDays.count))
+
+        let mensturationGap = totalGap.count != 0 ?   Int(Double(totalGap.reduce(0,+))/Double(totalGap.count)) : defulatPeriod
+
+
+        var nextMensturations: [Date] = []
+
+        for index in 0..<periodGap {
+            let nextMensturation = Calendar.current.date(byAdding: .day, value: mensturationGap+index, to: lastStartDay)!
+
+            nextMensturations.append(nextMensturation)
+        }
+
+        self.eventsArray = nextMensturations
+    }
 }
 
 // MARK: - FSCalendar
@@ -136,13 +184,11 @@ extension TargetCalViewController: FSCalendarDataSource, FSCalendarDelegateAppea
 
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         self.bridgeModel?.selectedDataContainer = date
-//        print(self.bridgeModel?.selectedDataContainer)
-        // 이벤트 추가 <- TEMP for Test
-        if (date>Date()) {    // 예정일
-            eventsArray.append(date)
-        } else {    // 오늘과 과거
+        // 이벤트 추가 및 예측
+        if (date <= Date()) {
             eventsArrayDone.append(date)
         }
+        calculateAverageConsecutiveDays(array: eventsArrayDone.sorted())
 
         // 선택 일자 타이틀 색상 지정
         let day = Calendar.current.component(.weekday, from: date) - 1
