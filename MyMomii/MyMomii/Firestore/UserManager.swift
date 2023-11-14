@@ -21,6 +21,7 @@ struct DBUser: Codable {
     let dateCreated: Date?
     let preferences: [String]?
     let favoriteMovie: Movie?
+    let mensInfo: MensInfo?
 
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -28,6 +29,7 @@ struct DBUser: Codable {
         self.dateCreated = Date()
         self.preferences = nil
         self.favoriteMovie = nil
+        self.mensInfo = nil
     }
 
     init(
@@ -35,13 +37,15 @@ struct DBUser: Codable {
         isAnonymous: Bool? = nil,
         dateCreated: Date? = nil,
         preferences: [String]? = nil,
-        favoriteMovie: Movie? = nil
+        favoriteMovie: Movie? = nil,
+        mensInfo: MensInfo? = nil
     ) {
         self.userId = userId
         self.isAnonymous = isAnonymous
         self.dateCreated = dateCreated
         self.preferences = preferences
         self.favoriteMovie = favoriteMovie
+        self.mensInfo = mensInfo
     }
 
     enum CodingKeys: String, CodingKey {
@@ -50,6 +54,7 @@ struct DBUser: Codable {
         case dateCreated = "date_created"
         case preferences = "preferences"
         case favoriteMovie = "favorite_movie"
+        case mensInfo = "mens_info"
     }
 
     init(from decoder: Decoder) throws {
@@ -59,6 +64,7 @@ struct DBUser: Codable {
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.preferences = try container.decodeIfPresent([String].self, forKey: .preferences)
         self.favoriteMovie = try container.decodeIfPresent(Movie.self, forKey: .favoriteMovie)
+        self.mensInfo = try container.decodeIfPresent(MensInfo.self, forKey: .mensInfo)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -68,6 +74,7 @@ struct DBUser: Codable {
         try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
         try container.encodeIfPresent(self.preferences, forKey: .preferences)
         try container.encodeIfPresent(self.favoriteMovie, forKey: .favoriteMovie)
+        try container.encodeIfPresent(self.mensInfo, forKey: .mensInfo)
     }
 
 }
@@ -161,6 +168,26 @@ final class UserManager {
     func removeFavoriteMovie(userId: String) async throws {
         let data: [String: Any?] = [
             DBUser.CodingKeys.favoriteMovie.rawValue: nil
+        ]
+
+        try await userDocument(userId: userId).updateData(data as [AnyHashable: Any])
+    }
+
+    func addMensInfo(userId: String, mensInfo: MensInfo) async throws {
+        guard let data = try? encoder.encode(mensInfo) else {
+            throw URLError(.badURL)
+        }
+
+        let dict: [String: Any] = [
+            DBUser.CodingKeys.mensInfo.rawValue: data
+        ]
+
+        try await userDocument(userId: userId).updateData(dict)
+    }
+
+    func removeMensInfo(userId: String) async throws {
+        let data: [String: Any?] = [
+            DBUser.CodingKeys.mensInfo.rawValue: nil
         ]
 
         try await userDocument(userId: userId).updateData(data as [AnyHashable: Any])
