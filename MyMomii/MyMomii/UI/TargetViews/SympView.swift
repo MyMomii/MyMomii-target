@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SympView: View {
-    @StateObject var mensInfoStore: MensInfoStore = MensInfoStore()
+    @StateObject private var viewModel = SympViewModel()
     @State var mensSympSelected = 0
     @State var mensAmtSelected = 0
     @State var emoLvSelected = 0
@@ -22,26 +22,34 @@ struct SympView: View {
     }()
     var body: some View {
             VStack(spacing: 20) {
-                TodayWithDayOfWeek()
-                    .padding(.top, 5)
-                symptomViewByDevice
-                HStack {
-                    Button(action: {
-                        mensInfoStore.addNewMensInfo(
-                            mensInfo: MensInfo(id: UUID().uuidString, imperID: "imperID", mensAmt: mensAmtTitle[mensAmtSelected],
-                                               mensSymp: mensSympTitle[mensSympSelected], emoLv: emoLvTitle[emoLvSelected], regDe: dateformat.string(from: Date())))
-                    }, label: {
-                        RoundedRectangle(cornerRadius: 61)
-                            .foregroundColor(.coral500)
-                            .overlay(
-                                Text("저장해요")
-                                    .bold24White50()
-                            )
-                            .frame(height: 65)
-                            .shadow(color: .black500.opacity(0.15), radius: 4, x: 0, y: 4)
-                    })
+                if let user = viewModel.user {
+                    TodayWithDayOfWeek()
+                        .padding(.top, 5)
+                    symptomViewByDevice
+                    HStack {
+                        Button(action: {
+                            if user.mensInfo == nil {
+                                // MARK: dateOfMens 는 달력에서 값 받아와야 함
+                                viewModel.addMensInfo(mensSymp: mensSympTitle[mensSympSelected], mensAmt: mensAmtTitle[mensAmtSelected], emoLv: emoLvTitle[emoLvSelected], dateOfMens: Date())
+                            } else {
+                                viewModel.removeMensInfo()
+                            }
+                        }, label: {
+                            RoundedRectangle(cornerRadius: 61)
+                                .foregroundColor(.coral500)
+                                .overlay(
+                                    Text("저장해요")
+                                        .bold24White50()
+                                )
+                                .frame(height: 65)
+                                .shadow(color: .black500.opacity(0.15), radius: 4, x: 0, y: 4)
+                        })
+                    }
                 }
                 Spacer()
+            }
+            .task {
+                try? await viewModel.loadCurrentUser()
             }
             .padding(.horizontal, 16)
             .background(Color.white300)
