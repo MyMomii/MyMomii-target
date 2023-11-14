@@ -8,31 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var isSettingMainView = false
-    @State var isTargetMainView = false
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 20) {
-                Button(action: {
-                    self.isSettingMainView = true
-                }, label: {
-                    Text("SettingMainView")
-                })
-                .navigationDestination(isPresented: $isSettingMainView) {
-                    SettingMainView(userName: "이김생리")
-                }
-
-                Button(action: {
-                    self.isTargetMainView = true
-                }, label: {
-                    Text("TargetMainView")
-                })
-                .navigationDestination(isPresented: $isTargetMainView) {
-                    TargetMainView()
-                }
-            }
-            .padding()
-        }
+        LaunchScreenView()
     }
 }
 
