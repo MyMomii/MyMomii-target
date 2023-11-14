@@ -47,11 +47,11 @@ struct CarouselView: View {
                                         Text("간편히 입력하세요")
                                             .bold23White300()
                                     } else {
-                                        HStack {
+                                        HStack(spacing: 0) {
                                             Text("달력에서")
                                                 .regular23White300()
-                                            Text("생리 예상 주기와")
-                                                    .bold23White300()
+                                            Text(" 생리 예상 주기와")
+                                                .bold23White300()
                                         }
                                         Text("과거 정보를 확인하세요")
                                             .bold23White300()
@@ -75,11 +75,11 @@ struct CarouselView: View {
                                         Text("간편히 입력하세요")
                                             .bold23White300()
                                     } else {
-                                        HStack {
+                                        HStack(spacing: 0) {
                                             Text("달력에서")
                                                 .regular23White300()
-                                            Text("생리 예상 주기와")
-                                                    .bold23White300()
+                                            Text(" 생리 예상 주기와")
+                                                .bold23White300()
                                         }
                                         Text("과거 정보를 확인하세요")
                                             .bold23White300()

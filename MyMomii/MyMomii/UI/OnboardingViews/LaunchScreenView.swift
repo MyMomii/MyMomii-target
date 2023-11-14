@@ -10,7 +10,7 @@ import SwiftUI
 struct LaunchScreenView: View {
     @State private var isActive = false
     @State private var size = 0.8
-    @State private var opacity = 0.3
+    @State private var opacity = 0.5
     
     var body: some View {
         if isActive {
@@ -24,7 +24,7 @@ struct LaunchScreenView: View {
                     .resizable()
                     .frame(width: 130, height: 214)
                     .shadow(color: .black.opacity(0.15), radius: 5, x: 0, y: 4)
-                Text("마이모미와 함께 \n소중한 월경 주기를 관리해보아요")
+                Text("마이모미와 함께\n소중한 월경 주기를 관리해보아요")
                     .semiBold16White50()
                     .multilineTextAlignment(.center)
             }
@@ -32,7 +32,7 @@ struct LaunchScreenView: View {
             .opacity(opacity)
             .onAppear {
                 withAnimation(.easeIn(duration: 1.2)) {
-                    self.size = 1.2
+                    self.size = 1.0
                     self.opacity = 1.0
                 }
             }
