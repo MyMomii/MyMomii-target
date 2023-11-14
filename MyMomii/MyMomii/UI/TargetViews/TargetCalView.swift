@@ -14,6 +14,7 @@ struct TargetCalView: View {
     @State private var eventsArrayDone: [Date] = []
     @State private var calendarTitle: String = ""
     @State private var changePage: Int = 0
+    @State var isInputSelected: Bool = false
     var dDay: Int
     var dDayTitle: String {
         if dDay == 0 {
@@ -31,12 +32,15 @@ struct TargetCalView: View {
                 .font(.system(size: 32, weight: .bold))
                 .foregroundColor(Color.coral400)
                 .padding(EdgeInsets(top: 16, leading: 8, bottom: 32, trailing: 8))
-            CalendarRect(selectedDate: $selectedDate, calendarHeight: $calendarHeight, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage)
+            CalendarRect(selectedDate: $selectedDate, calendarHeight: $calendarHeight, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage, isInputSelected: $isInputSelected)
                 .frame(height: 600)
             Spacer()
         }
         .padding(.horizontal, 16)
         .background(Color.white300)
+        .navigationDestination(isPresented: $isInputSelected) {
+            SympView()
+        }
     }
 }
 
@@ -48,6 +52,7 @@ struct CalendarRect: View {
     @Binding var eventsArrayDone: [Date]
     @Binding var calendarTitle: String
     @Binding var changePage: Int
+    @Binding var isInputSelected: Bool
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -71,7 +76,7 @@ struct CalendarRect: View {
                 .frame(height: 600)
                 .padding(EdgeInsets(top: 8, leading: 16, bottom: 16, trailing: 16))
                 .offset(y: 70)
-            MensDataRect(selectedDate: $selectedDate, eventsArrayDone: $eventsArrayDone)
+            MensDataRect(selectedDate: $selectedDate, eventsArrayDone: $eventsArrayDone, isInputSelected: $isInputSelected)
                 .padding(EdgeInsets(top: 200, leading: 16, bottom: 16, trailing: 16))
         }
     }
@@ -111,6 +116,7 @@ struct CalendarHeader: View {
 struct MensDataRect: View {
     @Binding var selectedDate: Date
     @Binding var eventsArrayDone: [Date]
+    @Binding var isInputSelected: Bool
 
     var body: some View {
         VStack(alignment: .trailing, spacing: 0) {
@@ -154,6 +160,7 @@ struct MensDataRect: View {
                 } else {
                     eventsArrayDone.append(selectedDate)
                 }
+                isInputSelected = true
             } label: {
                 Rectangle()
                     .cornerRadius(10)
@@ -171,6 +178,7 @@ struct MensDataRect: View {
                     }
             }
             .padding(.top, 16)
+
             Spacer()
         }
         .frame(height: 350)
