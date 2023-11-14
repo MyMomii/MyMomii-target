@@ -68,7 +68,7 @@ struct TargetMainView: View {
                         SympView()
                     }
                     .navigationDestination(isPresented: $calendarBtnClick) {
-                        TargetMainView()
+                        TargetCalView()
                     }
                     .background(Color.white300)
                     .zIndex(isLottieViewDone ? 9 : 0)
@@ -85,6 +85,8 @@ struct TargetMainView: View {
                         .ignoresSafeArea()
                 }
             }
+            .navigationBarBackButtonHidden()
+
         }
     }
 }

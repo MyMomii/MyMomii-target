@@ -54,9 +54,6 @@ extension Text {
     func medium22Black500() -> some View {
         modifier(Medium22Black500())
     }
-    func medium23White300() -> some View {
-        modifier(Medium23White300())
-    }
     // MARK: - SemiBold
     func semiBold12Black200() -> some View {
         modifier(SemiBold12Black200())
@@ -154,6 +151,9 @@ extension Text {
     }
     func bold22Coral400() -> some View {
         modifier(Bold22Coral400())
+    }
+    func bold23White300() -> some View {
+        modifier(Bold23White300())
     }
     func bold24White50() -> some View {
         modifier(Bold24White50())
@@ -278,14 +278,6 @@ struct Medium22Black500: ViewModifier {
         content
             .font(.system(size: 22, weight: .medium))
             .foregroundColor(.black500)
-    }
-}
-
-struct Medium23White300: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .font(.system(size: 23, weight: .medium))
-            .foregroundColor(.white300)
     }
 }
 
@@ -542,6 +534,14 @@ struct Bold22Coral400: ViewModifier {
         content
             .font(.system(size: 22, weight: .bold))
             .foregroundColor(.coral400)
+    }
+}
+
+struct Bold23White300: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: 23, weight: .bold))
+            .foregroundColor(.white300)
     }
 }
 

@@ -40,17 +40,21 @@ struct CarouselView: View {
                                         Text("생리를 시작했다면,")
                                             .regular23White300()
                                         Text("생리 정보를 입력하세요")
-                                            .medium23White300()
+                                            .bold23White300()
                                     } else if index == 1 {
                                         Text("내 생리 증상을 선택하여")
                                             .regular23White300()
                                         Text("간편히 입력하세요")
-                                            .medium23White300()
+                                            .bold23White300()
                                     } else {
-                                        Text("달력에서 생리 예상 주기와")
-                                            .regular23White300()
+                                        HStack {
+                                            Text("달력에서")
+                                                .regular23White300()
+                                            Text("생리 예상 주기와")
+                                                    .bold23White300()
+                                        }
                                         Text("과거 정보를 확인하세요")
-                                            .medium23White300()
+                                            .bold23White300()
                                     }
                                 }
                             } else {
@@ -64,17 +68,21 @@ struct CarouselView: View {
                                         Text("생리를 시작했다면,")
                                             .regular23White300()
                                         Text("생리 정보를 입력하세요")
-                                            .medium23White300()
+                                            .bold23White300()
                                     } else if index == 1 {
                                         Text("내 생리 증상을 선택하여")
                                             .regular23White300()
                                         Text("간편히 입력하세요")
-                                            .medium23White300()
+                                            .bold23White300()
                                     } else {
-                                        Text("달력에서 생리 예상 주기와")
-                                            .regular23White300()
+                                        HStack {
+                                            Text("달력에서")
+                                                .regular23White300()
+                                            Text("생리 예상 주기와")
+                                                    .bold23White300()
+                                        }
                                         Text("과거 정보를 확인하세요")
-                                            .medium23White300()
+                                            .bold23White300()
                                     }
                                 }
                             }
