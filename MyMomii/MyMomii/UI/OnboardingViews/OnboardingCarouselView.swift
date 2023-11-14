@@ -22,6 +22,7 @@ struct CarouselView: View {
     }
     @State var goToMain = false
     @EnvironmentObject private var authModel: AuthViewModel
+    @AppStorage("isOnBoarding") var isOnBoarding: Bool!
     
     var body: some View {
         NavigationStack {
@@ -40,12 +41,12 @@ struct CarouselView: View {
                                             .regular23White300()
                                         Text("생리 정보를 입력하세요")
                                             .medium23White300()
-                                    }else if index == 1{
+                                    } else if index == 1 {
                                         Text("내 생리 증상을 선택하여")
                                             .regular23White300()
                                         Text("간편히 입력하세요")
                                             .medium23White300()
-                                    }else{
+                                    } else {
                                         Text("달력에서 생리 예상 주기와")
                                             .regular23White300()
                                         Text("과거 정보를 확인하세요")
@@ -64,12 +65,12 @@ struct CarouselView: View {
                                             .regular23White300()
                                         Text("생리 정보를 입력하세요")
                                             .medium23White300()
-                                    }else if index == 1{
+                                    } else if index == 1 {
                                         Text("내 생리 증상을 선택하여")
                                             .regular23White300()
                                         Text("간편히 입력하세요")
                                             .medium23White300()
-                                    }else{
+                                    } else {
                                         Text("달력에서 생리 예상 주기와")
                                             .regular23White300()
                                         Text("과거 정보를 확인하세요")
@@ -83,6 +84,7 @@ struct CarouselView: View {
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 Button(action: {
                     goToMain = true
+                    isOnBoarding = false
 //                    authModel.signInAnonymously()
                 }, label: {
                     if DeviceSize.width < DeviceSize.iPhone14 {
