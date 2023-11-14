@@ -10,10 +10,10 @@ import FirebaseDatabase
 import FirebaseDatabaseSwift
 
 struct MensInfo: Codable, Identifiable, Hashable {
-    var id: String
-    var imperID: String
-    var mensAmt: String
+    var id: Date
     var mensSymp: String
+    var mensAmt: String
     var emoLv: String
-    var regDe: String
+    var dateOfMens: Date
+    var regDt: Date
 }
