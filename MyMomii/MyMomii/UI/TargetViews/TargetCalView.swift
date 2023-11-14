@@ -12,9 +12,8 @@ struct TargetCalView: View {
     @State private var calendarHeight: CGFloat = 600.0
     @State private var eventsArray: [Date] = []
     @State private var eventsArrayDone: [Date] = []
-    @State private var pressNext: Bool = false
-    @State private var pressPrev: Bool = false
     @State private var calendarTitle: String = ""
+    @State private var changePage: Int = 0
     var dDay: Int
     var dDayTitle: String {
         if dDay == 0 {
@@ -32,7 +31,7 @@ struct TargetCalView: View {
                 .font(.system(size: 32, weight: .bold))
                 .foregroundColor(Color.coral400)
                 .padding(EdgeInsets(top: 16, leading: 8, bottom: 32, trailing: 8))
-            CalendarRect(selectedDate: $selectedDate, calendarHeight: $calendarHeight, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, pressNext: $pressNext, pressPrev: $pressPrev, calendarTitle: $calendarTitle)
+            CalendarRect(selectedDate: $selectedDate, calendarHeight: $calendarHeight, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage)
                 .frame(height: 600)
             Spacer()
         }
@@ -41,14 +40,14 @@ struct TargetCalView: View {
     }
 }
 
+// MARK: - 캘린더 박스
 struct CalendarRect: View {
     @Binding var selectedDate: Date
     @Binding var calendarHeight: CGFloat
     @Binding var eventsArray: [Date]
     @Binding var eventsArrayDone: [Date]
-    @Binding var pressNext: Bool
-    @Binding var pressPrev: Bool
     @Binding var calendarTitle: String
+    @Binding var changePage: Int
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -60,7 +59,7 @@ struct CalendarRect: View {
                     .overlay {
                         // Header
                         VStack(spacing: 0) {
-                            CalendarHeader(pressNext: $pressNext, pressPrev: $pressPrev, calendarTitle: $calendarTitle)
+                            CalendarHeader(calendarTitle: $calendarTitle, changePage: $changePage)
                                 .padding(EdgeInsets(top: 24, leading: 16, bottom: 16, trailing: 16))
                             Spacer()
                         }
@@ -68,7 +67,7 @@ struct CalendarRect: View {
                 Spacer()
             }
             .frame(height: 600)
-            TargetCalViewRepresentable(selectedDate: $selectedDate, calendarHeight: $calendarHeight, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, pressNext: $pressNext, pressPrev: $pressPrev, calendarTitle: $calendarTitle)
+            TargetCalViewRepresentable(selectedDate: $selectedDate, calendarHeight: $calendarHeight, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage)
                 .frame(height: 600)
                 .padding(EdgeInsets(top: 8, leading: 16, bottom: 16, trailing: 16))
                 .offset(y: 70)
@@ -78,14 +77,15 @@ struct CalendarRect: View {
     }
 }
 
+// MARK: - 캘린더 타이틀 및 이전/다음 이동 버튼
 struct CalendarHeader: View {
-    @Binding var pressNext: Bool
-    @Binding var pressPrev: Bool
     @Binding var calendarTitle: String
+    @Binding var changePage: Int
     var body: some View {
         HStack(spacing: 0) {
+            // 이전 버튼
             Button {
-                pressPrev.toggle()
+                changePage -= 1
             } label: {
                 Image(systemName: "chevron.left.circle.fill")
                     .font(.system(size: 24, weight: .bold))
@@ -95,8 +95,9 @@ struct CalendarHeader: View {
             Text("\(calendarTitle)")
                 .bold22Black500()
             Spacer()
+            // 다음 버튼
             Button {
-                pressNext.toggle()
+                changePage += 1
             } label: {
                 Image(systemName: "chevron.right.circle.fill")
                     .font(.system(size: 24, weight: .bold))
@@ -106,6 +107,7 @@ struct CalendarHeader: View {
     }
 }
 
+// MARK: - 생리 데이터 박스
 struct MensDataRect: View {
     @Binding var selectedDate: Date
     @Binding var eventsArrayDone: [Date]
@@ -175,6 +177,7 @@ struct MensDataRect: View {
     }
 }
 
+// MARK: - 생리 데이터 리스트
 struct MensData: View {
     let mensImage: String
     let mensText: String

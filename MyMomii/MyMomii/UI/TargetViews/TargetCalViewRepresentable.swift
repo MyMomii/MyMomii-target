@@ -23,9 +23,8 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
     @Binding var calendarHeight: CGFloat
     @Binding var eventsArray: [Date]
     @Binding var eventsArrayDone: [Date]
-    @Binding var pressNext: Bool
-    @Binding var pressPrev: Bool
     @Binding var calendarTitle: String
+    @Binding var changePage: Int
     @State var isViewUpdated = false
 
     // MARK: - Code
@@ -39,6 +38,7 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
         uiView.delegate = context.coordinator
         uiView.dataSource = context.coordinator
 
+        // need refactoring
         if !isViewUpdated {
             let scope: FSCalendarScope = .month
             uiView.setScope(scope, animated: false)
@@ -49,11 +49,18 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
                 uiView.setScope(.week, animated: true)
             }
         }
+
+        // 달력 이동 버튼 동작
+        let page = Calendar.current.date(byAdding: .weekOfMonth, value: changePage, to: uiView.currentPage)!
+        uiView.setCurrentPage(page, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+            changePage = 0
+        }
     }
 
     // 유킷 -> 스유
     func makeCoordinator() -> Coordinator {
-        Coordinator(selectedDate: $selectedDate, calendarHeight: $calendarHeight, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, pressNext: $pressNext, pressPrev: $pressPrev, calendarTitle: $calendarTitle)
+        Coordinator(selectedDate: $selectedDate, calendarHeight: $calendarHeight, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone,calendarTitle: $calendarTitle)
     }
 
     class Coordinator: NSObject, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
@@ -61,8 +68,6 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
         @Binding var calendarHeight: CGFloat
         @Binding var eventsArray: [Date]
         @Binding var eventsArrayDone: [Date]
-        @Binding var pressNext: Bool
-        @Binding var pressPrev: Bool
         @Binding var calendarTitle: String
 
         let coral500 = UIColor(red: 255/255, green: 84/255, blue: 61/255, alpha: 1) // coral500
@@ -74,13 +79,11 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
         let calmint = UIColor(red: 32/255, green: 211/255, blue: 211/255, alpha: 1) // cal_weekend
         let calyellow = UIColor(red: 255/255, green: 236/255, blue: 165/255, alpha: 1)  // cal_today
 
-        init(selectedDate: Binding<Date>, calendarHeight: Binding<CGFloat>, eventsArray: Binding<[Date]>, eventsArrayDone: Binding<[Date]>, pressNext: Binding<Bool>, pressPrev: Binding<Bool>, calendarTitle: Binding<String>) {
+        init(selectedDate: Binding<Date>, calendarHeight: Binding<CGFloat>, eventsArray: Binding<[Date]>, eventsArrayDone: Binding<[Date]>, calendarTitle: Binding<String>) {
             self._selectedDate = selectedDate
             self._calendarHeight = calendarHeight
             self._eventsArray = eventsArray
             self._eventsArrayDone = eventsArrayDone
-            self._pressNext = pressNext
-            self._pressPrev = pressPrev
             self._calendarTitle = calendarTitle
         }
 
@@ -121,16 +124,6 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
             cell.eventIndicator.transform = CGAffineTransform(scaleX: 0, y: 0)
 
             calendarTitle = calendarCurrentPageDidChange(calendar: calendar)
-
-            if pressNext {
-                tapNext(calendar: calendar, calendarTitle: $calendarTitle)
-                pressNext = false
-            }
-            if pressPrev {
-                tapPrev(calendar: calendar, calendarTitle: $calendarTitle)
-                print(pressPrev)
-                pressPrev = false
-            }
 
             // 셀 배경색
             let selectedColor = CGColor(red: 255/255, green: 236/255, blue: 165/255, alpha: 1)
@@ -193,22 +186,6 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
             } else {
                 return  black500
             }
-        }
-
-        func getNextWeek(date: Date) -> Date {
-            return  Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: date)!
-        }
-
-        func getPrevWeek(date: Date) -> Date {
-            return  Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: date)!
-        }
-
-        func tapNext(calendar: FSCalendar, calendarTitle: Binding<String>) {
-            calendar.setCurrentPage(getNextWeek(date: calendar.currentPage), animated: true)
-        }
-
-        func tapPrev(calendar: FSCalendar, calendarTitle: Binding<String>) {
-            calendar.setCurrentPage(getPrevWeek(date: calendar.currentPage), animated: true)
         }
 
         private func calendarCurrentPageDidChange(calendar: FSCalendar) -> String {
@@ -291,15 +268,12 @@ extension TargetCalViewRepresentable {
         calendarView.appearance.todayColor = .clear
         calendarView.collectionViewLayout.sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)    // cell 여백 조정
         calendarView.appearance.separators = FSCalendarSeparators(rawValue: 0)!
-
-//        calendarView.snp.makeConstraints {
-//            $0.height.equalTo(calendarHeight)
-//        }
+        calendarView.appearance.imageOffset = CGPoint(x: -6, y: -8)
 
         return calendarView
     }
 }
 
 #Preview {
-    TargetCalViewRepresentable(selectedDate: .constant(Date()), calendarHeight: .constant(100), eventsArray: .constant([]), eventsArrayDone: .constant([]), pressNext: .constant(false), pressPrev: .constant(false), calendarTitle: .constant(""))
+    TargetCalViewRepresentable(selectedDate: .constant(Date()), calendarHeight: .constant(100), eventsArray: .constant([]), eventsArrayDone: .constant([]), calendarTitle: .constant(""), changePage: .constant(0))
 }
