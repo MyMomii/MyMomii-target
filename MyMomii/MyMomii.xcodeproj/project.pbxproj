@@ -67,6 +67,7 @@
 		8E01FA422AFE77A2002F77A4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA412AFE77A2002F77A4 /* SnapKit */; };
 		8E01FA442AFE77A2002F77A4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA432AFE77A2002F77A4 /* SnapKit-Dynamic */; };
 		8E01FA472AFE77B6002F77A4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA462AFE77B6002F77A4 /* Then */; };
+		8E01FA6C2B0335EE002F77A4 /* TargetCalViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E01FA6B2B0335EE002F77A4 /* TargetCalViewRepresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		7DADB0562AFBD0A600A6846B /* ImperMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImperMainView.swift; sourceTree = "<group>"; };
 		7DADB0572AFBD0A600A6846B /* EditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		8E01FA3B2AFE773C002F77A4 /* TargetCalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCalViewController.swift; sourceTree = "<group>"; };
+		8E01FA6B2B0335EE002F77A4 /* TargetCalViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCalViewRepresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +236,7 @@
 				7D67F4032AFA3BA600F7931D /* SympView.swift */,
 				7D67F4052AFA3BA600F7931D /* TargetCalView.swift */,
 				8E01FA3B2AFE773C002F77A4 /* TargetCalViewController.swift */,
+				8E01FA6B2B0335EE002F77A4 /* TargetCalViewRepresentable.swift */,
 			);
 			path = TargetViews;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D67F4002AFA3B0900F7931D /* ModelTest.swift in Sources */,
+				8E01FA6C2B0335EE002F77A4 /* TargetCalViewRepresentable.swift in Sources */,
 				7D67F41A2AFA3BED00F7931D /* SettingComponents.swift in Sources */,
 				7D97FE2F2AF9DE4D000608DA /* ContentView.swift in Sources */,
 				7D67F4082AFA3BA600F7931D /* TargetCalView.swift in Sources */,

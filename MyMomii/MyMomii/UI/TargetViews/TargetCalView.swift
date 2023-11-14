@@ -8,111 +8,170 @@
 import SwiftUI
 
 struct TargetCalView: View {
-    @ObservedObject var selectedDe = SelectedDateViewModel()
-    @State var isData: Bool
-    @State var showModal: Bool
+    @State private var selectedDate: Date = .now
+    @State private var calendarHeight: CGFloat = 600.0
+    @State private var eventsArray: [Date] = []
+    @State private var eventsArrayDone: [Date] = []
+    @State private var pressNext: Bool = false
+    @State private var pressPrev: Bool = false
+    @State private var calendarTitle: String = ""
     var dDay: Int
+    var dDayTitle: String {
+        if dDay == 0 {
+            return "오늘 생리 시작!"
+        } else if dDay > 0 {
+            return "생리 시작 \(dDay)일 전"
+        } else {
+            return "생리 \(dDay+1)일째"
+        }
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(dDay>0 ? "생리 \(dDay)일 전)" : "생리 \(dDay+1)일 째")
+            Text("\(dDayTitle)")
                 .font(.system(size: 32, weight: .bold))
-                .foregroundColor(.coral400)
-                .padding(.top, 24)  // sample
-            TargetCalWhiteRect(isData: $isData, showModal: $showModal)
-                .padding(.top, 32)
-//            Text("\(selectedDate)")
-            Text("selectedDate: \(selectedDe.selectedDataContainer)")
-                .onTapGesture {
-                    print(selectedDe.selectedDataContainer)
-//                    print("Selected Date: \(TargetCalendarView(model: selectedDe).getSelectedDate())")
-                }
+                .foregroundColor(Color.coral400)
+                .padding(EdgeInsets(top: 16, leading: 8, bottom: 32, trailing: 8))
+            CalendarRect(selectedDate: $selectedDate, calendarHeight: $calendarHeight, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, pressNext: $pressNext, pressPrev: $pressPrev, calendarTitle: $calendarTitle)
+                .frame(height: 600)
             Spacer()
         }
         .padding(.horizontal, 16)
         .background(Color.white300)
-        .sheet(isPresented: self.$showModal) {
-            DailyEditView()
+    }
+}
+
+struct CalendarRect: View {
+    @Binding var selectedDate: Date
+    @Binding var calendarHeight: CGFloat
+    @Binding var eventsArray: [Date]
+    @Binding var eventsArrayDone: [Date]
+    @Binding var pressNext: Bool
+    @Binding var pressPrev: Bool
+    @Binding var calendarTitle: String
+    var body: some View {
+        ZStack {
+            VStack(spacing: 0) {
+                Rectangle()
+                    .cornerRadius(10)
+                    .foregroundColor(Color.white50)
+                    .shadow(color: .black500.opacity(0.15), radius: 3.5, x: 0, y: 2)
+                    .frame(height: eventsArrayDone.contains(selectedDate) ? 580 : 400)
+                    .overlay {
+                        // Header
+                        VStack(spacing: 0) {
+                            CalendarHeader(pressNext: $pressNext, pressPrev: $pressPrev, calendarTitle: $calendarTitle)
+                                .padding(EdgeInsets(top: 24, leading: 16, bottom: 16, trailing: 16))
+                            Spacer()
+                        }
+                    }
+                Spacer()
+            }
+            .frame(height: 600)
+            TargetCalViewRepresentable(selectedDate: $selectedDate, calendarHeight: $calendarHeight, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, pressNext: $pressNext, pressPrev: $pressPrev, calendarTitle: $calendarTitle)
+                .frame(height: 600)
+                .padding(EdgeInsets(top: 8, leading: 16, bottom: 16, trailing: 16))
+                .offset(y: 70)
+            MensDataRect(selectedDate: $selectedDate, eventsArrayDone: $eventsArrayDone)
+                .padding(EdgeInsets(top: 200, leading: 16, bottom: 16, trailing: 16))
         }
     }
 }
 
-struct TargetCalWhiteRect: View {
-    @ObservedObject var selectedDe = SelectedDateViewModel()
-    @Binding var isData: Bool
-    @Binding var showModal: Bool
+struct CalendarHeader: View {
+    @Binding var pressNext: Bool
+    @Binding var pressPrev: Bool
+    @Binding var calendarTitle: String
     var body: some View {
-        Rectangle()
-            .cornerRadius(10)
-            .foregroundColor(Color.white50)
-            .frame(height: isData ? 580: 400)   // 120 차이
-            .shadow(color: .black500.opacity(0.15), radius: 3.5, x: 0, y: 2)
-            .overlay {
-                VStack(alignment: .trailing, spacing: 0) {
-                    TargetCalendarView(model: selectedDe)  // HARD coding
-                        .frame(height: 560)
-                        .padding(EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16))
-                    VStack(alignment: .trailing, spacing: 0) {
-                        TargetCalRect(isData: $isData)
-                        Button {
-                            self.isData.toggle()
-                            self.showModal = true
-                        } label: {
-                            Rectangle()
-                                .cornerRadius(10)
-                                .frame(width: 120, height: 45)
-                                .foregroundColor(Color.coral500)
-                                .overlay {
-                                    HStack(spacing: 0) {
-                                        Image(systemName: "square.and.pencil")
-                                        Spacer()
-                                        Text(isData ? "고치기" : "입력")
-                                    }
-                                    .font(.system(size: 20, weight: .semibold))
-                                    .foregroundColor(.white50)
-                                    .padding(.horizontal, 16)
-                                }
-                        }
-                        .padding(.top, 16)
-                    }
-                    .padding(EdgeInsets(top: 16, leading: 32, bottom: 0, trailing: 32))
-                    .padding(.top, -380)
-                }
-                .padding(.top, isData ? 0 : 180)    // 120 차이
+        HStack(spacing: 0) {
+            Button {
+                pressPrev.toggle()
+            } label: {
+                Image(systemName: "chevron.left.circle.fill")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(Color.coral200)
             }
+            Spacer()
+            Text("\(calendarTitle)")
+                .bold22Black500()
+            Spacer()
+            Button {
+                pressNext.toggle()
+            } label: {
+                Image(systemName: "chevron.right.circle.fill")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(Color.coral200)
+            }
+        }
     }
 }
 
-struct TargetCalRect: View {
-    @Binding var isData: Bool
+struct MensDataRect: View {
+    @Binding var selectedDate: Date
+    @Binding var eventsArrayDone: [Date]
+
     var body: some View {
-        Rectangle()
-            .cornerRadius(10)
-            .frame(height: isData ? 280 : 100)
-            .foregroundColor(.calToday)
-            .shadow(color: .black500.opacity(0.25), radius: 2, x: 0, y:4)
-            .overlay {
-                if isData {
-                    VStack(spacing: 0) {    // sample
-                        MensData(mensImage: "Symp2", mensText: "배가 아파요")
-                        MensData(mensImage: "MensAmt3", mensText: "생리양이 많아요")
-                            .padding(.top, 8)
-                        MensData(mensImage: "Mood3", mensText: "기분이 나빠요")
-                            .padding(.top, 8)
-                    }
-                    .padding(.horizontal, -8)
-                } else {
-                    HStack(spacing: 0) {
-                        Image("SympRecordNone")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 50, height: 50)
-                        Text("입력된 기록이 없어요")
-                            .font(.system(size: 20, weight: .semibold))
-                            .foregroundColor(.coral300)
-                            .padding(.leading, 10)
+        VStack(alignment: .trailing, spacing: 0) {
+            Rectangle()
+                .cornerRadius(10)
+                .frame(height: eventsArrayDone.contains(selectedDate) ? 280 : 100)
+                .foregroundColor(.calToday)
+                .shadow(color: .black500.opacity(0.25), radius: 2, x: 0, y: 4)
+                .overlay {
+                    VStack(spacing: 0) {
+                        if eventsArrayDone.contains(selectedDate) {
+                            VStack(spacing: 0) {    // sample
+                                MensData(mensImage: "Symp1", mensText: "배가 안 아파요")
+                                MensData(mensImage: "MensAmt2", mensText: "생리양이 보통이에요")
+                                    .padding(.top, 8)
+                                MensData(mensImage: "Mood3", mensText: "기분이 나빠요")
+                                    .padding(.top, 8)
+                            }
+                            .padding(.horizontal, -8)
+                        } else {
+                            HStack(spacing: 0) {
+                                Image("SympRecordNone")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 50, height: 50)
+                                Text("입력된 기록이 없어요")
+                                    .font(.system(size: 20, weight: .semibold))
+                                    .foregroundColor(.coral300)
+                                    .padding(.leading, 10)
+                            }
+                        }
                     }
                 }
+
+            Button {
+                print(selectedDate) // sample
+                if eventsArrayDone.contains(selectedDate) {
+                    if let index = eventsArrayDone.firstIndex(of: selectedDate) {
+                        eventsArrayDone.remove(at: index)
+                    }
+                } else {
+                    eventsArrayDone.append(selectedDate)
+                }
+            } label: {
+                Rectangle()
+                    .cornerRadius(10)
+                    .frame(width: 120, height: 45)
+                    .foregroundColor(Color.coral500)
+                    .overlay {
+                        HStack(spacing: 0) {
+                            Image(systemName: "square.and.pencil")
+                            Spacer()
+                            Text(eventsArrayDone.contains(selectedDate) ? "고치기" : "입력")
+                        }
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundColor(.white50)
+                        .padding(.horizontal, 16)
+                    }
             }
+            .padding(.top, 16)
+            Spacer()
+        }
+        .frame(height: 350)
     }
 }
 
@@ -138,24 +197,6 @@ struct MensData: View {
     }
 }
 
-struct TargetCalendarView: UIViewControllerRepresentable {
-    typealias UIViewControllerType = TargetCalViewController
-    @State private var selectedDate = Date()
-    let model: SelectedDateViewModel
-
-    func makeUIViewController(context: Context) -> TargetCalViewController {
-        let targetCalViewController = TargetCalViewController()
-        targetCalViewController.bridgeModel = self.model
-        return targetCalViewController
-    }
-
-    func updateUIViewController(_ uiViewController: TargetCalViewController, context: Context) {
-        // Update selectedDate based on the value from TargetCalViewController
-        print(self.model.selectedDataContainer) // 전달하고자 하는 내용
-        uiViewController.bridgeModel = self.model
-    }
-}
-
 #Preview {
-    TargetCalView(isData: false, showModal: false, dDay: 0)
+    TargetCalView(dDay: 0)
 }

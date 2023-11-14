@@ -16,13 +16,9 @@ class SelectedDateViewModel: ObservableObject {
 }
 
 class TargetCalViewController: UIViewController, FSCalendarDelegate {
-    @Published var selectedDate: Date? {
-        didSet {
-            selectedDateLabel.text = "selected: \(selectedDate ?? Date())"
-        }
-    }
-    var bridgeModel: SelectedDateViewModel?
+    @State var bridgeModel = SelectedDateViewModel()
     let coral500 = UIColor(red: 255/255, green: 84/255, blue: 61/255, alpha: 1) // coral500
+    let coral200 = UIColor(red: 255/255, green: 176/255, blue: 166/255, alpha: 1) // coral200
     let black500 = UIColor(red: 31/255, green: 31/255, blue: 31/255, alpha: 1) // black500
     let black200 = UIColor(red: 86/255, green: 86/255, blue: 86/255, alpha: 1) // black200
     let black75 = UIColor(red: 171/255, green: 171/255, blue: 171/255, alpha: 1)    // black75
@@ -58,15 +54,15 @@ class TargetCalViewController: UIViewController, FSCalendarDelegate {
     }
 
     private lazy var leftButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "chevron.left"), for: .normal)    // sample
-        $0.tintColor = coral500
+        $0.setImage(UIImage(systemName: "chevron.left.circle.fill"), for: .normal)    // sample
+        $0.tintColor = coral200
         $0.translatesAutoresizingMaskIntoConstraints = true
         $0.addTarget(self, action: #selector(tapBefore), for: .touchUpInside)
     }
 
     private lazy var rightButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "chevron.right"), for: .normal)   // sample
-        $0.tintColor = coral500
+        $0.setImage(UIImage(systemName: "chevron.right.circle.fill"), for: .normal)   // sample
+        $0.tintColor = coral200
         $0.translatesAutoresizingMaskIntoConstraints = true
         $0.addTarget(self, action: #selector(tapNext), for: .touchUpInside)
     }
@@ -119,6 +115,7 @@ class TargetCalViewController: UIViewController, FSCalendarDelegate {
         configureCalendar()
     }
 
+    // MARK: - 생리주기 예측
     func calculateAverageConsecutiveDays(array: [Date], defulatPeriod: Int = 28) {
         guard array.count > 0 else { return }
 
@@ -183,7 +180,8 @@ extension TargetCalViewController: FSCalendarDataSource, FSCalendarDelegateAppea
     }
 
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        self.bridgeModel?.selectedDataContainer = date
+        self.bridgeModel.selectedDataContainer = date
+        print(self.bridgeModel.selectedDataContainer)
         // 이벤트 추가 및 예측
         if (date <= Date()) {
             eventsArrayDone.append(date)
@@ -201,8 +199,6 @@ extension TargetCalViewController: FSCalendarDataSource, FSCalendarDelegateAppea
         }
 
         calendarView.reloadData()
-
-        selectedDate = date
     }
 
     // 주말 색상 변경
@@ -430,6 +426,6 @@ extension TargetCalViewController {
     }
 }
 
-#Preview {
-    TargetCalendarView(model: SelectedDateViewModel())
-}
+//#Preview {
+//    TargetCalendarView(selectedDate: .constant(SelectedDateViewModel()), model: SelectedDateViewModel())
+//}
