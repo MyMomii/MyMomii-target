@@ -10,7 +10,7 @@ import SwiftUI
 
 struct OnboardingCarouselView: View {
     var body: some View {
-        CarouselView(imageNames: ["mount1", "mount2", "mount3"])
+        CarouselView(imageNames: ["OnBoard_01", "OnBoard_02", "OnBoard_03"])
     }
 }
 
@@ -22,6 +22,7 @@ struct CarouselView: View {
     }
     @State var goToMain = false
     @EnvironmentObject private var authModel: AuthViewModel
+    @AppStorage("isOnBoarding") var isOnBoarding: Bool!
     
     var body: some View {
         NavigationStack {
@@ -30,23 +31,68 @@ struct CarouselView: View {
                     ForEach(0..<imageNames.count, id: \.self) { index in
                         ZStack(alignment: .topLeading) {
                             if DeviceSize.width < DeviceSize.iPhone14 {
-                                Image("\(imageNames[index])")
-                                    .resizable()
-                                    .tag(index)
-                                    .frame(width: 280, height: 365)
+                                VStack {
+                                    Image("\(imageNames[index])")
+                                        .resizable()
+                                        .tag(index)
+                                        .frame(width: 280, height: 365)
+                                    if index == 0 {
+                                        Text("생리를 시작했다면,")
+                                            .regular23White300()
+                                        Text("생리 정보를 입력하세요")
+                                            .bold23White300()
+                                    } else if index == 1 {
+                                        Text("내 생리 증상을 선택하여")
+                                            .regular23White300()
+                                        Text("간편히 입력하세요")
+                                            .bold23White300()
+                                    } else {
+                                        HStack(spacing: 0) {
+                                            Text("달력에서")
+                                                .regular23White300()
+                                            Text(" 생리 예상 주기와")
+                                                .bold23White300()
+                                        }
+                                        Text("과거 정보를 확인하세요")
+                                            .bold23White300()
+                                    }
+                                }
                             } else {
-                                Image("\(imageNames[index])")
-                                    .resizable()
-                                    .tag(index)
-                                    .frame(width: 340, height: 560)
+                                VStack {
+                                    Image("\(imageNames[index])")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .tag(index)
+                                        .frame(width: 300, height: 493)
+                                    if index == 0 {
+                                        Text("생리를 시작했다면,")
+                                            .regular23White300()
+                                        Text("생리 정보를 입력하세요")
+                                            .bold23White300()
+                                    } else if index == 1 {
+                                        Text("내 생리 증상을 선택하여")
+                                            .regular23White300()
+                                        Text("간편히 입력하세요")
+                                            .bold23White300()
+                                    } else {
+                                        HStack(spacing: 0) {
+                                            Text("달력에서")
+                                                .regular23White300()
+                                            Text(" 생리 예상 주기와")
+                                                .bold23White300()
+                                        }
+                                        Text("과거 정보를 확인하세요")
+                                            .bold23White300()
+                                    }
+                                }
                             }
                         }
-                            .shadow(color: .black.opacity(0.15), radius: 4, x: 0, y: 2)
                     }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 Button(action: {
                     goToMain = true
+                    isOnBoarding = false
 //                    authModel.signInAnonymously()
                 }, label: {
                     if DeviceSize.width < DeviceSize.iPhone14 {
