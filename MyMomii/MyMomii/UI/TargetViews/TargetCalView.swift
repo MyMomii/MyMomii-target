@@ -86,7 +86,7 @@ struct TargetCalView: View {
         }
         .navigationBarBackButtonHidden()
         .navigationDestination(isPresented: $isInputSelected) {
-            SympView()
+            SympView(selectedDate: $selectedDate, selectedFromCalView: true)
         }
         .navigationDestination(isPresented: $isSettingSelected) {
             SettingMainView(userName: "")   // not completed <- SettingMainView에서 userName 제거 필요
