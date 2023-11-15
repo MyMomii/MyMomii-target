@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SympView: View {
     @StateObject private var viewModel = SympViewModel()
+    @State var moveToCalView = false
     @State var mensSympSelected = 0
     @State var mensAmtSelected = 0
     @State var emoLvSelected = 0
@@ -30,6 +31,7 @@ struct SympView: View {
                         Button(action: {
                             // MARK: dateOfMens 는 달력에서 값 받아와야 함
                             viewModel.addMensInfo(mensSymp: mensSympTitle[mensSympSelected], mensAmt: mensAmtTitle[mensAmtSelected], emoLv: emoLvTitle[emoLvSelected], dateOfMens: Date())
+                            moveToCalView = true
                         }, label: {
                             RoundedRectangle(cornerRadius: 61)
                                 .foregroundColor(.coral500)
@@ -50,6 +52,9 @@ struct SympView: View {
             .padding(.horizontal, 16)
             .background(Color.white300)
             .navigationBarBackButtonHidden()
+            .navigationDestination(isPresented: $moveToCalView) {
+                TargetCalView()
+            }
     }
 
     @ViewBuilder private var symptomViewByDevice: some View {
