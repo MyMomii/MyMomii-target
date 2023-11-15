@@ -318,7 +318,7 @@ struct MensData: View {
                             .scaledToFit()
                             .frame(width: 50, height: 50)
                     }
-                Text("배가 \(mensSympText)")
+                Text("\(mensSympText)")
                     .semiBold20Black500()
                     .padding(.leading, 16)
                 Spacer()
@@ -331,7 +331,7 @@ struct MensData: View {
                             .scaledToFit()
                             .frame(width: 50, height: 50)
                     }
-                Text("생리양이 \(mensAmtText)")
+                Text("\(mensAmtText)")
                     .semiBold20Black500()
                     .padding(.leading, 16)
                 Spacer()
@@ -345,7 +345,7 @@ struct MensData: View {
                             .scaledToFit()
                             .frame(width: 50, height: 50)
                     }
-                Text("기분이 \(emoLvText)")
+                Text("\(emoLvText)")
                     .semiBold20Black500()
                     .padding(.leading, 16)
                 Spacer()
@@ -357,9 +357,9 @@ struct MensData: View {
 
     // firestore에 저장된 증상 String에 일치하는 이미지 return
     func stringToImage(detail: String) -> String {
-        let mensSympTitle = ["안 아파요", "아파요", "많이 아파요"]
-        let mensAmtTitle = ["적어요", "보통이에요", "많아요"]
-        let emoLvTitle = ["좋아요", "보통이에요", "나빠요"]
+        let mensSympTitle = ["배가 안 아파요", "배가 아파요", "배가 많이 아파요"]
+        let mensAmtTitle = ["생리양이 적어요", "생리양이 보통이에요", "생리양이 많아요"]
+        let emoLvTitle = ["기분이 좋아요", "기분이 보통이에요", "기분이 나빠요"]
 
         switch detail {
         case mensSympTitle[0]:
