@@ -32,9 +32,12 @@ class NotificationManager {
         content.sound = .default
 
         var dateComponents = DateComponents()
-        dateComponents.hour = 16
+        dateComponents.hour = 17
         dateComponents.minute = 40
         // MARK: - 생리 예정일 날짜 dateFormatter 필요
+//        dateComponents.year =
+//        dateComponents.month =
+//        dateComponents.day =
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(
@@ -60,7 +63,7 @@ class NotificationManager {
 }
 
 struct SettingNotiView: View {
-    @State var isMensToday = false
+    @State var isMensToday = true
     
     var body: some View {
         VStack(spacing: 0) {
@@ -110,9 +113,6 @@ struct SettingNotiView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(leading: BackButton(backBtnTitleType: .titleImage, backButtonTitle: "gearshape.fill"))
         .background(Color.white300)
-        .onAppear {
-            NotificationManager.instance.requestNotificationAuthorization()
-        }
     }
 }
 

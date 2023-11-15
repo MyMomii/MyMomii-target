@@ -85,6 +85,9 @@ struct TargetMainView: View {
                         .ignoresSafeArea()
                 }
             }
+            .onAppear {
+                NotificationManager.instance.requestNotificationAuthorization()
+            }
             .navigationBarBackButtonHidden()
 
         }
