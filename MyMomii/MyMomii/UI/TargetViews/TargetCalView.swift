@@ -28,9 +28,8 @@ struct TargetCalView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("\(dDayTitle)")    // TEXT MODIFIER
-                .font(.system(size: 32, weight: .bold))
-                .foregroundColor(Color.coral400)
+            Text("\(dDayTitle)")
+                .bold32Coral400()
                 .padding(EdgeInsets(top: 16, leading: 8, bottom: 32, trailing: 8))
             CalendarRect(selectedDate: $selectedDate, calendarHeight: $calendarHeight, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage, isInputSelected: $isInputSelected)
                 .frame(height: 600)
@@ -142,9 +141,8 @@ struct MensDataRect: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 50, height: 50)
-                                Text("입력된 기록이 없어요") // TEXT MODIFIER
-                                    .font(.system(size: 20, weight: .semibold))
-                                    .foregroundColor(.coral300)
+                                Text("입력된 기록이 없어요")
+                                    .semiBold20Coral300()
                                     .padding(.leading, 10)
                             }
                         }
@@ -199,9 +197,8 @@ struct MensData: View {
                         .scaledToFit()
                         .frame(width: 50, height: 50)
                 }
-            Text(mensText)  // TEXT MODIFIER
-                .font(.system(size: 20, weight: .semibold))
-                .foregroundColor(.black500)
+            Text(mensText)
+                .semiBold20Black500()
                 .padding(.leading, 16)
             Spacer()
         }
