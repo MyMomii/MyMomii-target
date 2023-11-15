@@ -236,8 +236,8 @@ struct MensDataRect: View {
                 .shadow(color: .black500.opacity(0.25), radius: 2, x: 0, y: 4)
                 .overlay {
                     VStack(spacing: 0) {
-                        if eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) {
-                            VStack(spacing: 0) {    // sample
+                        if eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) && viewModel.mensInfosForSelectedDate != [] {
+                            VStack(spacing: 0) {
                                 MensData(mensSympText: viewModel.mensInfosForSelectedDate[0].mensSymp,
                                          mensAmtText: viewModel.mensInfosForSelectedDate[0].mensAmt,
                                          emoLvText: viewModel.mensInfosForSelectedDate[0].emoLv)
@@ -292,6 +292,13 @@ struct MensDataRect: View {
         .frame(height: 374)
         .task {
             try? await viewModel.getMensInfoForSelectedDate(selectedDate: firestoreFormatter.string(from: selectedDate))
+            print(viewModel.mensInfosForSelectedDate)
+        }
+        .onChange(of: selectedDate) {
+            Task {
+                try? await viewModel.getMensInfoForSelectedDate(selectedDate: firestoreFormatter.string(from: selectedDate))
+                print(viewModel.mensInfosForSelectedDate)
+            }
         }
     }
 }
