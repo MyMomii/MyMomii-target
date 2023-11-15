@@ -21,6 +21,11 @@ struct SympView: View {
         formatter.dateFormat = "YYYY년 M월 d일 HH:mm:ss"
         return formatter
     }()
+    let dateOfMensFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        return formatter
+    }()
     var body: some View {
             VStack(spacing: 20) {
                 if let user = viewModel.user {
@@ -29,8 +34,8 @@ struct SympView: View {
                     symptomViewByDevice
                     HStack {
                         Button(action: {
-                            // MARK: dateOfMens 는 달력에서 값 받아와야 함
-                            viewModel.addMensInfo(mensSymp: mensSympTitle[mensSympSelected], mensAmt: mensAmtTitle[mensAmtSelected], emoLv: emoLvTitle[emoLvSelected], dateOfMens: Date())
+                            // MARK: dateOfMens의 값은 메인화면에서 접근했을 경우 오늘 날짜로 지정, 달력에서 이동했을 경우 달력에서 선택한 값으로 설정
+                            viewModel.addMensInfo(mensSymp: mensSympTitle[mensSympSelected], mensAmt: mensAmtTitle[mensAmtSelected], emoLv: emoLvTitle[emoLvSelected], dateOfMens: dateOfMensFormat.string(from: Date()))
                             moveToCalView = true
                         }, label: {
                             RoundedRectangle(cornerRadius: 61)
