@@ -74,7 +74,7 @@ struct TargetCalView: View {
         if dDay == 0 {  // 생리 예정일 당일 또는 생리 정보 입력 당일
             return "오늘 생리 시작!"
         } else if dDay == 9999 {    // 디데이 값 이상
-            return "생리 정보를 입력해주세요"
+            return ""
         } else if dDay > 900 {    // 생리 시작 3일 이내
             return "생리 시작 \(-(dDay-1000)+2)일차"
         } else if dDay > 0 {    // 생리 예정일 전
@@ -156,25 +156,19 @@ struct CalendarRect: View {
             TargetCalViewRepresentable(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage)
                 .padding(EdgeInsets(top: 0, leading: 16, bottom: 24, trailing: 16))
                 .offset(y: 50)
-                .opacity(isOpacity)
                 .animation(.easeInOut, value: 1)
+                .frame(height: CalendarRect.calendarSetHeight)
+                .clipped()
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         isOpacity = 1
                     }
                 }
-                .frame(height: CalendarRect.calendarSetHeight)
-                .clipped()
 
             MensDataRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, dDay: $dDay, dDayTitle: $dDayTitle)
                 .frame(height: CalendarRect.mensSetHeight)
                 .padding(EdgeInsets(top: CalendarRect.calendarSetHeight-CalendarRect.mensSetHeight-16, leading: 16, bottom: 8+16, trailing: 16))
                 .opacity(isOpacity)
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                        isOpacity = 1
-                    }
-                }
         }
     }
 }

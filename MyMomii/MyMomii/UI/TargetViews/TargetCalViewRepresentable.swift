@@ -24,29 +24,21 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
     @Binding var eventsArrayDone: [String]
     @Binding var calendarTitle: String
     @Binding var changePage: Int
-    @State var isViewUpdated = true
-
+    @State var isViewUpdated = false
     // MARK: - Code
     typealias UIViewType = FSCalendar
 
-    func changeUsViewUpdated() {
-        isViewUpdated = false
-    }
-
     func makeUIView(context: Context) -> FSCalendar {
         let calendarView = configureCalendar()
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
-            changeUsViewUpdated()
-        }
         return calendarView
     }
 
     func updateUIView(_ uiView: FSCalendar, context: Context) {
         uiView.delegate = context.coordinator
         uiView.dataSource = context.coordinator
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
             isViewUpdated = true
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.3) {
                 uiView.setScope(.week, animated: true)
             }
         }
@@ -61,7 +53,7 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
 
     // 유킷 -> 스유
     func makeCoordinator() -> Coordinator {
-        Coordinator(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone,calendarTitle: $calendarTitle)
+        Coordinator(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle)
     }
 
     class Coordinator: NSObject, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
@@ -211,7 +203,6 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
                 }
             }
             var lastStartDay = dateArray.first ?? Date()
-//            var lastStartDay = array.first ?? firestoreFormatter.string(from: Date())
             let firestoreFormatter = DateFormatter()
             firestoreFormatter.dateFormat = "yyyyMMdd"
 
@@ -238,10 +229,8 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
                 totalGap.append(gap + totalPeriodDays[totalPeriodDays.count-2] - 1)
             }
 
-            let periodGap = Int(Double(totalPeriodDays.reduce(0,+))/Double(totalPeriodDays.count))
-
-            let mensturationGap = totalGap.count != 0 ?   Int(Double(totalGap.reduce(0,+))/Double(totalGap.count)) : defulatPeriod
-
+            let periodGap = Int(Double(totalPeriodDays.reduce(0, +))/Double(totalPeriodDays.count))
+            let mensturationGap = totalGap.count != 0 ?   Int(Double(totalGap.reduce(0, +))/Double(totalGap.count)) : defulatPeriod
             var nextMensturations: [String] = []
 
             for index in 0..<periodGap {
