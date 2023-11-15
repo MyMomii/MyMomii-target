@@ -366,7 +366,7 @@ struct MensData: View {
         case mensAmtTitle[1]:
             return "MensAmt2"
         case mensAmtTitle[2]:
-            return "MensAmt13"
+            return "MensAmt3"
         case emoLvTitle[0]:
             return "Mood1"
         case emoLvTitle[1]:
