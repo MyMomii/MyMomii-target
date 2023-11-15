@@ -62,6 +62,11 @@
 		7DADB0592AFBD0A700A6846B /* MensInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADB0552AFBD0A600A6846B /* MensInfo.swift */; };
 		7DADB05A2AFBD0A700A6846B /* ImperMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADB0562AFBD0A600A6846B /* ImperMainView.swift */; };
 		7DADB05B2AFBD0A700A6846B /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADB0572AFBD0A600A6846B /* EditView.swift */; };
+		8E01FA3F2AFE7783002F77A4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA3E2AFE7783002F77A4 /* FSCalendar */; };
+		8E01FA422AFE77A2002F77A4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA412AFE77A2002F77A4 /* SnapKit */; };
+		8E01FA442AFE77A2002F77A4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA432AFE77A2002F77A4 /* SnapKit-Dynamic */; };
+		8E01FA472AFE77B6002F77A4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA462AFE77B6002F77A4 /* Then */; };
+		8E01FA6C2B0335EE002F77A4 /* TargetCalViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E01FA6B2B0335EE002F77A4 /* TargetCalViewRepresentable.swift */; };
 		DE4140572AFF72C300A20CC9 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4140562AFF72C300A20CC9 /* LaunchScreenView.swift */; };
 		DE895D962B01BB8400FB2226 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE895D952B01BB8400FB2226 /* AuthViewModel.swift */; };
 		DE895D982B01BB9B00FB2226 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE895D972B01BB9B00FB2226 /* AuthenticationView.swift */; };
@@ -97,6 +102,7 @@
 		7DADB0552AFBD0A600A6846B /* MensInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MensInfo.swift; sourceTree = "<group>"; };
 		7DADB0562AFBD0A600A6846B /* ImperMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImperMainView.swift; sourceTree = "<group>"; };
 		7DADB0572AFBD0A600A6846B /* EditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
+		8E01FA6B2B0335EE002F77A4 /* TargetCalViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCalViewRepresentable.swift; sourceTree = "<group>"; };
 		DE4140562AFF72C300A20CC9 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		DE895D952B01BB8400FB2226 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		DE895D972B01BB9B00FB2226 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
@@ -110,12 +116,16 @@
 			files = (
 				7D97FE6C2AF9FCB9000608DA /* FirebaseFunctions in Frameworks */,
 				7D97FE622AF9FCB9000608DA /* FirebaseDatabaseSwift in Frameworks */,
+				8E01FA3F2AFE7783002F77A4 /* FSCalendar in Frameworks */,
+				8E01FA472AFE77B6002F77A4 /* Then in Frameworks */,
 				7D97FE722AF9FCB9000608DA /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
 				7D97FE782AF9FCB9000608DA /* FirebaseMessaging in Frameworks */,
 				7D97FE582AF9FCB9000608DA /* FirebaseAppDistribution-Beta in Frameworks */,
 				7D97FE5C2AF9FCB9000608DA /* FirebaseAuthCombine-Community in Frameworks */,
+				8E01FA442AFE77A2002F77A4 /* SnapKit-Dynamic in Frameworks */,
 				7D97FE682AF9FCB9000608DA /* FirebaseFirestoreCombine-Community in Frameworks */,
 				7D97FE522AF9FCB9000608DA /* FirebaseAnalyticsSwift in Frameworks */,
+				8E01FA422AFE77A2002F77A4 /* SnapKit in Frameworks */,
 				7D97FE762AF9FCB9000608DA /* FirebaseMLModelDownloader in Frameworks */,
 				7D97FE542AF9FCB9000608DA /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				7D97FE4E2AF9FCB9000608DA /* FirebaseAnalytics in Frameworks */,
@@ -232,6 +242,7 @@
 				7D67F4042AFA3BA600F7931D /* DailyEditView.swift */,
 				7D67F4032AFA3BA600F7931D /* SympView.swift */,
 				7D67F4052AFA3BA600F7931D /* TargetCalView.swift */,
+				8E01FA6B2B0335EE002F77A4 /* TargetCalViewRepresentable.swift */,
 			);
 			path = TargetViews;
 			sourceTree = "<group>";
@@ -322,6 +333,10 @@
 				7D97FE7D2AF9FCB9000608DA /* FirebaseRemoteConfigSwift */,
 				7D97FE7F2AF9FCB9000608DA /* FirebaseStorage */,
 				7D97FE812AF9FCB9000608DA /* FirebaseStorageCombine-Community */,
+				8E01FA3E2AFE7783002F77A4 /* FSCalendar */,
+				8E01FA412AFE77A2002F77A4 /* SnapKit */,
+				8E01FA432AFE77A2002F77A4 /* SnapKit-Dynamic */,
+				8E01FA462AFE77B6002F77A4 /* Then */,
 			);
 			productName = MyMomii;
 			productReference = 7D97FE292AF9DE4D000608DA /* MyMomii.app */;
@@ -355,6 +370,9 @@
 			packageReferences = (
 				7D97FE492AF9E704000608DA /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				7D97FE4C2AF9FCB9000608DA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				8E01FA3D2AFE7782002F77A4 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				8E01FA402AFE77A2002F77A4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				8E01FA452AFE77B6002F77A4 /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			productRefGroup = 7D97FE2A2AF9DE4D000608DA /* Products */;
 			projectDirPath = "";
@@ -409,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D67F4002AFA3B0900F7931D /* ModelTest.swift in Sources */,
+				8E01FA6C2B0335EE002F77A4 /* TargetCalViewRepresentable.swift in Sources */,
 				7D67F41A2AFA3BED00F7931D /* SettingComponents.swift in Sources */,
 				7D97FE2F2AF9DE4D000608DA /* ContentView.swift in Sources */,
 				DEC525E92B0170DC008C0B1B /* OnboardingCarouselView.swift in Sources */,
@@ -659,6 +678,30 @@
 				minimumVersion = 10.17.0;
 			};
 		};
+		8E01FA3D2AFE7782002F77A4 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
+		8E01FA402AFE77A2002F77A4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
+		8E01FA452AFE77B6002F77A4 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -801,6 +844,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7D97FE4C2AF9FCB9000608DA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		8E01FA3E2AFE7783002F77A4 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E01FA3D2AFE7782002F77A4 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+		8E01FA412AFE77A2002F77A4 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E01FA402AFE77A2002F77A4 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		8E01FA432AFE77A2002F77A4 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E01FA402AFE77A2002F77A4 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+		8E01FA462AFE77B6002F77A4 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E01FA452AFE77B6002F77A4 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
