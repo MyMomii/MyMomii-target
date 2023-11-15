@@ -90,6 +90,14 @@ final class UserManager {
         userCollection.document(userId)
     }
 
+    private func userMensInfoCollection(userId: String) -> CollectionReference {
+        userDocument(userId: userId).collection("mens_info")
+    }
+
+    private func userMensInfoDocument(userId: String) -> DocumentReference {
+        userMensInfoCollection(userId: userId).document()
+    }
+
     private let encoder: Firestore.Encoder = {
         let encoder = Firestore.Encoder()
 //        encoder.keyEncodingStrategy = .convertToSnakeCase
@@ -182,7 +190,7 @@ final class UserManager {
             DBUser.CodingKeys.mensInfo.rawValue: data
         ]
 
-        try await userDocument(userId: userId).updateData(dict)
+        try await userMensInfoDocument(userId: userId).setData(dict, merge: false)
     }
 
     func removeMensInfo(userId: String) async throws {
@@ -190,6 +198,6 @@ final class UserManager {
             DBUser.CodingKeys.mensInfo.rawValue: nil
         ]
 
-        try await userDocument(userId: userId).updateData(data as [AnyHashable: Any])
+        try await userMensInfoDocument(userId: userId).updateData(data as [AnyHashable: Any])
     }
 }
