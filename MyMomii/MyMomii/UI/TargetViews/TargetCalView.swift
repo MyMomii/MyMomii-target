@@ -151,11 +151,7 @@ struct MensDataRect: View {
                     VStack(spacing: 0) {
                         if eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) {
                             VStack(spacing: 0) {    // sample
-                                MensData(mensImage: "Symp1", mensText: "배가 안 아파요")
-                                MensData(mensImage: "MensAmt2", mensText: "생리양이 보통이에요")
-                                    .padding(.top, 8)
-                                MensData(mensImage: "Mood3", mensText: "기분이 나빠요")
-                                    .padding(.top, 8)
+                                MensData(mensSympText: "안 아파요", mensAmtText: "보통이에요", emoLvText: "나빠요")
                             }
                             .padding(.horizontal, -8)
                         } else {
@@ -208,23 +204,85 @@ struct MensDataRect: View {
 
 // MARK: - 생리 데이터 리스트
 struct MensData: View {
-    let mensImage: String
-    let mensText: String
+    let mensSympText: String
+    let mensAmtText: String
+    let emoLvText: String
     var body: some View {
-        HStack(spacing: 0) {
-            Image("SmallCheckStroke")
-                .overlay {
-                    Image(mensImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50)
-                }
-            Text(mensText)
-                .semiBold20Black500()
-                .padding(.leading, 16)
-            Spacer()
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                Image("SmallCheckStroke")
+                    .overlay {
+                        Image(stringToImage(detail: mensSympText))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50)
+                    }
+                Text("배가 \(mensSympText)")
+                    .semiBold20Black500()
+                    .padding(.leading, 16)
+                Spacer()
+            }
+            HStack(spacing: 0) {
+                Image("SmallCheckStroke")
+                    .overlay {
+                        Image(stringToImage(detail: mensAmtText))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50)
+                    }
+                Text("생리양이 \(mensAmtText)")
+                    .semiBold20Black500()
+                    .padding(.leading, 16)
+                Spacer()
+            }
+            .padding(.top, 8)
+            HStack(spacing: 0) {
+                Image("SmallCheckStroke")
+                    .overlay {
+                        Image(stringToImage(detail: emoLvText))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50)
+                    }
+                Text("기분이 \(emoLvText)")
+                    .semiBold20Black500()
+                    .padding(.leading, 16)
+                Spacer()
+            }
+            .padding(.top, 8)
         }
         .padding(.horizontal, 32)
+    }
+
+    // firestore에 저장된 증상 String에 일치하는 이미지 return
+    func stringToImage(detail: String) -> String {
+        let mensSympTitle = ["안 아파요", "아파요", "많이 아파요"]
+        let mensAmtTitle = ["적어요", "보통이에요", "많아요"]
+        let emoLvTitle = ["좋아요", "보통이에요", "나빠요"]
+        let detailImageName: String
+
+        switch detail {
+        case mensSympTitle[0]:
+            return "Symp1"
+        case mensSympTitle[1]:
+            return "Symp2"
+        case mensSympTitle[2]:
+            return "Symp3"
+        case mensAmtTitle[0]:
+            return "MensAmt1"
+        case mensAmtTitle[1]:
+            return "MensAmt2"
+        case mensAmtTitle[2]:
+            return "MensAmt13"
+        case emoLvTitle[0]:
+            return "Mood1"
+        case emoLvTitle[1]:
+            return "Mood2"
+        case emoLvTitle[2]:
+            return "Mood3"
+        default:
+            return ""
+        }
     }
 }
 
