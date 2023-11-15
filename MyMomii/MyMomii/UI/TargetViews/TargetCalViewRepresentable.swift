@@ -21,8 +21,8 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
 
     @Binding var selectedDate: Date
     @Binding var calendarHeight: CGFloat
-    @Binding var eventsArray: [Date]
-    @Binding var eventsArrayDone: [Date]
+    @Binding var eventsArray: [String]
+    @Binding var eventsArrayDone: [String]
     @Binding var calendarTitle: String
     @Binding var changePage: Int
     @State var isViewUpdated = false
@@ -66,9 +66,15 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
     class Coordinator: NSObject, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
         @Binding var selectedDate: Date
         @Binding var calendarHeight: CGFloat
-        @Binding var eventsArray: [Date]
-        @Binding var eventsArrayDone: [Date]
+        @Binding var eventsArray: [String]
+        @Binding var eventsArrayDone: [String]
         @Binding var calendarTitle: String
+
+        var firestoreFormatter: DateFormatter {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyyMMdd"
+            return formatter
+        }
 
         let coral500 = UIColor(red: 255/255, green: 84/255, blue: 61/255, alpha: 1) // coral500
         let coral200 = UIColor(red: 255/255, green: 176/255, blue: 166/255, alpha: 1) // coral200
@@ -79,7 +85,7 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
         let calmint = UIColor(red: 32/255, green: 211/255, blue: 211/255, alpha: 1) // cal_weekend
         let calyellow = UIColor(red: 255/255, green: 236/255, blue: 165/255, alpha: 1)  // cal_today
 
-        init(selectedDate: Binding<Date>, calendarHeight: Binding<CGFloat>, eventsArray: Binding<[Date]>, eventsArrayDone: Binding<[Date]>, calendarTitle: Binding<String>) {
+        init(selectedDate: Binding<Date>, calendarHeight: Binding<CGFloat>, eventsArray: Binding<[String]>, eventsArrayDone: Binding<[String]>, calendarTitle: Binding<String>) {
             self._selectedDate = selectedDate
             self._calendarHeight = calendarHeight
             self._eventsArray = eventsArray
@@ -94,7 +100,6 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
                 guard let self = self else { return }
                 selectedDate = date
             }
-            calculateAverageConsecutiveDays(array: eventsArrayDone.sorted())
 
             // 선택 일자 타이틀 색상 지정
             let day = Calendar.current.component(.weekday, from: date) - 1
@@ -124,6 +129,7 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
             cell.eventIndicator.transform = CGAffineTransform(scaleX: 0, y: 0)
 
             calendarTitle = calendarCurrentPageDidChange(calendar: calendar)
+            calculateAverageConsecutiveDays(array: eventsArrayDone.sorted())
 
             // 셀 배경색
             let selectedColor = CGColor(red: 255/255, green: 236/255, blue: 165/255, alpha: 1)
@@ -147,9 +153,9 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
         func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
             // 셀에 넣을 image 추가
             var iconName: String {
-                if self.eventsArray.contains(date) {
+                if self.eventsArray.contains(firestoreFormatter.string(from: date)) {
                     return "CalDropTarget"
-                } else if self.eventsArrayDone.contains(date) {
+                } else if self.eventsArrayDone.contains(firestoreFormatter.string(from: date)) {
                     return "CalDropTargetFill"
                 } else {
                     return ""
@@ -199,18 +205,29 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
         }
 
         // MARK: - 생리주기 예측
-        func calculateAverageConsecutiveDays(array: [Date], defulatPeriod: Int = 28) {
+        func calculateAverageConsecutiveDays(array: [String], defulatPeriod: Int = 28) {
             guard array.count > 0 else { return }
 
             var periodDaysCount = 1
             var totalPeriodDays: [Int] = []
             var totalGap: [Int] = []
             var currentGap: Int?
-            var lastStartDay = array.first ?? Date()
+            var dateArray: [Date] = []
+            for dateString in array {
+                if let date = firestoreFormatter.date(from: dateString) {
+                    dateArray.append(date)
+                } else {
+                    print("날짜를 변환할 수 없습니다: \(dateString)")
+                }
+            }
+            var lastStartDay = dateArray.first ?? Date()
+//            var lastStartDay = array.first ?? firestoreFormatter.string(from: Date())
+            let firestoreFormatter = DateFormatter()
+            firestoreFormatter.dateFormat = "yyyyMMdd"
 
-            for index in 1..<array.count {
-                let previousDate = Calendar.current.date(byAdding: .day, value: -1, to: array[index])!
-                if Calendar.current.isDate(array[index-1], equalTo: previousDate, toGranularity: .day) {
+            for index in 1..<dateArray.count {
+                let previousDate = Calendar.current.date(byAdding: .day, value: -1, to: dateArray[index])!
+                if Calendar.current.isDate(dateArray[index-1], equalTo: previousDate, toGranularity: .day) {
                     periodDaysCount += 1
                 } else {
                     totalPeriodDays.append(periodDaysCount)
@@ -220,9 +237,9 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
                         totalGap.append(gap + totalPeriodDays[totalPeriodDays.count-2] - 1)
                     }
 
-                    currentGap = Calendar.current.dateComponents([.day], from: array[index-1], to: array[index]).day
+                    currentGap = Calendar.current.dateComponents([.day], from: dateArray[index-1], to: dateArray[index]).day
 
-                    lastStartDay = array[index]
+                    lastStartDay = dateArray[index]
                 }
             }
 
@@ -235,12 +252,12 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
 
             let mensturationGap = totalGap.count != 0 ?   Int(Double(totalGap.reduce(0,+))/Double(totalGap.count)) : defulatPeriod
 
-            var nextMensturations: [Date] = []
+            var nextMensturations: [String] = []
 
             for index in 0..<periodGap {
                 let nextMensturation = Calendar.current.date(byAdding: .day, value: mensturationGap+index, to: lastStartDay)!
 
-                nextMensturations.append(nextMensturation)
+                nextMensturations.append(firestoreFormatter.string(from: nextMensturation))
             }
 
             self.eventsArray = nextMensturations
