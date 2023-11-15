@@ -155,14 +155,13 @@ struct CalendarRect: View {
             .frame(height: CalendarRect.calendarSetHeight)
             TargetCalViewRepresentable(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage)
                 .padding(EdgeInsets(top: 0, leading: 16, bottom: 24, trailing: 16))
+                .opacity(isOpacity)
+                .animation(.easeInOut(duration: 0.3), value: isOpacity)
                 .offset(y: 50)
-                .animation(.easeInOut, value: 1)
                 .frame(height: CalendarRect.calendarSetHeight)
                 .clipped()
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        isOpacity = 1
-                    }
+                .onChange(of: eventsArray) {
+                    isOpacity = 1
                 }
 
             MensDataRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, dDay: $dDay, dDayTitle: $dDayTitle)

@@ -38,7 +38,7 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
         uiView.dataSource = context.coordinator
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
             isViewUpdated = true
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.5) {
                 uiView.setScope(.week, animated: true)
             }
         }
