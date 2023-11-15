@@ -28,12 +28,8 @@ struct SympView: View {
                     symptomViewByDevice
                     HStack {
                         Button(action: {
-                            if user.mensInfo == nil {
-                                // MARK: dateOfMens 는 달력에서 값 받아와야 함
-                                viewModel.addMensInfo(mensSymp: mensSympTitle[mensSympSelected], mensAmt: mensAmtTitle[mensAmtSelected], emoLv: emoLvTitle[emoLvSelected], dateOfMens: Date())
-                            } else {
-                                viewModel.removeMensInfo()
-                            }
+                            // MARK: dateOfMens 는 달력에서 값 받아와야 함
+                            viewModel.addMensInfo(mensSymp: mensSympTitle[mensSympSelected], mensAmt: mensAmtTitle[mensAmtSelected], emoLv: emoLvTitle[emoLvSelected], dateOfMens: Date())
                         }, label: {
                             RoundedRectangle(cornerRadius: 61)
                                 .foregroundColor(.coral500)
