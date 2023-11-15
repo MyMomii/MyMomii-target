@@ -27,39 +27,40 @@ struct SympView: View {
         return formatter
     }()
     var body: some View {
-            VStack(spacing: 20) {
-                if let user = viewModel.user {
-                    TodayWithDayOfWeek()
-                        .padding(.top, 5)
-                    symptomViewByDevice
-                    HStack {
-                        Button(action: {
-                            // MARK: dateOfMens의 값은 메인화면에서 접근했을 경우 오늘 날짜로 지정, 달력에서 이동했을 경우 달력에서 선택한 값으로 설정
-                            viewModel.addMensInfo(mensSymp: mensSympTitle[mensSympSelected], mensAmt: mensAmtTitle[mensAmtSelected], emoLv: emoLvTitle[emoLvSelected], dateOfMens: dateOfMensFormat.string(from: Date()))
-                            moveToCalView = true
-                        }, label: {
-                            RoundedRectangle(cornerRadius: 61)
-                                .foregroundColor(.coral500)
-                                .overlay(
-                                    Text("저장해요")
-                                        .bold24White50()
-                                )
-                                .frame(height: 65)
-                                .shadow(color: .black500.opacity(0.15), radius: 4, x: 0, y: 4)
-                        })
-                    }
+        // MARK: viewModel(TargetCalViewModel)에서 현재날짜로 getMensInfoForSelectedDate를 실행했을 때 값이 있을때/없을때 처리 필요
+        VStack(spacing: 20) {
+            if let user = viewModel.user {
+                TodayWithDayOfWeek()
+                    .padding(.top, 5)
+                symptomViewByDevice
+                HStack {
+                    Button(action: {
+                        // MARK: dateOfMens의 값은 메인화면에서 접근했을 경우 오늘 날짜로 지정, 달력에서 이동했을 경우 달력에서 선택한 값으로 설정
+                        viewModel.addMensInfo(mensSymp: mensSympTitle[mensSympSelected], mensAmt: mensAmtTitle[mensAmtSelected], emoLv: emoLvTitle[emoLvSelected], dateOfMens: dateOfMensFormat.string(from: Date()))
+                        moveToCalView = true
+                    }, label: {
+                        RoundedRectangle(cornerRadius: 61)
+                            .foregroundColor(.coral500)
+                            .overlay(
+                                Text("저장해요")
+                                    .bold24White50()
+                            )
+                            .frame(height: 65)
+                            .shadow(color: .black500.opacity(0.15), radius: 4, x: 0, y: 4)
+                    })
                 }
-                Spacer()
             }
-            .task {
-                try? await viewModel.loadCurrentUser()
-            }
-            .padding(.horizontal, 16)
-            .background(Color.white300)
-            .navigationBarBackButtonHidden()
-            .navigationDestination(isPresented: $moveToCalView) {
-                TargetCalView()
-            }
+            Spacer()
+        }
+        .task {
+            try? await viewModel.loadCurrentUser()
+        }
+        .padding(.horizontal, 16)
+        .background(Color.white300)
+        .navigationBarBackButtonHidden()
+        .navigationDestination(isPresented: $moveToCalView) {
+            TargetCalView()
+        }
     }
 
     @ViewBuilder private var symptomViewByDevice: some View {
