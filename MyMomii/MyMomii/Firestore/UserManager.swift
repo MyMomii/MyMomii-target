@@ -155,15 +155,19 @@ final class UserManager {
     }
 
     func addMensInfo(userId: String, mensInfo: MensInfo) async throws {
-        guard let data = try? encoder.encode(mensInfo) else {
-            throw URLError(.badURL)
-        }
+        let document = userMensInfoDocument(userId: userId)
+        let documentId = document.documentID
 
-        let dict: [String: Any] = [
-            DBUser.CodingKeys.mensInfo.rawValue: data
+        let data: [String: Any] = [
+            "id": documentId,
+            "mens_symp": mensInfo.mensSymp,
+            "mens_amt": mensInfo.mensAmt,
+            "emo_lv": mensInfo.emoLv,
+            "date_of_mens": mensInfo.dateOfMens,
+            "reg_dt": mensInfo.regDt
         ]
 
-        try await userMensInfoDocument(userId: userId).setData(dict, merge: false)
+        try await document.setData(data, merge: false)
     }
 
     func removeMensInfo(userId: String) async throws {
