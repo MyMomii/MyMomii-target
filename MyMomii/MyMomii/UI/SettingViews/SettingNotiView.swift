@@ -8,7 +8,7 @@ import SwiftUI
 
 struct SettingNotiView: View {
     @State var isMensToday = true
-//    @State var expect: String = "20231115"
+    @State var expect: String = "20231116"
 //    @Binding var eventsArray: [String]
     
     var body: some View {
@@ -16,9 +16,9 @@ struct SettingNotiView: View {
             HStack {
                 Text("알림 설정")
                     .bold28Black400()
-//                    .onTapGesture {
-//                        NotificationManager.instance.scheduleNotification(expectedDate: expect)
-//                    }
+                    .onTapGesture {
+                        NotificationManager.instance.scheduleNotification(expectedDate: expect)
+                    }
                 Spacer()
             }
             .padding(EdgeInsets(top: 20, leading: 16, bottom: 20, trailing: 16))

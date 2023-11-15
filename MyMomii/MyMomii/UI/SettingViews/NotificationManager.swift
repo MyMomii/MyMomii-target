@@ -29,24 +29,33 @@ class NotificationManager {
     // 오전 9시에 알림 보내기
     func scheduleNotification(expectedDate: String) {
         let content = UNMutableNotificationContent()
-        content.title = "생리 예정 알림"
-        content.body = "오늘은 생리 예정일 입니다."
+        
+        content.title = "마이모미"
+        content.subtitle = "생리 시작 알림"
+        content.body = "오늘 생리가 시작돼요."
         content.sound = .default
+        
+//        // MARK: - time interval로 푸시알림 테스트
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5.0, repeats: false)
+//        let request = UNNotificationRequest(
+//            identifier: UUID().uuidString,
+//            content: content,
+//            trigger: trigger)
 
+        // MARK: - date로 푸시알림 받기
         var dateComponents = DateComponents()
-        dateComponents.hour = 21
-        dateComponents.minute = 13
-        // MARK: - 생리 예정일 날짜
+        dateComponents.hour = 04
+        dateComponents.minute = 32
         dateComponents.year = Int(String(expectedDate.prefix(4)))
         dateComponents.month = Int(String(expectedDate.dropFirst(4).prefix(2)))
         dateComponents.day = Int(String(expectedDate.dropFirst(6).prefix(2)))
-        
+
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(
             identifier: UUID().uuidString,
             content: content,
             trigger: trigger) // trigger는 3가지 방법 가능 (time, calendar, location)
-
+        
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 print("ERROR: \(error.localizedDescription)")
