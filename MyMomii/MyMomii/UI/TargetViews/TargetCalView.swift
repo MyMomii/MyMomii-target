@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct TargetCalView: View {
+    @StateObject private var viewModel = TargetCalViewModel()
     @State private var selectedDate: Date = .now
     @State private var calendarHeight: CGFloat = 600.0
     @State private var eventsArray: [String] = []
-    @State private var eventsArrayDone: [String] = ["20231011", "20231012", "20231013"]
+    @State private var eventsArrayDone: [String] = []
     @State private var calendarTitle: String = ""
     @State private var changePage: Int = 0
     @State private var isInputSelected: Bool = false
     @State private var isSettingSelected = false
     @State private var dDay: Int = 0
     @State private var dDayTitle: String = "생리 정보를 입력해주세요"
+    @State private var mensInfos: [MensInfo] = []
 
     func dDayToTitle(dDay: Int) -> String {
         if dDay == 0 {  // 생리 예정일 당일 또는 생리 정보 입력 당일
@@ -35,7 +37,6 @@ struct TargetCalView: View {
 
     func calculateDDay(eventsArray: [String], eventsArrayDone: [String]) -> Int {
         if eventsArray==[] || eventsArrayDone==[] {
-            print("array is empty")
             return 9999
         }
 
@@ -90,14 +91,32 @@ struct TargetCalView: View {
         .navigationDestination(isPresented: $isSettingSelected) {
             SettingMainView(userName: "")   // not completed <- SettingMainView에서 userName 제거 필요
         }
+        .task {
+            try? await viewModel.getAllMensInfos()
+            mensInfoToEventsArrayDone()
+        }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
                 dDay = calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone)
-                dDayTitle = dDayToTitle(dDay:dDay)
-                print("D-Day: \(dDay)")
-                print("D-Day Title: \(dDayTitle)")
+                dDayTitle = dDayToTitle(dDay: dDay)
             }
         }
+        .onChange(of: eventsArrayDone) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+                dDay = calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone)
+                dDayTitle = dDayToTitle(dDay: dDay)
+            }
+        }
+    }
+
+    func mensInfoToEventsArrayDone() {
+        let mensInfos = viewModel.mensInfos
+        var str: [String] = []
+        for mensInfo in mensInfos {
+            self.mensInfos.append(mensInfo)
+            str.append(mensInfo.dateOfMens)
+        }
+        eventsArrayDone = str
     }
 }
 
@@ -246,7 +265,7 @@ struct MensDataRect: View {
                 }
                 isInputSelected = true
                 dDay = TargetCalView().calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone)
-                dDayTitle = TargetCalView().dDayToTitle(dDay:dDay)
+                dDayTitle = TargetCalView().dDayToTitle(dDay: dDay)
             } label: {
                 Rectangle()
                     .cornerRadius(10)
@@ -328,7 +347,6 @@ struct MensData: View {
         let mensSympTitle = ["안 아파요", "아파요", "많이 아파요"]
         let mensAmtTitle = ["적어요", "보통이에요", "많아요"]
         let emoLvTitle = ["좋아요", "보통이에요", "나빠요"]
-        let detailImageName: String
 
         switch detail {
         case mensSympTitle[0]:
