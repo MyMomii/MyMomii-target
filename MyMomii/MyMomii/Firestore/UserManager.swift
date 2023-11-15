@@ -180,7 +180,17 @@ final class UserManager {
 
     func getAllMensInfo(userId: String) async throws -> [MensInfo] {
         let snapshot = try await userMensInfoCollection(userId: userId).getDocuments()
+        var mensInfos: [MensInfo] = []
 
+        for document in snapshot.documents {
+            let mensInfo = try document.data(as: MensInfo.self)
+            mensInfos.append(mensInfo)
+        }
+        return mensInfos
+    }
+
+    func getMensInfoForSelectedDate(userId: String, selectedDate: String) async throws -> [MensInfo] {
+        let snapshot = try await userMensInfoCollection(userId: userId).whereField("dateOfMens", isEqualTo: selectedDate).getDocuments()
         var mensInfos: [MensInfo] = []
 
         for document in snapshot.documents {
