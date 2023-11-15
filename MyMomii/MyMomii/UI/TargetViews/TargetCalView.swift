@@ -10,11 +10,12 @@ import SwiftUI
 struct TargetCalView: View {
     @State private var selectedDate: Date = .now
     @State private var calendarHeight: CGFloat = 600.0
-    @State private var eventsArray: [Date] = []
-    @State private var eventsArrayDone: [Date] = []
+    @State private var eventsArray: [String] = []
+    @State private var eventsArrayDone: [String] = ["20231101", "20231102", "20231103"]
     @State private var calendarTitle: String = ""
     @State private var changePage: Int = 0
-    @State var isInputSelected: Bool = false
+    @State private var isInputSelected: Bool = false
+    @State private var isSettingSelected = false
     var dDay: Int = 0
     var dDayTitle: String {
         if dDay == 0 {
@@ -37,8 +38,22 @@ struct TargetCalView: View {
         }
         .padding(.horizontal, 16)
         .background(Color.white300)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    self.isSettingSelected = true
+                }, label: {
+                    Image(systemName: "gearshape.fill")
+                        .foregroundColor(Color.coral500)
+                })
+            }
+        }
+        .navigationBarBackButtonHidden()
         .navigationDestination(isPresented: $isInputSelected) {
             SympView()
+        }
+        .navigationDestination(isPresented: $isSettingSelected) {
+            SettingMainView(userName: "")   // not completed <- SettingMainView에서 userName 제거 필요
         }
     }
 }
@@ -47,11 +62,16 @@ struct TargetCalView: View {
 struct CalendarRect: View {
     @Binding var selectedDate: Date
     @Binding var calendarHeight: CGFloat
-    @Binding var eventsArray: [Date]
-    @Binding var eventsArrayDone: [Date]
+    @Binding var eventsArray: [String]
+    @Binding var eventsArrayDone: [String]
     @Binding var calendarTitle: String
     @Binding var changePage: Int
     @Binding var isInputSelected: Bool
+    var firestoreFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        return formatter
+    }
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -59,7 +79,7 @@ struct CalendarRect: View {
                     .cornerRadius(10)
                     .foregroundColor(Color.white50)
                     .shadow(color: .black500.opacity(0.15), radius: 3.5, x: 0, y: 2)
-                    .frame(height: eventsArrayDone.contains(selectedDate) ? 580 : 400)
+                    .frame(height: eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) ? 580 : 400)
                     .overlay {
                         // Header
                         VStack(spacing: 0) {
@@ -112,19 +132,24 @@ struct CalendarHeader: View {
 // MARK: - 생리 데이터 박스
 struct MensDataRect: View {
     @Binding var selectedDate: Date
-    @Binding var eventsArrayDone: [Date]
+    @Binding var eventsArrayDone: [String]
     @Binding var isInputSelected: Bool
+    var firestoreFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        return formatter
+    }
 
     var body: some View {
         VStack(alignment: .trailing, spacing: 0) {
             Rectangle()
                 .cornerRadius(10)
-                .frame(height: eventsArrayDone.contains(selectedDate) ? 280 : 100)
+                .frame(height: eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) ? 280 : 100)
                 .foregroundColor(.calToday)
                 .shadow(color: .black500.opacity(0.25), radius: 2, x: 0, y: 4)
                 .overlay {
                     VStack(spacing: 0) {
-                        if eventsArrayDone.contains(selectedDate) {
+                        if eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) {
                             VStack(spacing: 0) {    // sample
                                 MensData(mensImage: "Symp1", mensText: "배가 안 아파요")
                                 MensData(mensImage: "MensAmt2", mensText: "생리양이 보통이에요")
@@ -149,12 +174,12 @@ struct MensDataRect: View {
 
             Button {
                 print(selectedDate) // sample
-                if eventsArrayDone.contains(selectedDate) {
-                    if let index = eventsArrayDone.firstIndex(of: selectedDate) {
+                if eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) {
+                    if let index = eventsArrayDone.firstIndex(of: firestoreFormatter.string(from: selectedDate)) {
                         eventsArrayDone.remove(at: index)
                     }
                 } else {
-                    eventsArrayDone.append(selectedDate)
+                    eventsArrayDone.append(firestoreFormatter.string(from: selectedDate))
                 }
                 isInputSelected = true
             } label: {
@@ -166,7 +191,7 @@ struct MensDataRect: View {
                         HStack(spacing: 0) {
                             Image(systemName: "square.and.pencil")
                             Spacer()
-                            Text(eventsArrayDone.contains(selectedDate) ? "고치기" : "입력")
+                            Text(eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) ? "고치기" : "입력")
                         }
                         .modifier(SemiBold20White50())
                         .padding(.horizontal, 16)
