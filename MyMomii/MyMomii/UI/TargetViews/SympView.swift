@@ -13,6 +13,8 @@ struct SympView: View {
     @State var mensSympSelected = 0
     @State var mensAmtSelected = 0
     @State var emoLvSelected = 0
+    @Binding var selectedDate: Date
+    @State var selectedFromCalView = false
     let mensSympTitle = ["안 아파요", "아파요", "많이 아파요"]
     let mensAmtTitle = ["적어요", "보통이에요", "많아요"]
     let emoLvTitle = ["좋아요", "보통이에요", "나빠요"]
@@ -40,7 +42,7 @@ struct SympView: View {
                             mensSymp: "배가 \(mensSympTitle[mensSympSelected])",
                             mensAmt: "생리양이 \(mensAmtTitle[mensAmtSelected])",
                             emoLv: "기분이 \(emoLvTitle[emoLvSelected])",
-                            dateOfMens: dateOfMensFormat.string(from: Date()))
+                            dateOfMens: selectedFromCalView ? dateOfMensFormat.string(from: selectedDate) : dateOfMensFormat.string(from: Date()))
                         moveToCalView = true
                     }, label: {
                         RoundedRectangle(cornerRadius: 61)
@@ -232,5 +234,5 @@ struct TodayWithDayOfWeek: View {
 }
 
 #Preview {
-    SympView()
+    SympView(selectedDate: .constant(.now))
 }
