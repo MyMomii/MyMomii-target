@@ -103,11 +103,17 @@ extension Text {
     func semiBold18White75() -> some View {
         modifier(SemiBold18White75())
     }
+    func semiBold20Coral300() -> some View {
+        modifier(SemiBold20Coral300())
+    }
     func semiBold20Coral500() -> some View {
         modifier(SemiBold20Coral500())
     }
     func semiBold20White50() -> some View {
         modifier(SemiBold20White50())
+    }
+    func semiBold20Black500() -> some View {
+        modifier(SemiBold20Black500())
     }
     func semiBold24Coral500() -> some View {
         modifier(SemiBold24Coral500())
@@ -155,6 +161,9 @@ extension Text {
     func bold23White300() -> some View {
         modifier(Bold23White300())
     }
+    func bold24Coral200() -> some View {
+        modifier(Bold24Coral200())
+    }
     func bold24White50() -> some View {
         modifier(Bold24White50())
     }
@@ -178,6 +187,9 @@ extension Text {
     }
     func bold30Coral500() -> some View {
         modifier(Bold30Coral500())
+    }
+    func bold32Coral400() -> some View {
+        modifier(Bold32Coral400())
     }
     // MARK: - Heavy
     func heavy32Black400() -> some View {
@@ -409,6 +421,14 @@ struct SemiBold18White75: ViewModifier {
     }
 }
 
+struct SemiBold20Coral300: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: 20, weight: .semibold))
+            .foregroundColor(.coral300)
+    }
+}
+
 struct SemiBold20Coral500: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -422,6 +442,14 @@ struct SemiBold20White50: ViewModifier {
         content
             .font(.system(size: 20, weight: .semibold))
             .foregroundColor(.white50)
+    }
+}
+
+struct SemiBold20Black500: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: 20, weight: .semibold))
+            .foregroundColor(.black500)
     }
 }
 
@@ -545,6 +573,14 @@ struct Bold23White300: ViewModifier {
     }
 }
 
+struct Bold24Coral200: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: 24, weight: .bold))
+            .foregroundColor(.coral200)
+    }
+}
+
 struct Bold24White50: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -606,6 +642,14 @@ struct Bold30Coral500: ViewModifier {
         content
             .font(.system(size: 28, weight: .bold))
             .foregroundColor(.coral500)
+    }
+}
+
+struct Bold32Coral400: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: 32, weight: .bold))
+            .foregroundColor(.coral400)
     }
 }
 
