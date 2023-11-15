@@ -15,10 +15,10 @@ struct TargetCalView: View {
     @State private var eventsArrayDone: [String] = []
     @State private var calendarTitle: String = ""
     @State private var changePage: Int = 0
-
     @State private var dDay: Int = 0
     @State private var dDayTitle: String = "생리 정보를 입력해주세요"
     @State private var isInputSelected: Bool = false
+
     @State private var isSettingSelected: Bool = false
     @State private var mensInfos: [MensInfo] = []
 
@@ -31,7 +31,7 @@ struct TargetCalView: View {
                     dDay = calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone)
                     dDayTitle = dDayToTitle(dDay: dDay)
                 }
-            CalendarRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage, dDay: $dDay, dDayTitle: $dDayTitle)
+            CalendarRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage, dDay: $dDay, dDayTitle: $dDayTitle, isInputSelected: $isInputSelected)
                 .frame(height: 600)
             Spacer()
         }
@@ -123,6 +123,7 @@ struct CalendarRect: View {
     @Binding var changePage: Int
     @Binding var dDay: Int
     @Binding var dDayTitle: String
+    @Binding var isInputSelected: Bool
     @State var isOpacity: CGFloat = 0.0
     var firestoreFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -164,7 +165,7 @@ struct CalendarRect: View {
                     isOpacity = 1
                 }
 
-            MensDataRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, dDay: $dDay, dDayTitle: $dDayTitle)
+            MensDataRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, dDay: $dDay, dDayTitle: $dDayTitle, isInputSelected: $isInputSelected)
                 .frame(height: CalendarRect.mensSetHeight)
                 .padding(EdgeInsets(top: CalendarRect.calendarSetHeight-CalendarRect.mensSetHeight-16, leading: 16, bottom: 8+16, trailing: 16))
                 .opacity(isOpacity)
@@ -208,6 +209,7 @@ struct MensDataRect: View {
     @Binding var eventsArrayDone: [String]
     @Binding var dDay: Int
     @Binding var dDayTitle: String
+    @Binding var isInputSelected: Bool
     var firestoreFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
@@ -272,6 +274,7 @@ struct MensDataRect: View {
                 } else {
                     eventsArrayDone.append(firestoreFormatter.string(from: selectedDate))
                 }
+                isInputSelected = true
             } label: {
                 Rectangle()
                     .cornerRadius(10)
