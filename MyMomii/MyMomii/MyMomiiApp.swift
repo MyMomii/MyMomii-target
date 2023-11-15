@@ -22,6 +22,7 @@ struct MyMomiiApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+//            AuthenticationView().environmentObject(AuthViewModel())
         }
     }
 }
