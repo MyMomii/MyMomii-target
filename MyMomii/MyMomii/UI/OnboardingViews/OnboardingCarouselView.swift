@@ -7,18 +7,21 @@
 
 import FirebaseAuth
 import SwiftUI
+import Lottie
 
 struct OnboardingCarouselView: View {
     var body: some View {
-        CarouselView(imageNames: ["OnBoard_01", "OnBoard_02", "OnBoard_03"])
+//        CarouselView(imageNames: ["OnBoard_01", "OnBoard_02", "OnBoard_03"])
+        CarouselView(lottieFileNames: ["Confetti_01", "Confetti_02", "Confetti_01"])
+
     }
 }
 
 struct CarouselView: View {
-    var imageNames: [String]
+    var lottieFileNames: [String]
     @State private var selectedImageIndex: Int = 0
     var isLastImage: Bool {
-        return selectedImageIndex == imageNames.count - 1
+        return selectedImageIndex == lottieFileNames.count - 1
     }
     @State var goToMain = false
     @EnvironmentObject private var authModel: AuthViewModel
@@ -28,13 +31,18 @@ struct CarouselView: View {
         NavigationStack {
             VStack {
                 TabView(selection: $selectedImageIndex) {
-                    ForEach(0..<imageNames.count, id: \.self) { index in
+                    ForEach(0..<lottieFileNames.count, id: \.self) { index in
                         ZStack(alignment: .topLeading) {
                             if DeviceSize.width < DeviceSize.iPhone14 {
                                 VStack {
-                                    Image("\(imageNames[index])")
+                                    LottieView(animation: .named(lottieFileNames[index]))
                                         .resizable()
-                                        .tag(index)
+                                        .configure { lottieAnimationView in
+                                            lottieAnimationView.loopMode = .loop
+                                            lottieAnimationView.contentMode = .scaleAspectFit
+                                            lottieAnimationView.animationSpeed = 1.5
+                                        }
+                                        .playing()
                                         .frame(width: 280, height: 365)
                                     if index == 0 {
                                         Text("생리를 시작했다면,")
@@ -59,10 +67,14 @@ struct CarouselView: View {
                                 }
                             } else {
                                 VStack {
-                                    Image("\(imageNames[index])")
+                                    LottieView(animation: .named(lottieFileNames[index]))
                                         .resizable()
-                                        .scaledToFill()
-                                        .tag(index)
+                                        .configure { lottieAnimationView in
+                                            lottieAnimationView.loopMode = .loop
+                                            lottieAnimationView.contentMode = .scaleAspectFit
+                                            lottieAnimationView.animationSpeed = 1.5
+                                        }
+                                        .playing()
                                         .frame(width: 300, height: 493)
                                     if index == 0 {
                                         Text("생리를 시작했다면,")
