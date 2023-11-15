@@ -15,7 +15,7 @@ struct SympView: View {
     @State var emoLvSelected = 0
     let mensSympTitle = ["안 아파요", "아파요", "많이 아파요"]
     let mensAmtTitle = ["적어요", "보통이에요", "많아요"]
-    let emoLvTitle = ["적어요", "보통이에요", "많아요"]
+    let emoLvTitle = ["좋아요", "보통이에요", "나빠요"]
     let dateformat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY년 M월 d일 HH:mm:ss"
