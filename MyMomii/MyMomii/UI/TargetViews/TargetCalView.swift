@@ -92,8 +92,7 @@ struct CalendarHeader: View {
                 changePage -= 1
             } label: {
                 Image(systemName: "chevron.left.circle.fill")
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(Color.coral200)
+                    .modifier(Bold24Coral200())
             }
             Spacer()
             Text("\(calendarTitle)")
@@ -104,8 +103,7 @@ struct CalendarHeader: View {
                 changePage += 1
             } label: {
                 Image(systemName: "chevron.right.circle.fill")
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(Color.coral200)
+                    .modifier(Bold24Coral200())
             }
         }
     }
@@ -170,8 +168,7 @@ struct MensDataRect: View {
                             Spacer()
                             Text(eventsArrayDone.contains(selectedDate) ? "고치기" : "입력")
                         }
-                        .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(.white50)
+                        .modifier(SemiBold20White50())
                         .padding(.horizontal, 16)
                     }
             }

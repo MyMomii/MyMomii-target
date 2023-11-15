@@ -161,6 +161,9 @@ extension Text {
     func bold23White300() -> some View {
         modifier(Bold23White300())
     }
+    func bold24Coral200() -> some View {
+        modifier(Bold24Coral200())
+    }
     func bold24White50() -> some View {
         modifier(Bold24White50())
     }
@@ -567,6 +570,14 @@ struct Bold23White300: ViewModifier {
         content
             .font(.system(size: 23, weight: .bold))
             .foregroundColor(.white300)
+    }
+}
+
+struct Bold24Coral200: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: 24, weight: .bold))
+            .foregroundColor(.coral200)
     }
 }
 
