@@ -13,6 +13,7 @@ struct TargetMainView: View {
     @State var calendarBtnClick = false
     @State var toSympView = false
     @State var isLottieViewDone = false
+    @State var selectedDate = Date()
     @AppStorage("isOnBoarding") var isOnBoarding: Bool = true
     
     var body: some View {
@@ -65,7 +66,7 @@ struct TargetMainView: View {
                     }
                     .padding(EdgeInsets(top: 30, leading: 16, bottom: 30, trailing: 16))
                     .navigationDestination(isPresented: $toSympView) {
-                        SympView()
+                        SympView(selectedDate: $selectedDate)
                     }
                     .navigationDestination(isPresented: $calendarBtnClick) {
                         TargetCalView()
