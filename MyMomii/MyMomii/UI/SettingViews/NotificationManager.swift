@@ -44,8 +44,8 @@ class NotificationManager {
 
         // MARK: - date로 푸시알림 받기
         var dateComponents = DateComponents()
-        dateComponents.hour = 04
-        dateComponents.minute = 32
+        dateComponents.hour = 9
+        dateComponents.minute = 0 
         dateComponents.year = Int(String(expectedDate.prefix(4)))
         dateComponents.month = Int(String(expectedDate.dropFirst(4).prefix(2)))
         dateComponents.day = Int(String(expectedDate.dropFirst(6).prefix(2)))

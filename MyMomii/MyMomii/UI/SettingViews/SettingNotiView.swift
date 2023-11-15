@@ -8,7 +8,7 @@ import SwiftUI
 
 struct SettingNotiView: View {
     @State var isMensToday = true
-    @State var expect: String = "20231116"
+    @State var expect: String = "테스트용오늘날짜"
 //    @Binding var eventsArray: [String]
     
     var body: some View {
