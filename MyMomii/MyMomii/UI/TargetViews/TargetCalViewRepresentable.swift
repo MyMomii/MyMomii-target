@@ -150,16 +150,13 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
 
         func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
             // 셀에 넣을 image 추가
-            var iconName: String {
-                if self.eventsArray.contains(firestoreFormatter.string(from: date)) {
-                    return "CalDropTarget"
-                } else if self.eventsArrayDone.contains(firestoreFormatter.string(from: date)) {
-                    return "CalDropTargetFill"
-                } else {
-                    return ""
-                }
+            if self.eventsArray.contains(firestoreFormatter.string(from: date)) {
+                return UIImage(named: "CalDropTarget")?.withTintColor(coral500)
+            } else if self.eventsArrayDone.contains(firestoreFormatter.string(from: date)) {
+                return UIImage(named: "CalDropTargetFill")?.withTintColor(coral500)
+            } else {
+                return nil
             }
-            return UIImage(named: iconName)?.withTintColor(coral500)
         }
 
         // 일자 표시 위치
@@ -303,7 +300,6 @@ extension TargetCalViewRepresentable {
 
     func calculateDDay(eventsArray: [String], eventsArrayDone: [String]) -> Int {
         if eventsArray==[] || eventsArrayDone==[] {
-            print("array is empty")
             return 9999
         }
 

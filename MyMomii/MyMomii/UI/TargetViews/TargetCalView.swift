@@ -150,9 +150,8 @@ struct CalendarRect: View {
             }
             .frame(height: 600)
             TargetCalViewRepresentable(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage, dDay: $dDay, dDayTitle: $dDayTitle)
-                .frame(height: 600)
                 .padding(EdgeInsets(top: 0, leading: 16, bottom: 24, trailing: 16))
-                .offset(y: 70)
+                .offset(y: 50)
                 .opacity(isOpacity)
                 .animation(.easeInOut, value: 1)
                 .onAppear {
@@ -160,9 +159,11 @@ struct CalendarRect: View {
                         isOpacity = 1
                     }
                 }
+                .frame(height: 600)
+                .clipped()
 
             MensDataRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, isInputSelected: $isInputSelected, dDay: $dDay, dDayTitle: $dDayTitle)
-                .padding(EdgeInsets(top: 200-4, leading: 16, bottom: 16+4, trailing: 16))
+                .padding(EdgeInsets(top: 200-24, leading: 16, bottom: 16+24-8, trailing: 16))
                 .opacity(isOpacity)
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
@@ -236,7 +237,7 @@ struct MensDataRect: View {
                     .padding(.leading, 8)
             }
             .frame(height: 16)
-            .padding(.bottom, 8)
+            .padding(.bottom, 16)
             Rectangle()
                 .cornerRadius(10)
                 .frame(height: eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) ? 280 : 100)
@@ -295,7 +296,7 @@ struct MensDataRect: View {
 
             Spacer()
         }
-        .frame(height: 374)
+        .frame(height: 382)
         .task {
             try? await viewModel.getMensInfoForSelectedDate(selectedDate: firestoreFormatter.string(from: selectedDate))
             print(viewModel.mensInfosForSelectedDate)
