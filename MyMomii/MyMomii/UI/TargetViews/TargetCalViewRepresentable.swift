@@ -24,8 +24,6 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
     @Binding var eventsArrayDone: [String]
     @Binding var calendarTitle: String
     @Binding var changePage: Int
-    @Binding var dDay: Int
-    @Binding var dDayTitle: String
     @State var isViewUpdated = true
 
     // MARK: - Code
@@ -59,9 +57,6 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
             changePage = 0
         }
-
-        dDay = calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone)
-        dDayTitle = dDayToTitle(dDay: dDay)
     }
 
     // 유킷 -> 스유
@@ -328,5 +323,5 @@ extension TargetCalViewRepresentable {
 }
 
 #Preview {
-    TargetCalViewRepresentable(selectedDate: .constant(Date()), eventsArray: .constant([]), eventsArrayDone: .constant([]), calendarTitle: .constant(""), changePage: .constant(0), dDay: .constant(0), dDayTitle: .constant(""))
+    TargetCalViewRepresentable(selectedDate: .constant(Date()), eventsArray: .constant([]), eventsArrayDone: .constant([]), calendarTitle: .constant(""), changePage: .constant(0))
 }

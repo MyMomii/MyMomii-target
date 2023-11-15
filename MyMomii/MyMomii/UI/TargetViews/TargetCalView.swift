@@ -9,15 +9,17 @@ import SwiftUI
 
 struct TargetCalView: View {
     @StateObject private var viewModel = TargetCalViewModel()
-    @State private var selectedDate: Date = .now
+
+    @State private var selectedDate: Date = .now    // from=증상입력화면 -> navigationDestination(isActive: 동작조건) { TargetCalView(selectedDate: 증상입력날짜) }
     @State private var eventsArray: [String] = []
     @State private var eventsArrayDone: [String] = []
     @State private var calendarTitle: String = ""
     @State private var changePage: Int = 0
-    @State private var isInputSelected: Bool = false
-    @State private var isSettingSelected = false
+
     @State private var dDay: Int = 0
     @State private var dDayTitle: String = "생리 정보를 입력해주세요"
+    @State private var isInputSelected: Bool = false
+    @State private var isSettingSelected: Bool = false
     @State private var mensInfos: [MensInfo] = []
 
     var body: some View {
@@ -25,13 +27,11 @@ struct TargetCalView: View {
             Text("\(dDayTitle)")
                 .bold32Coral400()
                 .padding(EdgeInsets(top: 16, leading: 8, bottom: 32, trailing: 8))
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        dDay = calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone)
-                        dDayTitle = dDayToTitle(dDay: dDay)
-                    }
+                .onChange(of: eventsArray) {
+                    dDay = calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone)
+                    dDayTitle = dDayToTitle(dDay: dDay)
                 }
-            CalendarRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage, isInputSelected: $isInputSelected, dDay: $dDay, dDayTitle: $dDayTitle)
+            CalendarRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage, dDay: $dDay, dDayTitle: $dDayTitle)
                 .frame(height: 600)
             Spacer()
         }
@@ -121,7 +121,6 @@ struct CalendarRect: View {
     @Binding var eventsArrayDone: [String]
     @Binding var calendarTitle: String
     @Binding var changePage: Int
-    @Binding var isInputSelected: Bool
     @Binding var dDay: Int
     @Binding var dDayTitle: String
     @State var isOpacity: CGFloat = 0.0
@@ -154,7 +153,7 @@ struct CalendarRect: View {
                 Spacer()
             }
             .frame(height: CalendarRect.calendarSetHeight)
-            TargetCalViewRepresentable(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage, dDay: $dDay, dDayTitle: $dDayTitle)
+            TargetCalViewRepresentable(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage)
                 .padding(EdgeInsets(top: 0, leading: 16, bottom: 24, trailing: 16))
                 .offset(y: 50)
                 .opacity(isOpacity)
@@ -167,7 +166,7 @@ struct CalendarRect: View {
                 .frame(height: CalendarRect.calendarSetHeight)
                 .clipped()
 
-            MensDataRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, isInputSelected: $isInputSelected, dDay: $dDay, dDayTitle: $dDayTitle)
+            MensDataRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, dDay: $dDay, dDayTitle: $dDayTitle)
                 .frame(height: CalendarRect.mensSetHeight)
                 .padding(EdgeInsets(top: CalendarRect.calendarSetHeight-CalendarRect.mensSetHeight-16, leading: 16, bottom: 8+16, trailing: 16))
                 .opacity(isOpacity)
@@ -214,7 +213,6 @@ struct MensDataRect: View {
     @Binding var selectedDate: Date
     @Binding var eventsArray: [String]
     @Binding var eventsArrayDone: [String]
-    @Binding var isInputSelected: Bool
     @Binding var dDay: Int
     @Binding var dDayTitle: String
     var firestoreFormatter: DateFormatter {
@@ -281,7 +279,6 @@ struct MensDataRect: View {
                 } else {
                     eventsArrayDone.append(firestoreFormatter.string(from: selectedDate))
                 }
-                isInputSelected = true
             } label: {
                 Rectangle()
                     .cornerRadius(10)
