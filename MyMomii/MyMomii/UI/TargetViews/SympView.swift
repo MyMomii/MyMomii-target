@@ -36,7 +36,11 @@ struct SympView: View {
                 HStack {
                     Button(action: {
                         // MARK: dateOfMens의 값은 메인화면에서 접근했을 경우 오늘 날짜로 지정, 달력에서 이동했을 경우 달력에서 선택한 값으로 설정
-                        viewModel.addMensInfo(mensSymp: mensSympTitle[mensSympSelected], mensAmt: mensAmtTitle[mensAmtSelected], emoLv: emoLvTitle[emoLvSelected], dateOfMens: dateOfMensFormat.string(from: Date()))
+                        viewModel.addMensInfo(
+                            mensSymp: "배가 \(mensSympTitle[mensSympSelected])",
+                            mensAmt: "생리양이 \(mensAmtTitle[mensAmtSelected])",
+                            emoLv: "기분이 \(emoLvTitle[emoLvSelected])",
+                            dateOfMens: dateOfMensFormat.string(from: Date()))
                         moveToCalView = true
                     }, label: {
                         RoundedRectangle(cornerRadius: 61)
