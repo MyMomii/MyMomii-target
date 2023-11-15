@@ -130,6 +130,11 @@ struct CalendarRect: View {
         formatter.dateFormat = "yyyyMMdd"
         return formatter
     }
+    static let calendarSetHeight: CGFloat = 600
+    static let calendarRectHeight: CGFloat = mensRectHeight+300   // < calendarSetHeight
+    static let mensSetHeight: CGFloat = mensRectHeight+140 // 생리데이터+버튼+범례
+    static let dataGap: CGFloat = calendarRectHeight-mensSetHeight  // = 140
+    static let mensRectHeight: CGFloat = 260
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -137,7 +142,7 @@ struct CalendarRect: View {
                     .cornerRadius(10)
                     .foregroundColor(Color.white50)
                     .shadow(color: .black500.opacity(0.15), radius: 3.5, x: 0, y: 2)
-                    .frame(height: eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) ? 580 : 400)
+                    .frame(height: eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) ? CalendarRect.calendarRectHeight : CalendarRect.calendarRectHeight-CalendarRect.dataGap)
                     .overlay {
                         // Header
                         VStack(spacing: 0) {
@@ -148,7 +153,7 @@ struct CalendarRect: View {
                     }
                 Spacer()
             }
-            .frame(height: 600)
+            .frame(height: CalendarRect.calendarSetHeight)
             TargetCalViewRepresentable(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage, dDay: $dDay, dDayTitle: $dDayTitle)
                 .padding(EdgeInsets(top: 0, leading: 16, bottom: 24, trailing: 16))
                 .offset(y: 50)
@@ -159,11 +164,12 @@ struct CalendarRect: View {
                         isOpacity = 1
                     }
                 }
-                .frame(height: 600)
+                .frame(height: CalendarRect.calendarSetHeight)
                 .clipped()
 
             MensDataRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, isInputSelected: $isInputSelected, dDay: $dDay, dDayTitle: $dDayTitle)
-                .padding(EdgeInsets(top: 200-24, leading: 16, bottom: 16+24-8, trailing: 16))
+                .frame(height: CalendarRect.mensSetHeight)
+                .padding(EdgeInsets(top: CalendarRect.calendarSetHeight-CalendarRect.mensSetHeight-16, leading: 16, bottom: 8+16, trailing: 16))
                 .opacity(isOpacity)
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
@@ -240,7 +246,7 @@ struct MensDataRect: View {
             .padding(.bottom, 16)
             Rectangle()
                 .cornerRadius(10)
-                .frame(height: eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) ? 280 : 100)
+                .frame(height: eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) ? CalendarRect.mensRectHeight : CalendarRect.mensRectHeight-CalendarRect.dataGap)
                 .foregroundColor(.calToday)
                 .shadow(color: .black500.opacity(0.25), radius: 2, x: 0, y: 4)
                 .overlay {
@@ -296,7 +302,7 @@ struct MensDataRect: View {
 
             Spacer()
         }
-        .frame(height: 382)
+        .frame(height: CalendarRect.mensSetHeight)
         .task {
             try? await viewModel.getMensInfoForSelectedDate(selectedDate: firestoreFormatter.string(from: selectedDate))
             print(viewModel.mensInfosForSelectedDate)
