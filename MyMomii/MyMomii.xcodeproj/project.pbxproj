@@ -19,13 +19,10 @@
 		7D67F4082AFA3BA600F7931D /* TargetCalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F4052AFA3BA600F7931D /* TargetCalView.swift */; };
 		7D67F40C2AFA3BE000F7931D /* GestureModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F40A2AFA3BE000F7931D /* GestureModifier.swift */; };
 		7D67F40D2AFA3BE000F7931D /* TextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F40B2AFA3BE000F7931D /* TextModifier.swift */; };
-		7D67F4152AFA3BED00F7931D /* DetailTermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F40E2AFA3BEC00F7931D /* DetailTermView.swift */; };
 		7D67F4162AFA3BED00F7931D /* SettingNotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F40F2AFA3BEC00F7931D /* SettingNotiView.swift */; };
 		7D67F4172AFA3BED00F7931D /* SettingMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F4102AFA3BEC00F7931D /* SettingMainView.swift */; };
-		7D67F4182AFA3BED00F7931D /* SettingTermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F4112AFA3BEC00F7931D /* SettingTermView.swift */; };
 		7D67F4192AFA3BED00F7931D /* SettingGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F4122AFA3BEC00F7931D /* SettingGuideView.swift */; };
 		7D67F41A2AFA3BED00F7931D /* SettingComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F4132AFA3BEC00F7931D /* SettingComponents.swift */; };
-		7D67F41B2AFA3BED00F7931D /* OutCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F4142AFA3BED00F7931D /* OutCheckView.swift */; };
 		7D97FE2D2AF9DE4D000608DA /* MyMomiiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D97FE2C2AF9DE4D000608DA /* MyMomiiApp.swift */; };
 		7D97FE2F2AF9DE4D000608DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D97FE2E2AF9DE4D000608DA /* ContentView.swift */; };
 		7D97FE312AF9DE4E000608DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D97FE302AF9DE4E000608DA /* Assets.xcassets */; };
@@ -81,13 +78,10 @@
 		7D67F4052AFA3BA600F7931D /* TargetCalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetCalView.swift; sourceTree = "<group>"; };
 		7D67F40A2AFA3BE000F7931D /* GestureModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureModifier.swift; sourceTree = "<group>"; };
 		7D67F40B2AFA3BE000F7931D /* TextModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextModifier.swift; sourceTree = "<group>"; };
-		7D67F40E2AFA3BEC00F7931D /* DetailTermView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTermView.swift; sourceTree = "<group>"; };
 		7D67F40F2AFA3BEC00F7931D /* SettingNotiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingNotiView.swift; sourceTree = "<group>"; };
 		7D67F4102AFA3BEC00F7931D /* SettingMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingMainView.swift; sourceTree = "<group>"; };
-		7D67F4112AFA3BEC00F7931D /* SettingTermView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTermView.swift; sourceTree = "<group>"; };
 		7D67F4122AFA3BEC00F7931D /* SettingGuideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingGuideView.swift; sourceTree = "<group>"; };
 		7D67F4132AFA3BEC00F7931D /* SettingComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingComponents.swift; sourceTree = "<group>"; };
-		7D67F4142AFA3BED00F7931D /* OutCheckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutCheckView.swift; sourceTree = "<group>"; };
 		7D97FE292AF9DE4D000608DA /* MyMomii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMomii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D97FE2C2AF9DE4D000608DA /* MyMomiiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMomiiApp.swift; sourceTree = "<group>"; };
 		7D97FE2E2AF9DE4D000608DA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -214,13 +208,10 @@
 		7D97FE3C2AF9DF1E000608DA /* SettingViews */ = {
 			isa = PBXGroup;
 			children = (
-				7D67F40E2AFA3BEC00F7931D /* DetailTermView.swift */,
-				7D67F4142AFA3BED00F7931D /* OutCheckView.swift */,
 				7D67F4132AFA3BEC00F7931D /* SettingComponents.swift */,
 				7D67F4122AFA3BEC00F7931D /* SettingGuideView.swift */,
 				7D67F4102AFA3BEC00F7931D /* SettingMainView.swift */,
 				7D67F40F2AFA3BEC00F7931D /* SettingNotiView.swift */,
-				7D67F4112AFA3BEC00F7931D /* SettingTermView.swift */,
 			);
 			path = SettingViews;
 			sourceTree = "<group>";
@@ -413,7 +404,6 @@
 				7D97FE2F2AF9DE4D000608DA /* ContentView.swift in Sources */,
 				DEC525E92B0170DC008C0B1B /* OnboardingCarouselView.swift in Sources */,
 				7D67F4082AFA3BA600F7931D /* TargetCalView.swift in Sources */,
-				7D67F4182AFA3BED00F7931D /* SettingTermView.swift in Sources */,
 				7DADB0582AFBD0A700A6846B /* MensInfoStore.swift in Sources */,
 				7DADB05B2AFBD0A700A6846B /* EditView.swift in Sources */,
 				7D67F4162AFA3BED00F7931D /* SettingNotiView.swift in Sources */,
@@ -426,10 +416,8 @@
 				7D97FE2D2AF9DE4D000608DA /* MyMomiiApp.swift in Sources */,
 				7DADB05A2AFBD0A700A6846B /* ImperMainView.swift in Sources */,
 				7D67F4192AFA3BED00F7931D /* SettingGuideView.swift in Sources */,
-				7D67F4152AFA3BED00F7931D /* DetailTermView.swift in Sources */,
 				7D67F40C2AFA3BE000F7931D /* GestureModifier.swift in Sources */,
 				DE895D962B01BB8400FB2226 /* AuthViewModel.swift in Sources */,
-				7D67F41B2AFA3BED00F7931D /* OutCheckView.swift in Sources */,
 				7D67F4062AFA3BA600F7931D /* SympView.swift in Sources */,
 				DE4140572AFF72C300A20CC9 /* LaunchScreenView.swift in Sources */,
 				DE895D982B01BB9B00FB2226 /* AuthenticationView.swift in Sources */,
