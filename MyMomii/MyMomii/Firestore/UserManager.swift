@@ -160,11 +160,11 @@ final class UserManager {
 
         let data: [String: Any] = [
             "id": documentId,
-            "mens_symp": mensInfo.mensSymp,
-            "mens_amt": mensInfo.mensAmt,
-            "emo_lv": mensInfo.emoLv,
-            "date_of_mens": mensInfo.dateOfMens,
-            "reg_dt": mensInfo.regDt
+            "mensSymp": mensInfo.mensSymp,
+            "mensAmt": mensInfo.mensAmt,
+            "emoLv": mensInfo.emoLv,
+            "dateOfMens": mensInfo.dateOfMens,
+            "regDt": mensInfo.regDt
         ]
 
         try await document.setData(data, merge: false)
@@ -176,5 +176,17 @@ final class UserManager {
         ]
 
         try await userMensInfoDocument(userId: userId).updateData(data as [AnyHashable: Any])
+    }
+
+    func getAllMensInfo(userId: String) async throws -> [MensInfo] {
+        let snapshot = try await userMensInfoCollection(userId: userId).getDocuments()
+
+        var mensInfos: [MensInfo] = []
+
+        for document in snapshot.documents {
+            let mensInfo = try document.data(as: MensInfo.self)
+            mensInfos.append(mensInfo)
+        }
+        return mensInfos
     }
 }
