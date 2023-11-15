@@ -62,7 +62,6 @@
 		7DADB0592AFBD0A700A6846B /* MensInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADB0552AFBD0A600A6846B /* MensInfo.swift */; };
 		7DADB05A2AFBD0A700A6846B /* ImperMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADB0562AFBD0A600A6846B /* ImperMainView.swift */; };
 		7DADB05B2AFBD0A700A6846B /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADB0572AFBD0A600A6846B /* EditView.swift */; };
-		8E01FA3C2AFE773C002F77A4 /* TargetCalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E01FA3B2AFE773C002F77A4 /* TargetCalViewController.swift */; };
 		8E01FA3F2AFE7783002F77A4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA3E2AFE7783002F77A4 /* FSCalendar */; };
 		8E01FA422AFE77A2002F77A4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA412AFE77A2002F77A4 /* SnapKit */; };
 		8E01FA442AFE77A2002F77A4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA432AFE77A2002F77A4 /* SnapKit-Dynamic */; };
@@ -103,7 +102,6 @@
 		7DADB0552AFBD0A600A6846B /* MensInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MensInfo.swift; sourceTree = "<group>"; };
 		7DADB0562AFBD0A600A6846B /* ImperMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImperMainView.swift; sourceTree = "<group>"; };
 		7DADB0572AFBD0A600A6846B /* EditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
-		8E01FA3B2AFE773C002F77A4 /* TargetCalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCalViewController.swift; sourceTree = "<group>"; };
 		8E01FA6B2B0335EE002F77A4 /* TargetCalViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCalViewRepresentable.swift; sourceTree = "<group>"; };
 		DE4140562AFF72C300A20CC9 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		DE895D952B01BB8400FB2226 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -244,7 +242,6 @@
 				7D67F4042AFA3BA600F7931D /* DailyEditView.swift */,
 				7D67F4032AFA3BA600F7931D /* SympView.swift */,
 				7D67F4052AFA3BA600F7931D /* TargetCalView.swift */,
-				8E01FA3B2AFE773C002F77A4 /* TargetCalViewController.swift */,
 				8E01FA6B2B0335EE002F77A4 /* TargetCalViewRepresentable.swift */,
 			);
 			path = TargetViews;
@@ -445,7 +442,6 @@
 				7D67F4022AFA3B9B00F7931D /* TargetMainView.swift in Sources */,
 				7D67F4172AFA3BED00F7931D /* SettingMainView.swift in Sources */,
 				7D67F40D2AFA3BE000F7931D /* TextModifier.swift in Sources */,
-				8E01FA3C2AFE773C002F77A4 /* TargetCalViewController.swift in Sources */,
 				7D97FE2D2AF9DE4D000608DA /* MyMomiiApp.swift in Sources */,
 				7DADB05A2AFBD0A700A6846B /* ImperMainView.swift in Sources */,
 				7D67F4192AFA3BED00F7931D /* SettingGuideView.swift in Sources */,

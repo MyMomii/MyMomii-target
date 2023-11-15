@@ -155,7 +155,6 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
                     return ""
                 }
             }
-
             return UIImage(named: iconName)?.withTintColor(coral500)
         }
 
