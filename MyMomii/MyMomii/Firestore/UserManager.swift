@@ -114,36 +114,9 @@ final class UserManager {
         try userDocument(userId: user.userId).setData(from: user, merge: false)
     }
 
-//    func createNewUser(userId: String) async throws {
-//        var userData: [String: Any] = [
-//            "user_id": userId,
-//            "is_anonymous": true,
-//            "date_created": Timestamp()
-//        ]
-//
-//        try await userDocument(userId: userId).setData(userData, merge: false)
-//    }
-
-//    func getUser(userId: String) async throws -> DBUser {
-//        try await userDocument(userId: userId).getDocument(as: DBUser.self, decoder: decoder)
-//    }
-
     func getUser(userId: String) async throws -> DBUser {
         return try await userDocument(userId: userId).getDocument(as: DBUser.self)
     }
-
-//    func getUser(userId: String) async throws -> DBUser {
-//        let snapshot = try await userDocument(userId: userId).getDocument()
-//
-//        guard let data = snapshot.data(), let userId = data["user_id"] as? String else {
-//            throw URLError(.badServerResponse)
-//        }
-//
-//        let isAnonymous = data["is_anonymous"] as? Bool
-//        let dateCreated = data["date_created"] as? Date
-//
-//        return DBUser(userId: userId, isAnonymous: isAnonymous, dateCreated: dateCreated)
-//    }
 
     func addUserPreference(userId: String, preference: String) async throws {
         let data: [String: Any] = [
