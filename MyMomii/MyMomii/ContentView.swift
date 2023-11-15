@@ -19,7 +19,7 @@ struct ContentView: View {
                     Text("SettingMainView")
                 })
                 .navigationDestination(isPresented: $isSettingMainView) {
-                    SettingMainView(userName: "이김생리")
+                    SettingMainView()
                 }
 
                 Button(action: {
