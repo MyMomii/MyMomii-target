@@ -196,7 +196,7 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
         private func calendarCurrentPageDidChange(calendar: FSCalendar) -> String {
             let dateFormatter: DateFormatter = {
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "YYYY년 MM월 W주차"
+                dateFormatter.dateFormat = "MM월 W주차"
                 return dateFormatter
             }()
             let currentPage = calendar.currentPage
