@@ -15,7 +15,7 @@ struct TargetCalView: View {
     @State private var calendarTitle: String = ""
     @State private var changePage: Int = 0
     @State var isInputSelected: Bool = false
-    var dDay: Int
+    var dDay: Int = 0
     var dDayTitle: String {
         if dDay == 0 {
             return "오늘 생리 시작!"
@@ -28,7 +28,7 @@ struct TargetCalView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("\(dDayTitle)")
+            Text("\(dDayTitle)")    // TEXT MODIFIER
                 .font(.system(size: 32, weight: .bold))
                 .foregroundColor(Color.coral400)
                 .padding(EdgeInsets(top: 16, leading: 8, bottom: 32, trailing: 8))
@@ -142,7 +142,7 @@ struct MensDataRect: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 50, height: 50)
-                                Text("입력된 기록이 없어요")
+                                Text("입력된 기록이 없어요") // TEXT MODIFIER
                                     .font(.system(size: 20, weight: .semibold))
                                     .foregroundColor(.coral300)
                                     .padding(.leading, 10)
@@ -178,6 +178,7 @@ struct MensDataRect: View {
                     }
             }
             .padding(.top, 16)
+            .animationsDisabled()
 
             Spacer()
         }
@@ -198,13 +199,23 @@ struct MensData: View {
                         .scaledToFit()
                         .frame(width: 50, height: 50)
                 }
-            Text(mensText)
+            Text(mensText)  // TEXT MODIFIER
                 .font(.system(size: 20, weight: .semibold))
                 .foregroundColor(.black500)
                 .padding(.leading, 16)
             Spacer()
         }
         .padding(.horizontal, 32)
+    }
+}
+
+extension View {
+    // 기본 애니메이션 효과 제거
+    func animationsDisabled() -> some View {
+        return self.transaction { (tx: inout Transaction) in
+            tx.disablesAnimations = true
+            tx.animation = nil
+        }.animation(nil)
     }
 }
 
