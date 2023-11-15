@@ -195,6 +195,7 @@ struct CalendarHeader: View {
 
 // MARK: - 생리 데이터 박스
 struct MensDataRect: View {
+    @StateObject private var viewModel = TargetCalViewModel()
     @Binding var selectedDate: Date
     @Binding var eventsArray: [String]
     @Binding var eventsArrayDone: [String]
@@ -237,7 +238,9 @@ struct MensDataRect: View {
                     VStack(spacing: 0) {
                         if eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) {
                             VStack(spacing: 0) {    // sample
-                                MensData(mensSympText: "안 아파요", mensAmtText: "보통이에요", emoLvText: "나빠요")
+                                MensData(mensSympText: viewModel.mensInfosForSelectedDate[0].mensSymp,
+                                         mensAmtText: viewModel.mensInfosForSelectedDate[0].mensAmt,
+                                         emoLvText: viewModel.mensInfosForSelectedDate[0].emoLv)
                             }
                             .padding(.horizontal, -8)
                         } else {
@@ -287,6 +290,9 @@ struct MensDataRect: View {
             Spacer()
         }
         .frame(height: 374)
+        .task {
+            try? await viewModel.getMensInfoForSelectedDate(selectedDate: firestoreFormatter.string(from: selectedDate))
+        }
     }
 }
 
