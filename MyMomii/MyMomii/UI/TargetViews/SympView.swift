@@ -78,6 +78,7 @@ struct SympView: View {
             TargetCalView()
         }
         .navigationBarItems(leading: BackButton(backBtnTitleType: .titleImage, backButtonTitle: ""))
+        .backGesture()
     }
 
     func selectedMensSymp(mensInfo: MensInfo) -> Int {
