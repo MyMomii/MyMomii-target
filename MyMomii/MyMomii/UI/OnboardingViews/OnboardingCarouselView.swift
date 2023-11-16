@@ -11,15 +11,16 @@ import Lottie
 
 struct OnboardingCarouselView: View {
     var body: some View {
-        CarouselView(lottieFileNames: ["Confetti_01", "Confetti_02", "Confetti_01"])
+        CarouselView(imageNames: ["OnBoard_01","OnBoard_02","OnBoard_03" ])
+//        CarouselView(lottieFileNames: ["Confetti_01", "Confetti_02", "Confetti_01"])
     }
 }
 
 struct CarouselView: View {
-    var lottieFileNames: [String]
+    var imageNames: [String]
     @State private var selectedImageIndex: Int = 0
     var isLastImage: Bool { 
-        return selectedImageIndex == lottieFileNames.count - 1
+        return selectedImageIndex == imageNames.count - 1
     }
     @State var goToMain = false
     @EnvironmentObject private var authModel: AuthViewModel
@@ -29,19 +30,24 @@ struct CarouselView: View {
         NavigationStack {
             VStack {
                 TabView(selection: $selectedImageIndex) {
-                    ForEach(0..<lottieFileNames.count, id: \.self) { index in
+                    ForEach(0..<imageNames.count, id: \.self) { index in
                         ZStack(alignment: .topLeading) {
                             if DeviceSize.width < DeviceSize.iPhone14 {
                                 VStack {
-                                    LottieView(animation: .named(lottieFileNames[index]))
+                                    Image(imageNames[index])
                                         .resizable()
-                                        .configure { lottieAnimationView in
-                                            lottieAnimationView.loopMode = .loop
-                                            lottieAnimationView.contentMode = .scaleAspectFit
-                                            lottieAnimationView.animationSpeed = 1.0
-                                        }
-                                        .playing()
-                                        .frame(width: 280, height: 365)
+                                        .scaledToFill()
+                                        .frame(width: 280, height: 418)
+//                                        .border(Color.black)
+//                                    LottieView(animation: .named(lottieFileNames[index]))
+//                                        .resizable()
+//                                        .configure { lottieAnimationView in
+//                                            lottieAnimationView.loopMode = .loop
+//                                            lottieAnimationView.contentMode = .scaleAspectFit
+//                                            lottieAnimationView.animationSpeed = 1.0
+//                                        }
+//                                        .playing()
+//                                        .frame(width: 280, height: 365)
 //                                        .border(Color.black)
                                     if index == 0 {
                                         Text("생리를 시작했다면,")
@@ -66,16 +72,20 @@ struct CarouselView: View {
                                 }
                             } else {
                                 VStack {
-                                    LottieView(animation: .named(lottieFileNames[index]))
+                                    Image(imageNames[index])
                                         .resizable()
-                                        .configure { lottieAnimationView in
-                                            lottieAnimationView.loopMode = .loop
-                                            lottieAnimationView.contentMode = .scaleAspectFit
-                                            lottieAnimationView.animationSpeed = 1.0
-                                        }
-                                        .playing()
+                                        .scaledToFill()
                                         .frame(width: 300, height: 493)
-                                        .border(Color.black)
+//                                    LottieView(animation: .named(lottieFileNames[index]))
+//                                        .resizable()
+//                                        .configure { lottieAnimationView in
+//                                            lottieAnimationView.loopMode = .loop
+//                                            lottieAnimationView.contentMode = .scaleAspectFit
+//                                            lottieAnimationView.animationSpeed = 1.0
+//                                        }
+//                                        .playing()
+//                                        .frame(width: 300, height: 493)
+//                                        .border(Color.black)
                                     if index == 0 {
                                         Text("생리를 시작했다면,")
                                             .regular23White300()
