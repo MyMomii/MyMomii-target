@@ -10,7 +10,7 @@ import SwiftUI
 struct TargetCalView: View {
     @StateObject private var viewModel = TargetCalViewModel()
 
-    @State private var selectedDate: Date = .now    // from=증상입력화면 -> navigationDestination(isActive: 동작조건) { TargetCalView(selectedDate: 증상입력날짜) }
+    @State private var selectedDate: Date = .now
     @State private var eventsArray: [String] = []
     @State private var eventsArrayDone: [String] = []
     @State private var calendarTitle: String = ""
@@ -27,16 +27,16 @@ struct TargetCalView: View {
             Text("\(dDayTitle)")
                 .bold32Coral400()
                 .padding(EdgeInsets(top: 16, leading: 8, bottom: 32, trailing: 8))
-                .onChange(of: eventsArray) { newValue in
-                    dDay = calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone)
-                    dDayTitle = dDayToTitle(dDay: dDay)
-                }
             CalendarRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage, dDay: $dDay, dDayTitle: $dDayTitle, isInputSelected: $isInputSelected)
                 .frame(height: 600)
             Spacer()
         }
         .padding(.horizontal, 16)
         .background(Color.white300)
+        // Loading View
+        .overlay {
+            LoadingView()
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
@@ -67,50 +67,8 @@ struct TargetCalView: View {
             self.mensInfos.append(mensInfo)
             str.append(mensInfo.dateOfMens)
         }
-        eventsArrayDone = str
-    }
-
-    func dDayToTitle(dDay: Int) -> String {
-        if dDay == 0 {  // 생리 예정일 당일 또는 생리 정보 입력 당일
-            return "오늘 생리 시작!"
-        } else if dDay == 9999 {    // 디데이 값 이상
-            return ""
-        } else if dDay > 900 {    // 생리 시작 3일 이내
-            return "생리 시작 \(-(dDay-1000)+2)일차"
-        } else if dDay > 0 {    // 생리 예정일 전
-            return "생리 시작 \(dDay+1)일 전"
-        } else {    // 생리 예정일 지남
-            return "생리 예정일 \(-1*dDay)일 지남"
-        }
-    }
-
-    func calculateDDay(eventsArray: [String], eventsArrayDone: [String]) -> Int {
-        if eventsArray==[] || eventsArrayDone==[] {
-            print("array is empty")
-            return 9999
-        }
-
-        let afterToToday = eventsArray.first?.toDate()
-        let gapAfterToToday = Calendar.current.dateComponents([.day], from: Date(), to: afterToToday!).day
-        let beforeToToday = eventsArrayDone.last?.toDate()
-        let gapBeforeToToday = Calendar.current.dateComponents([.day], from: Date(), to: beforeToToday!).day
-
-        var dDayCode = 0
-        if gapAfterToToday == 0 {   // 생리 예정일 당일
-            dDayCode = gapAfterToToday!
-        } else if gapBeforeToToday == 0 {  // 생리 정보 입력 당일
-            dDayCode = gapBeforeToToday!
-        } else if gapBeforeToToday! > -3 && gapBeforeToToday! < 0 {   // 생리 시작 3일 이내
-            dDayCode = gapBeforeToToday!+1000
-        } else if gapAfterToToday! > 0 {    // 생리 예정일 전
-            dDayCode = gapAfterToToday!
-        } else if gapAfterToToday! < 0 { // 생리 예정일 지남
-            dDayCode = gapAfterToToday!
-        } else {    // dDay 이상 있음
-            dDayCode = 9999
-        }
-
-        return dDayCode
+        // TODO: 데이터량이 많을 때 작업 속도가 느려진다면 firestore orderby 작업 필요
+        eventsArrayDone = str.sorted()
     }
 }
 
@@ -172,6 +130,8 @@ struct CalendarRect: View {
                         eventsArrayFirst = eventsArray.first
                         eventsArrayDoneLast = eventsArrayDone.last
                     }
+                    dDay = calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone)
+                    dDayTitle = dDayToTitle(dDay: dDay)
                 }
 
             MensDataRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, dDay: $dDay, dDayTitle: $dDayTitle, isInputSelected: $isInputSelected)
@@ -179,6 +139,48 @@ struct CalendarRect: View {
                 .padding(EdgeInsets(top: CalendarRect.calendarSetHeight-CalendarRect.mensSetHeight-16, leading: 16, bottom: 8+16, trailing: 16))
                 .opacity(isOpacity)
         }
+    }
+
+    func dDayToTitle(dDay: Int) -> String {
+        if dDay == 9999 {    // 디데이 값 이상
+            return " "
+        } else if dDay > 900 {    // 생리 시작 3일 이내
+            return "생리 시작 \(-(dDay-1000)+2)일차"
+        } else if dDay > 0 {    // 생리 예정일 전
+            return "생리 시작 \(dDay+1)일 전"
+        } else if dDay < 0 {    // 생리 예정일 지남
+            return "생리 예정일 \(-1*(dDay+1))일 지남"
+        } else {  // 생리 예정일 당일 또는 생리 정보 입력 당일
+            return "오늘 생리 시작!"
+        }
+    }
+
+    func calculateDDay(eventsArray: [String], eventsArrayDone: [String]) -> Int {
+        if eventsArray==[] || eventsArrayDone==[] {
+            return 9999
+        }
+
+        let afterToToday = eventsArray.first?.toDate()
+        let gapAfterToToday = Calendar.current.dateComponents([.day], from: Date(), to: afterToToday!).day
+        let beforeToToday = eventsArrayDone.last?.toDate()
+        let gapBeforeToToday = Calendar.current.dateComponents([.day], from: Date(), to: beforeToToday!).day
+
+        var dDayCode = 0
+        if gapBeforeToToday! > -2 && gapBeforeToToday! < 0 {   // 생리 시작 3일 이내
+            dDayCode = gapBeforeToToday!+1000
+        } else if gapAfterToToday! > 0 {    // 생리 예정일 전
+            dDayCode = gapAfterToToday!
+        } else if gapAfterToToday! < 0 { // 생리 예정일 지남
+            dDayCode = gapAfterToToday!
+        } else if gapAfterToToday == 0 {  // 생리 예정일 당일
+            dDayCode = gapAfterToToday!
+        } else if gapBeforeToToday == 0 {  // 생리 정보 입력 당일
+            dDayCode = gapBeforeToToday!
+        } else {    // dDay 이상 있음
+            dDayCode = 9999
+        }
+
+        return dDayCode
     }
 }
 
@@ -219,6 +221,7 @@ struct MensDataRect: View {
     @Binding var dDay: Int
     @Binding var dDayTitle: String
     @Binding var isInputSelected: Bool
+    @State var inputButtonDisabled: Bool = false
     var firestoreFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
@@ -289,6 +292,7 @@ struct MensDataRect: View {
                     .cornerRadius(10)
                     .frame(width: 120, height: 45)
                     .foregroundColor(Color.coral500)
+                    .opacity(inputButtonDisabled ? 0.4 : 1.0)
                     .overlay {
                         HStack(spacing: 0) {
                             Image(systemName: "square.and.pencil")
@@ -299,6 +303,7 @@ struct MensDataRect: View {
                         .padding(.horizontal, 16)
                     }
             }
+            .disabled(inputButtonDisabled)
             .padding(.top, 16)
             .animationsDisabled()
 
@@ -312,6 +317,7 @@ struct MensDataRect: View {
             Task {
                 try? await viewModel.getMensInfoForSelectedDate(selectedDate: firestoreFormatter.string(from: selectedDate))
             }
+            inputButtonDisabled = firestoreFormatter.string(from: selectedDate) > firestoreFormatter.string(from: Date())
         }
     }
 }
