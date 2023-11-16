@@ -82,6 +82,9 @@ struct TargetMainView: View {
                         TargetCalView()
                     }
                     .background(Color.white300)
+                    .onDisappear {
+                        startDefaultBtnClick = false
+                    }
                     .zIndex(isLottieViewDone ? 9 : 0)
                     LottieView(animation: .named("Confetti_01"))
                         .resizable()
