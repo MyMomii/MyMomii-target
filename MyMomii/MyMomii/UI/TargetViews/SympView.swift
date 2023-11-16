@@ -72,6 +72,9 @@ struct SympView: View {
             TargetCalView()
         }
         .navigationBarItems(leading: BackButton(backBtnTitleType: .titleImage, backButtonTitle: ""))
+        .overlay {
+            LoadingView()
+        }
         .backGesture()
     }
 
