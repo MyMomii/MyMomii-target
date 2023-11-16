@@ -98,6 +98,10 @@ final class UserManager {
         userMensInfoCollection(userId: userId).document()
     }
 
+    private func userMensInfoDocument(userId: String, documentId: String) -> DocumentReference {
+        userMensInfoCollection(userId: userId).document(documentId)
+    }
+
     private let encoder: Firestore.Encoder = {
         let encoder = Firestore.Encoder()
 //        encoder.keyEncodingStrategy = .convertToSnakeCase
@@ -155,11 +159,17 @@ final class UserManager {
     }
 
     func addMensInfo(userId: String, mensInfo: MensInfo) async throws {
-        let document = userMensInfoDocument(userId: userId)
+        var document: DocumentReference
+
+        if mensInfo.id == "" {
+            document = userMensInfoDocument(userId: userId)
+        } else {
+            document = userMensInfoDocument(userId: userId, documentId: mensInfo.id)
+        }
         let documentId = document.documentID
 
         let data: [String: Any] = [
-            "id": documentId,
+            "id": mensInfo.id == "" ? documentId : mensInfo.id,
             "mensSymp": mensInfo.mensSymp,
             "mensAmt": mensInfo.mensAmt,
             "emoLv": mensInfo.emoLv,
@@ -167,7 +177,11 @@ final class UserManager {
             "regDt": mensInfo.regDt
         ]
 
-        try await document.setData(data, merge: false)
+        if mensInfo.id == "" {
+            try await document.setData(data, merge: false)
+        } else {
+            try await document.updateData(data as [AnyHashable: Any])
+        }
     }
 
     func removeMensInfo(userId: String) async throws {
