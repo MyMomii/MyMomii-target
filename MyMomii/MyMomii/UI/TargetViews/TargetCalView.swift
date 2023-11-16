@@ -84,7 +84,6 @@ struct CalendarRect: View {
     @Binding var dDay: Int
     @Binding var dDayTitle: String
     @Binding var isInputSelected: Bool
-    @State var isOpacity: CGFloat = 0.01
     var firestoreFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
@@ -116,13 +115,10 @@ struct CalendarRect: View {
             .frame(height: CalendarRect.calendarSetHeight)
             TargetCalViewRepresentable(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage)
                 .padding(EdgeInsets(top: 0, leading: 16, bottom: 24, trailing: 16))
-                .opacity(isOpacity)
-                .animation(.easeInOut(duration: 0.3), value: isOpacity)
                 .offset(y: 50)
                 .frame(height: CalendarRect.calendarSetHeight)
                 .clipped()
                 .onChange(of: eventsArray) { newValue in
-                    isOpacity = 1
                     if eventsArray == [] || eventsArrayDone == [] {
                         eventsArrayFirst = "00000000"
                         eventsArrayDoneLast = "00000000"
@@ -137,7 +133,6 @@ struct CalendarRect: View {
             MensDataRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, dDay: $dDay, dDayTitle: $dDayTitle, isInputSelected: $isInputSelected)
                 .frame(height: CalendarRect.mensSetHeight)
                 .padding(EdgeInsets(top: CalendarRect.calendarSetHeight-CalendarRect.mensSetHeight-16, leading: 16, bottom: 8+16, trailing: 16))
-                .opacity(isOpacity)
         }
     }
 
