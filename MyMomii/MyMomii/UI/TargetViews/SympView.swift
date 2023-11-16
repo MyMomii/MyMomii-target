@@ -30,33 +30,27 @@ struct SympView: View {
         return formatter
     }()
     var body: some View {
-        // MARK: viewModel(TargetCalViewModel)에서 현재날짜로 getMensInfoForSelectedDate를 실행했을 때 값이 있을때/없을때 처리 필요
         VStack(spacing: 20) {
-            if let user = viewModel.user {
-//                TodayWithDayOfWeek()
-//                    .padding(.top, 5)
-                symptomViewByDevice
-                HStack {
-                    Button(action: {
-                        // MARK: dateOfMens의 값은 메인화면에서 접근했을 경우 오늘 날짜로 지정, 달력에서 이동했을 경우 달력에서 선택한 값으로 설정
-                        viewModel.addMensInfo(
-                            id: targetCalViewModel.mensInfosForSelectedDate != [] ? targetCalViewModel.mensInfosForSelectedDate[0].id : "",
-                            mensSymp: "배가 \(mensSympTitle[mensSympSelected])",
-                            mensAmt: "생리양이 \(mensAmtTitle[mensAmtSelected])",
-                            emoLv: "기분이 \(emoLvTitle[emoLvSelected])",
-                            dateOfMens: dateOfMensFormat.string(from: selectedDate))
-                        moveToCalView = true
-                    }, label: {
-                        RoundedRectangle(cornerRadius: 61)
-                            .foregroundColor(.coral500)
-                            .overlay(
-                                Text("저장해요")
-                                    .bold24White50()
-                            )
-                            .frame(height: 65)
-                            .shadow(color: .black500.opacity(0.15), radius: 4, x: 0, y: 4)
-                    })
-                }
+            symptomViewByDevice
+            HStack {
+                Button(action: {
+                    viewModel.addMensInfo(
+                        id: targetCalViewModel.mensInfosForSelectedDate != [] ? targetCalViewModel.mensInfosForSelectedDate[0].id : "",
+                        mensSymp: "배가 \(mensSympTitle[mensSympSelected])",
+                        mensAmt: "생리양이 \(mensAmtTitle[mensAmtSelected])",
+                        emoLv: "기분이 \(emoLvTitle[emoLvSelected])",
+                        dateOfMens: dateOfMensFormat.string(from: selectedDate))
+                    moveToCalView = true
+                }, label: {
+                    RoundedRectangle(cornerRadius: 61)
+                        .foregroundColor(.coral500)
+                        .overlay(
+                            Text("저장해요")
+                                .bold24White50()
+                        )
+                        .frame(height: 65)
+                        .shadow(color: .black500.opacity(0.15), radius: 4, x: 0, y: 4)
+                })
             }
             Spacer()
         }
@@ -272,18 +266,6 @@ struct InputBackgroundView: View {
         RoundedRectangle(cornerRadius: 10)
             .foregroundColor(.white50)
             .shadow(color: .black500.opacity(0.10), radius: 3.5, x: 0, y: 0)
-    }
-}
-
-struct TodayWithDayOfWeek: View {
-    let dateformat: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "M월 d일 EEEE"
-        return formatter
-    }()
-    var body: some View {
-        Text("\(Image(systemName: "calendar")) \(dateformat.string(from: Date()))")
-            .bold22Coral400()
     }
 }
 
