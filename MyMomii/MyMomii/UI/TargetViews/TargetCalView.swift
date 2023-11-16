@@ -27,7 +27,7 @@ struct TargetCalView: View {
             Text("\(dDayTitle)")
                 .bold32Coral400()
                 .padding(EdgeInsets(top: 16, leading: 8, bottom: 32, trailing: 8))
-                .onChange(of: eventsArray) {
+                .onChange(of: eventsArray) { newValue in
                     dDay = calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone)
                     dDayTitle = dDayToTitle(dDay: dDay)
                 }
@@ -52,7 +52,7 @@ struct TargetCalView: View {
             SympView(selectedDate: $selectedDate, selectedFromCalView: true)
         }
         .navigationDestination(isPresented: $isSettingSelected) {
-            SettingMainView(userName: "")   // not completed <- SettingMainView에서 userName 제거 필요
+            SettingMainView(eventsArray: $eventsArray)   // not completed <- SettingMainView에서 userName 제거 필요
         }
         .task {
             try? await viewModel.getAllMensInfos()
@@ -163,7 +163,7 @@ struct CalendarRect: View {
                 .offset(y: 50)
                 .frame(height: CalendarRect.calendarSetHeight)
                 .clipped()
-                .onChange(of: eventsArray) {
+                .onChange(of: eventsArray) { newValue in
                     isOpacity = 1
                     if eventsArray == [] || eventsArrayDone == [] {
                         eventsArrayFirst = "00000000"
@@ -308,7 +308,7 @@ struct MensDataRect: View {
         .task {
             try? await viewModel.getMensInfoForSelectedDate(selectedDate: firestoreFormatter.string(from: selectedDate))
         }
-        .onChange(of: selectedDate) {
+        .onChange(of: selectedDate) { newValue in
             Task {
                 try? await viewModel.getMensInfoForSelectedDate(selectedDate: firestoreFormatter.string(from: selectedDate))
             }

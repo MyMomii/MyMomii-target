@@ -67,12 +67,9 @@
 		7D97FE802AF9FCB9000608DA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7D97FE7F2AF9FCB9000608DA /* FirebaseStorage */; };
 		7D97FE822AF9FCB9000608DA /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 7D97FE812AF9FCB9000608DA /* FirebaseStorageCombine-Community */; };
 		7DADB0592AFBD0A700A6846B /* MensInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADB0552AFBD0A600A6846B /* MensInfo.swift */; };
-		DE2D6BBB2B04DB7E002AFBDC /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D6BBA2B04DB7E002AFBDC /* NotificationManager.swift */; };
 		8E01FA3F2AFE7783002F77A4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA3E2AFE7783002F77A4 /* FSCalendar */; };
-		8E01FA422AFE77A2002F77A4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA412AFE77A2002F77A4 /* SnapKit */; };
-		8E01FA442AFE77A2002F77A4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA432AFE77A2002F77A4 /* SnapKit-Dynamic */; };
-		8E01FA472AFE77B6002F77A4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA462AFE77B6002F77A4 /* Then */; };
 		8E01FA6C2B0335EE002F77A4 /* TargetCalViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E01FA6B2B0335EE002F77A4 /* TargetCalViewRepresentable.swift */; };
+		DE2D6BBB2B04DB7E002AFBDC /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D6BBA2B04DB7E002AFBDC /* NotificationManager.swift */; };
 		DE4140572AFF72C300A20CC9 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4140562AFF72C300A20CC9 /* LaunchScreenView.swift */; };
 		DE895D962B01BB8400FB2226 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE895D952B01BB8400FB2226 /* AuthViewModel.swift */; };
 		DE895D982B01BB9B00FB2226 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE895D972B01BB9B00FB2226 /* AuthenticationView.swift */; };
@@ -113,8 +110,8 @@
 		7D97FE302AF9DE4E000608DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D97FE332AF9DE4E000608DA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7DADB0552AFBD0A600A6846B /* MensInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MensInfo.swift; sourceTree = "<group>"; };
-		DE2D6BBA2B04DB7E002AFBDC /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		8E01FA6B2B0335EE002F77A4 /* TargetCalViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCalViewRepresentable.swift; sourceTree = "<group>"; };
+		DE2D6BBA2B04DB7E002AFBDC /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		DE4140562AFF72C300A20CC9 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		DE895D952B01BB8400FB2226 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		DE895D972B01BB9B00FB2226 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
@@ -129,15 +126,12 @@
 				7D97FE6C2AF9FCB9000608DA /* FirebaseFunctions in Frameworks */,
 				7D97FE622AF9FCB9000608DA /* FirebaseDatabaseSwift in Frameworks */,
 				8E01FA3F2AFE7783002F77A4 /* FSCalendar in Frameworks */,
-				8E01FA472AFE77B6002F77A4 /* Then in Frameworks */,
 				7D97FE722AF9FCB9000608DA /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
 				7D97FE782AF9FCB9000608DA /* FirebaseMessaging in Frameworks */,
 				7D97FE582AF9FCB9000608DA /* FirebaseAppDistribution-Beta in Frameworks */,
 				7D97FE5C2AF9FCB9000608DA /* FirebaseAuthCombine-Community in Frameworks */,
-				8E01FA442AFE77A2002F77A4 /* SnapKit-Dynamic in Frameworks */,
 				7D97FE682AF9FCB9000608DA /* FirebaseFirestoreCombine-Community in Frameworks */,
 				7D97FE522AF9FCB9000608DA /* FirebaseAnalyticsSwift in Frameworks */,
-				8E01FA422AFE77A2002F77A4 /* SnapKit in Frameworks */,
 				7D97FE762AF9FCB9000608DA /* FirebaseMLModelDownloader in Frameworks */,
 				7D97FE542AF9FCB9000608DA /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				7D97FE4E2AF9FCB9000608DA /* FirebaseAnalytics in Frameworks */,
@@ -376,9 +370,6 @@
 				7D97FE7F2AF9FCB9000608DA /* FirebaseStorage */,
 				7D97FE812AF9FCB9000608DA /* FirebaseStorageCombine-Community */,
 				8E01FA3E2AFE7783002F77A4 /* FSCalendar */,
-				8E01FA412AFE77A2002F77A4 /* SnapKit */,
-				8E01FA432AFE77A2002F77A4 /* SnapKit-Dynamic */,
-				8E01FA462AFE77B6002F77A4 /* Then */,
 			);
 			productName = MyMomii;
 			productReference = 7D97FE292AF9DE4D000608DA /* MyMomii.app */;
@@ -413,8 +404,6 @@
 				7D97FE492AF9E704000608DA /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				7D97FE4C2AF9FCB9000608DA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				8E01FA3D2AFE7782002F77A4 /* XCRemoteSwiftPackageReference "FSCalendar" */,
-				8E01FA402AFE77A2002F77A4 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				8E01FA452AFE77B6002F77A4 /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			productRefGroup = 7D97FE2A2AF9DE4D000608DA /* Products */;
 			projectDirPath = "";
@@ -477,8 +466,6 @@
 				7D35A2A22B02819900CE5C0D /* SettingView.swift in Sources */,
 				DEC525E92B0170DC008C0B1B /* OnboardingCarouselView.swift in Sources */,
 				7D67F4082AFA3BA600F7931D /* TargetCalView.swift in Sources */,
-				7DADB0582AFBD0A700A6846B /* MensInfoStore.swift in Sources */,
-				7DADB05B2AFBD0A700A6846B /* EditView.swift in Sources */,
 				7D67F4162AFA3BED00F7931D /* SettingNotiView.swift in Sources */,
 				7D35A2B12B037E5700CE5C0D /* SympViewModel.swift in Sources */,
 				7D5D054C2AFCA3060004D3F4 /* DeviceSize.swift in Sources */,
@@ -560,7 +547,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -617,7 +604,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -734,22 +721,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.8.4;
-			};
-		};
-		8E01FA402AFE77A2002F77A4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.6.0;
-			};
-		};
-		8E01FA452AFE77B6002F77A4 /* XCRemoteSwiftPackageReference "Then" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/devxoul/Then.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -899,21 +870,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8E01FA3D2AFE7782002F77A4 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
-		};
-		8E01FA412AFE77A2002F77A4 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8E01FA402AFE77A2002F77A4 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		8E01FA432AFE77A2002F77A4 /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8E01FA402AFE77A2002F77A4 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
-		};
-		8E01FA462AFE77B6002F77A4 /* Then */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8E01FA452AFE77B6002F77A4 /* XCRemoteSwiftPackageReference "Then" */;
-			productName = Then;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

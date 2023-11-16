@@ -39,17 +39,6 @@ struct CarouselView: View {
                                         .resizable()
                                         .scaledToFill()
                                         .frame(width: 280, height: 418)
-//                                        .border(Color.black)
-//                                    LottieView(animation: .named(lottieFileNames[index]))
-//                                        .resizable()
-//                                        .configure { lottieAnimationView in
-//                                            lottieAnimationView.loopMode = .loop
-//                                            lottieAnimationView.contentMode = .scaleAspectFit
-//                                            lottieAnimationView.animationSpeed = 1.0
-//                                        }
-//                                        .playing()
-//                                        .frame(width: 280, height: 365)
-//                                        .border(Color.black)
                                     if index == 0 {
                                         Text("생리를 시작했다면,")
                                             .regular23White300()
@@ -77,16 +66,6 @@ struct CarouselView: View {
                                         .resizable()
                                         .scaledToFill()
                                         .frame(width: 300, height: 493)
-//                                    LottieView(animation: .named(lottieFileNames[index]))
-//                                        .resizable()
-//                                        .configure { lottieAnimationView in
-//                                            lottieAnimationView.loopMode = .loop
-//                                            lottieAnimationView.contentMode = .scaleAspectFit
-//                                            lottieAnimationView.animationSpeed = 1.0
-//                                        }
-//                                        .playing()
-//                                        .frame(width: 300, height: 493)
-//                                        .border(Color.black)
                                     if index == 0 {
                                         Text("생리를 시작했다면,")
                                             .regular23White300()
