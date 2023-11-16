@@ -52,7 +52,7 @@ struct TargetCalView: View {
             SympView(selectedDate: $selectedDate, selectedFromCalView: true)
         }
         .navigationDestination(isPresented: $isSettingSelected) {
-            SettingMainView(eventsArray: $eventsArray)   // not completed <- SettingMainView에서 userName 제거 필요
+            SettingMainView(eventsArray: $eventsArray)
         }
         .task {
             try? await viewModel.getAllMensInfos()
