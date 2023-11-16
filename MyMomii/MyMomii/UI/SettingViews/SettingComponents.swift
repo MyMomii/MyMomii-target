@@ -193,10 +193,6 @@ struct BackButton: View {
     }
 }
 
-#Preview {
-    SettingComponents(toggleSample: .constant(true), datePickerSample: .constant(Date.now))
-}
-
 // Divider() 대체 : top, bottom, leading, trailing 모두 사용할 수 있는 border
 extension View {
     func border(width: CGFloat, edges: [Edge], color: Color) -> some View {
@@ -219,3 +215,9 @@ struct EdgeBorder: Shape {
         }.reduce(into: Path()) { $0.addPath($1) }
     }
 }
+
+
+#Preview {
+    SettingComponents(toggleSample: .constant(true), datePickerSample: .constant(Date.now))
+}
+
