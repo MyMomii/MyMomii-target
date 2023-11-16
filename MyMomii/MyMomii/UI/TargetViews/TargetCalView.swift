@@ -20,7 +20,6 @@ struct TargetCalView: View {
     @State private var dDay: Int = 0
     @State private var dDayTitle: String = "생리 정보를 입력해주세요"
     @State private var mensInfos: [MensInfo] = []
-
     func dDayToTitle(dDay: Int) -> String {
         if dDay == 0 {  // 생리 예정일 당일 또는 생리 정보 입력 당일
             return "오늘 생리 시작!"
@@ -292,12 +291,10 @@ struct MensDataRect: View {
         .frame(height: 374)
         .task {
             try? await viewModel.getMensInfoForSelectedDate(selectedDate: firestoreFormatter.string(from: selectedDate))
-            print(viewModel.mensInfosForSelectedDate)
         }
         .onChange(of: selectedDate) {
             Task {
                 try? await viewModel.getMensInfoForSelectedDate(selectedDate: firestoreFormatter.string(from: selectedDate))
-                print(viewModel.mensInfosForSelectedDate)
             }
         }
     }
