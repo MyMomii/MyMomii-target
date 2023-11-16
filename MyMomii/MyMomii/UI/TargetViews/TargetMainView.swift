@@ -13,8 +13,13 @@ struct TargetMainView: View {
     @State var calendarBtnClick = false
     @State var toSympView = false
     @State var isLottieViewDone = false
+    @State var selectedDate = Date()
     @AppStorage("isOnBoarding") var isOnBoarding: Bool = true
-    
+    @AppStorage("eventsArrayFirst") var eventsArrayFirst: String = "00000000"
+    @AppStorage("eventsArrayDoneLast") var eventsArrayDoneLast: String = "00000000"
+    @State var dDayTitle: String = "생리 정보를 입력해주세요"
+    @State var dDay: Int = 9999
+
     var body: some View {
         if isOnBoarding {
             OnboardingCarouselView()
@@ -24,13 +29,19 @@ struct TargetMainView: View {
                 ZStack {
                     VStack(spacing: 0) {
                         HStack {
-                            VStack(alignment: .leading) {
-                                Text("안녕하세요!")
-                                    .semiBold32Black400()
-                                Text("이김생리님")
-                                    .heavy32Black400()
-                            }
-                            .padding(.vertical, 20)
+                            Text("\(dDayTitle)")
+                                .bold32Coral400()
+                                .padding(EdgeInsets(top: 16, leading: 8, bottom: 32, trailing: 8))
+                                .onAppear {
+                                    if eventsArrayFirst != "00000000" || eventsArrayDoneLast != "00000000" {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+                                            let eventsArray: [String] = [eventsArrayFirst]
+                                            let eventsArrayDone: [String] = [eventsArrayDoneLast]
+                                            dDay = calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone) + 1
+                                            dDayTitle = dDayToTitle(dDay: dDay)
+                                        }
+                                    }
+                                }
                             Spacer()
                         }
                         Spacer()
@@ -65,7 +76,7 @@ struct TargetMainView: View {
                     }
                     .padding(EdgeInsets(top: 30, leading: 16, bottom: 30, trailing: 16))
                     .navigationDestination(isPresented: $toSympView) {
-                        SympView()
+                        SympView(selectedDate: $selectedDate)
                     }
                     .navigationDestination(isPresented: $calendarBtnClick) {
                         TargetCalView()
@@ -88,6 +99,48 @@ struct TargetMainView: View {
             .navigationBarBackButtonHidden()
 
         }
+    }
+
+    func dDayToTitle(dDay: Int) -> String {
+        if dDay == 0 {  // 생리 예정일 당일 또는 생리 정보 입력 당일
+            return "오늘 생리 시작!"
+        } else if dDay == 9999 {    // 디데이 값 이상
+            return " "
+        } else if dDay > 900 {    // 생리 시작 3일 이내
+            return "생리 시작 \(-(dDay-1000)+1)일차"
+        } else if dDay > 0 {    // 생리 예정일 전
+            return "생리 시작 \(dDay)일 전"
+        } else {    // 생리 예정일 지남
+            return "생리 예정일 \(-1*dDay)일 지남"
+        }
+    }
+
+    func calculateDDay(eventsArray: [String], eventsArrayDone: [String]) -> Int {
+        if eventsArray==[] || eventsArrayDone==[] {
+            return 9999
+        }
+
+        let afterToToday = eventsArray.first?.toDate()
+        let gapAfterToToday = Calendar.current.dateComponents([.day], from: Date(), to: afterToToday!).day
+        let beforeToToday = eventsArrayDone.last?.toDate()
+        let gapBeforeToToday = Calendar.current.dateComponents([.day], from: Date(), to: beforeToToday!).day
+
+        var dDayCode = 0
+        if gapAfterToToday == 0 {   // 생리 예정일 당일
+            dDayCode = gapAfterToToday!
+        } else if gapBeforeToToday == 0 {  // 생리 정보 입력 당일
+            dDayCode = gapBeforeToToday!
+        } else if gapBeforeToToday! > -3 && gapBeforeToToday! < 0 {   // 생리 시작 3일 이내
+            dDayCode = gapBeforeToToday!+1000
+        } else if gapAfterToToday! > 0 {    // 생리 예정일 전
+            dDayCode = gapAfterToToday!
+        } else if gapAfterToToday! < 0 { // 생리 예정일 지남
+            dDayCode = gapAfterToToday!
+        } else {    // dDay 이상 있음
+            dDayCode = 9999
+        }
+
+        return dDayCode
     }
 }
 

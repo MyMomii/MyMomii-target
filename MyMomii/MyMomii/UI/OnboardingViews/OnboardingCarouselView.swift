@@ -25,7 +25,8 @@ struct CarouselView: View {
     @State var goToMain = false
     @EnvironmentObject private var authModel: AuthViewModel
     @AppStorage("isOnBoarding") var isOnBoarding: Bool!
-    
+    @StateObject private var viewModel = AuthenticationViewModel()
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -115,7 +116,13 @@ struct CarouselView: View {
                 Button(action: {
                     goToMain = true
                     isOnBoarding = false
-//                    authModel.signInAnonymously()
+                    Task {
+                        do {
+                            try await viewModel.signInAnonymous()
+                        } catch {
+                            print(error)
+                        }
+                    }
                 }, label: {
                     if DeviceSize.width < DeviceSize.iPhone14 {
                         Rectangle()
