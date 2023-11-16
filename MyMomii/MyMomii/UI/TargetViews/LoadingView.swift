@@ -26,7 +26,7 @@ struct LoadingView: View {
             .opacity(opacity)
             .animation(.easeInOut(duration: 0.5), value: opacity)
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     opacity = 0.0
                 }
             }
