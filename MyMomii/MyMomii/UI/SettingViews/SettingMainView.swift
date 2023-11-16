@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct SettingMainView: View {
-    let userName: String
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                Text("\(userName)님")
+                Text("설정")
                     .bold28Black400()
                 Spacer()
             }
@@ -21,9 +20,6 @@ struct SettingMainView: View {
             Group {
                 NavigationLink(destination: SettingNotiView()) {
                     SettingList(listTitle: "알림 설정", listCaption: "알림 시간 설정 및 알람별 활성화 설정")
-                }
-                NavigationLink(destination: EmptyView()) {
-                    SettingList(listTitle: "이름 수정", listCaption: "가입된 이름 수정")
                 }
                 NavigationLink(destination: SettingGuideView()) {
                     SettingList(listTitle: "사용 가이드", listCaption: "앱 사용 가이드")
@@ -34,11 +30,11 @@ struct SettingMainView: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading: BackButton(backBtnTitleType: .titleImage, backButtonTitle: "calendar"))
+        .navigationBarItems(leading: BackButton(backBtnTitleType: .titleImage, backButtonTitle: ""))
         .background(Color.white300)
     }
 }
 
 #Preview {
-    SettingMainView(userName: "이김생리")
+    SettingMainView()
 }
