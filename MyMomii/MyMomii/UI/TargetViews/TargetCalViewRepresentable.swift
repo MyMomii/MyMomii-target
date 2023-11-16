@@ -34,7 +34,7 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
 
     func makeUIView(context: Context) -> FSCalendar {
         let calendarView = configureCalendar()
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             changeUsViewUpdated()
         }
         return calendarView
@@ -43,7 +43,7 @@ struct TargetCalViewRepresentable: UIViewRepresentable {
     func updateUIView(_ uiView: FSCalendar, context: Context) {
         uiView.delegate = context.coordinator
         uiView.dataSource = context.coordinator
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             isViewUpdated = true
             UIView.animate(withDuration: 0.5) {
                 uiView.setScope(.week, animated: true)
