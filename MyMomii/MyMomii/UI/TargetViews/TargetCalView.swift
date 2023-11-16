@@ -126,7 +126,7 @@ struct CalendarRect: View {
     @Binding var dDay: Int
     @Binding var dDayTitle: String
     @Binding var isInputSelected: Bool
-    @State var isOpacity: CGFloat = 0.0
+    @State var isOpacity: CGFloat = 0.01
     var firestoreFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
