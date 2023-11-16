@@ -116,6 +116,8 @@ struct TargetCalView: View {
 
 // MARK: - 캘린더 박스
 struct CalendarRect: View {
+    @AppStorage("eventsArrayFirst") var eventsArrayFirst: String!
+    @AppStorage("eventsArrayDoneLast") var eventsArrayDoneLast: String!
     @Binding var selectedDate: Date
     @Binding var eventsArray: [String]
     @Binding var eventsArrayDone: [String]
@@ -163,6 +165,13 @@ struct CalendarRect: View {
                 .clipped()
                 .onChange(of: eventsArray) {
                     isOpacity = 1
+                    if eventsArray == [] || eventsArrayDone == [] {
+                        eventsArrayFirst = "00000000"
+                        eventsArrayDoneLast = "00000000"
+                    } else {
+                        eventsArrayFirst = eventsArray.first
+                        eventsArrayDoneLast = eventsArrayDone.last
+                    }
                 }
 
             MensDataRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, dDay: $dDay, dDayTitle: $dDayTitle, isInputSelected: $isInputSelected)
