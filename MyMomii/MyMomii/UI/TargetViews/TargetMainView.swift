@@ -105,16 +105,16 @@ struct TargetMainView: View {
     }
 
     func dDayToTitle(dDay: Int) -> String {
-        if dDay == 0 {  // 생리 예정일 당일 또는 생리 정보 입력 당일
-            return "오늘 생리 시작!"
-        } else if dDay == 9999 {    // 디데이 값 이상
+        if dDay == 9999 {    // 디데이 값 이상
             return " "
         } else if dDay > 900 {    // 생리 시작 3일 이내
             return "생리 시작 \(-(dDay-1000)+1)일차"
         } else if dDay > 0 {    // 생리 예정일 전
             return "생리 시작 \(dDay)일 전"
-        } else {    // 생리 예정일 지남
+        } else if dDay < 0 {    // 생리 예정일 지남
             return "생리 예정일 \(-1*dDay)일 지남"
+        } else {  // 생리 예정일 당일 또는 생리 정보 입력 당일
+            return "오늘 생리 시작!"
         }
     }
 
@@ -129,16 +129,16 @@ struct TargetMainView: View {
         let gapBeforeToToday = Calendar.current.dateComponents([.day], from: Date(), to: beforeToToday!).day
 
         var dDayCode = 0
-        if gapAfterToToday == 0 {   // 생리 예정일 당일
-            dDayCode = gapAfterToToday!
-        } else if gapBeforeToToday == 0 {  // 생리 정보 입력 당일
-            dDayCode = gapBeforeToToday!
-        } else if gapBeforeToToday! > -3 && gapBeforeToToday! < 0 {   // 생리 시작 3일 이내
+        if gapBeforeToToday! > -2 && gapBeforeToToday! < 0 {   // 생리 시작 3일 이내
             dDayCode = gapBeforeToToday!+1000
         } else if gapAfterToToday! > 0 {    // 생리 예정일 전
             dDayCode = gapAfterToToday!
         } else if gapAfterToToday! < 0 { // 생리 예정일 지남
             dDayCode = gapAfterToToday!
+        } else if gapAfterToToday == 0 {  // 생리 예정일 당일
+            dDayCode = gapAfterToToday!
+        } else if gapBeforeToToday == 0 {  // 생리 정보 입력 당일
+            dDayCode = gapBeforeToToday!
         } else {    // dDay 이상 있음
             dDayCode = 9999
         }
