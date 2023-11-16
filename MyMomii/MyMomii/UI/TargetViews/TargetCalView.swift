@@ -9,65 +9,29 @@ import SwiftUI
 
 struct TargetCalView: View {
     @StateObject private var viewModel = TargetCalViewModel()
-    @State private var selectedDate: Date = .now
-    @State private var calendarHeight: CGFloat = 600.0
+
+    @State private var selectedDate: Date = .now    // from=증상입력화면 -> navigationDestination(isActive: 동작조건) { TargetCalView(selectedDate: 증상입력날짜) }
     @State private var eventsArray: [String] = []
     @State private var eventsArrayDone: [String] = []
     @State private var calendarTitle: String = ""
     @State private var changePage: Int = 0
-    @State private var isInputSelected: Bool = false
-    @State private var isSettingSelected = false
     @State private var dDay: Int = 0
     @State private var dDayTitle: String = "생리 정보를 입력해주세요"
+    @State private var isInputSelected: Bool = false
+
+    @State private var isSettingSelected: Bool = false
     @State private var mensInfos: [MensInfo] = []
-    func dDayToTitle(dDay: Int) -> String {
-        if dDay == 0 {  // 생리 예정일 당일 또는 생리 정보 입력 당일
-            return "오늘 생리 시작!"
-        } else if dDay == 9999 {    // 디데이 값 이상
-            return " "
-        } else if dDay > 900 {    // 생리 시작 3일 이내
-            return "생리 시작 \(-(dDay-1000)+1)일차"
-        } else if dDay > 0 {    // 생리 예정일 전
-            return "생리 시작 \(dDay)일 전"
-        } else {    // 생리 예정일 지남
-            return "생리 예정일 \(-1*dDay)일 지남"
-        }
-    }
-
-    func calculateDDay(eventsArray: [String], eventsArrayDone: [String]) -> Int {
-        if eventsArray==[] || eventsArrayDone==[] {
-            return 9999
-        }
-
-        let afterToToday = eventsArray.first?.toDate()
-        let gapAfterToToday = Calendar.current.dateComponents([.day], from: Date(), to: afterToToday!).day
-        let beforeToToday = eventsArrayDone.last?.toDate()
-        let gapBeforeToToday = Calendar.current.dateComponents([.day], from: Date(), to: beforeToToday!).day
-
-        var dDayCode = 0
-        if gapAfterToToday == 0 {   // 생리 예정일 당일
-            dDayCode = gapAfterToToday!
-        } else if gapBeforeToToday == 0 {  // 생리 정보 입력 당일
-            dDayCode = gapBeforeToToday!
-        } else if gapBeforeToToday! > -3 && gapBeforeToToday! < 0 {   // 생리 시작 3일 이내
-            dDayCode = gapBeforeToToday!+1000
-        } else if gapAfterToToday! > 0 {    // 생리 예정일 전
-            dDayCode = gapAfterToToday!
-        } else if gapAfterToToday! < 0 { // 생리 예정일 지남
-            dDayCode = gapAfterToToday!
-        } else {    // dDay 이상 있음
-            dDayCode = 9999
-        }
-
-        return dDayCode
-    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("\(dDayTitle)")
                 .bold32Coral400()
                 .padding(EdgeInsets(top: 16, leading: 8, bottom: 32, trailing: 8))
-            CalendarRect(selectedDate: $selectedDate, calendarHeight: $calendarHeight, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage, isInputSelected: $isInputSelected, dDay: $dDay, dDayTitle: $dDayTitle)
+                .onChange(of: eventsArray) {
+                    dDay = calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone)
+                    dDayTitle = dDayToTitle(dDay: dDay)
+                }
+            CalendarRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage, dDay: $dDay, dDayTitle: $dDayTitle, isInputSelected: $isInputSelected)
                 .frame(height: 600)
             Spacer()
         }
@@ -94,18 +58,6 @@ struct TargetCalView: View {
             try? await viewModel.getAllMensInfos()
             mensInfoToEventsArrayDone()
         }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
-                dDay = calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone)
-                dDayTitle = dDayToTitle(dDay: dDay)
-            }
-        }
-        .onChange(of: eventsArrayDone) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
-                dDay = calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone)
-                dDayTitle = dDayToTitle(dDay: dDay)
-            }
-        }
     }
 
     func mensInfoToEventsArrayDone() {
@@ -117,24 +69,74 @@ struct TargetCalView: View {
         }
         eventsArrayDone = str
     }
+
+    func dDayToTitle(dDay: Int) -> String {
+        if dDay == 0 {  // 생리 예정일 당일 또는 생리 정보 입력 당일
+            return "오늘 생리 시작!"
+        } else if dDay == 9999 {    // 디데이 값 이상
+            return ""
+        } else if dDay > 900 {    // 생리 시작 3일 이내
+            return "생리 시작 \(-(dDay-1000)+2)일차"
+        } else if dDay > 0 {    // 생리 예정일 전
+            return "생리 시작 \(dDay+1)일 전"
+        } else {    // 생리 예정일 지남
+            return "생리 예정일 \(-1*dDay)일 지남"
+        }
+    }
+
+    func calculateDDay(eventsArray: [String], eventsArrayDone: [String]) -> Int {
+        if eventsArray==[] || eventsArrayDone==[] {
+            print("array is empty")
+            return 9999
+        }
+
+        let afterToToday = eventsArray.first?.toDate()
+        let gapAfterToToday = Calendar.current.dateComponents([.day], from: Date(), to: afterToToday!).day
+        let beforeToToday = eventsArrayDone.last?.toDate()
+        let gapBeforeToToday = Calendar.current.dateComponents([.day], from: Date(), to: beforeToToday!).day
+
+        var dDayCode = 0
+        if gapAfterToToday == 0 {   // 생리 예정일 당일
+            dDayCode = gapAfterToToday!
+        } else if gapBeforeToToday == 0 {  // 생리 정보 입력 당일
+            dDayCode = gapBeforeToToday!
+        } else if gapBeforeToToday! > -3 && gapBeforeToToday! < 0 {   // 생리 시작 3일 이내
+            dDayCode = gapBeforeToToday!+1000
+        } else if gapAfterToToday! > 0 {    // 생리 예정일 전
+            dDayCode = gapAfterToToday!
+        } else if gapAfterToToday! < 0 { // 생리 예정일 지남
+            dDayCode = gapAfterToToday!
+        } else {    // dDay 이상 있음
+            dDayCode = 9999
+        }
+
+        return dDayCode
+    }
 }
 
 // MARK: - 캘린더 박스
 struct CalendarRect: View {
+    @AppStorage("eventsArrayFirst") var eventsArrayFirst: String!
+    @AppStorage("eventsArrayDoneLast") var eventsArrayDoneLast: String!
     @Binding var selectedDate: Date
-    @Binding var calendarHeight: CGFloat
     @Binding var eventsArray: [String]
     @Binding var eventsArrayDone: [String]
     @Binding var calendarTitle: String
     @Binding var changePage: Int
-    @Binding var isInputSelected: Bool
     @Binding var dDay: Int
     @Binding var dDayTitle: String
+    @Binding var isInputSelected: Bool
+    @State var isOpacity: CGFloat = 0.01
     var firestoreFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
         return formatter
     }
+    static let calendarSetHeight: CGFloat = 600
+    static let calendarRectHeight: CGFloat = mensRectHeight+300   // < calendarSetHeight
+    static let mensSetHeight: CGFloat = mensRectHeight+140 // 생리데이터+버튼+범례
+    static let dataGap: CGFloat = calendarRectHeight-mensSetHeight  // = 140
+    static let mensRectHeight: CGFloat = 260
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -142,24 +144,40 @@ struct CalendarRect: View {
                     .cornerRadius(10)
                     .foregroundColor(Color.white50)
                     .shadow(color: .black500.opacity(0.15), radius: 3.5, x: 0, y: 2)
-                    .frame(height: eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) ? 580 : 400)
+                    .frame(height: eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) ? CalendarRect.calendarRectHeight : CalendarRect.calendarRectHeight-CalendarRect.dataGap)
                     .overlay {
                         // Header
                         VStack(spacing: 0) {
                             CalendarHeader(calendarTitle: $calendarTitle, changePage: $changePage)
-                                .padding(EdgeInsets(top: 24, leading: 16, bottom: 16, trailing: 16))
+                                .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
                             Spacer()
                         }
                     }
                 Spacer()
             }
-            .frame(height: 600)
-            TargetCalViewRepresentable(selectedDate: $selectedDate, calendarHeight: $calendarHeight, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage)
-                .frame(height: 600)
-                .padding(EdgeInsets(top: 8, leading: 16, bottom: 16, trailing: 16))
-                .offset(y: 70)
-            MensDataRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, isInputSelected: $isInputSelected, dDay: $dDay, dDayTitle: $dDayTitle)
-                .padding(EdgeInsets(top: 200-4, leading: 16, bottom: 16+4, trailing: 16))
+            .frame(height: CalendarRect.calendarSetHeight)
+            TargetCalViewRepresentable(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, calendarTitle: $calendarTitle, changePage: $changePage)
+                .padding(EdgeInsets(top: 0, leading: 16, bottom: 24, trailing: 16))
+                .opacity(isOpacity)
+                .animation(.easeInOut(duration: 0.3), value: isOpacity)
+                .offset(y: 50)
+                .frame(height: CalendarRect.calendarSetHeight)
+                .clipped()
+                .onChange(of: eventsArray) {
+                    isOpacity = 1
+                    if eventsArray == [] || eventsArrayDone == [] {
+                        eventsArrayFirst = "00000000"
+                        eventsArrayDoneLast = "00000000"
+                    } else {
+                        eventsArrayFirst = eventsArray.first
+                        eventsArrayDoneLast = eventsArrayDone.last
+                    }
+                }
+
+            MensDataRect(selectedDate: $selectedDate, eventsArray: $eventsArray, eventsArrayDone: $eventsArrayDone, dDay: $dDay, dDayTitle: $dDayTitle, isInputSelected: $isInputSelected)
+                .frame(height: CalendarRect.mensSetHeight)
+                .padding(EdgeInsets(top: CalendarRect.calendarSetHeight-CalendarRect.mensSetHeight-16, leading: 16, bottom: 8+16, trailing: 16))
+                .opacity(isOpacity)
         }
     }
 }
@@ -198,9 +216,9 @@ struct MensDataRect: View {
     @Binding var selectedDate: Date
     @Binding var eventsArray: [String]
     @Binding var eventsArrayDone: [String]
-    @Binding var isInputSelected: Bool
     @Binding var dDay: Int
     @Binding var dDayTitle: String
+    @Binding var isInputSelected: Bool
     var firestoreFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
@@ -217,7 +235,7 @@ struct MensDataRect: View {
                     .semiBold14Black200()
                     .padding(.leading, 8)
                 Spacer()
-                Image("Drop")
+                Image("CalDropTarget")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 16, height: 16)
@@ -227,10 +245,10 @@ struct MensDataRect: View {
                     .padding(.leading, 8)
             }
             .frame(height: 16)
-            .padding(.bottom, 8)
+            .padding(.bottom, 16)
             Rectangle()
                 .cornerRadius(10)
-                .frame(height: eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) ? 280 : 100)
+                .frame(height: eventsArrayDone.contains(firestoreFormatter.string(from: selectedDate)) ? CalendarRect.mensRectHeight : CalendarRect.mensRectHeight-CalendarRect.dataGap)
                 .foregroundColor(.calToday)
                 .shadow(color: .black500.opacity(0.25), radius: 2, x: 0, y: 4)
                 .overlay {
@@ -266,8 +284,6 @@ struct MensDataRect: View {
                     eventsArrayDone.append(firestoreFormatter.string(from: selectedDate))
                 }
                 isInputSelected = true
-                dDay = TargetCalView().calculateDDay(eventsArray: eventsArray, eventsArrayDone: eventsArrayDone)
-                dDayTitle = TargetCalView().dDayToTitle(dDay: dDay)
             } label: {
                 Rectangle()
                     .cornerRadius(10)
@@ -288,7 +304,7 @@ struct MensDataRect: View {
 
             Spacer()
         }
-        .frame(height: 374)
+        .frame(height: CalendarRect.mensSetHeight)
         .task {
             try? await viewModel.getMensInfoForSelectedDate(selectedDate: firestoreFormatter.string(from: selectedDate))
         }
