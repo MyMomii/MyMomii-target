@@ -8,28 +8,42 @@
 import SwiftUI
 
 struct SympView: View {
-    @StateObject var mensInfoStore: MensInfoStore = MensInfoStore()
+    @StateObject private var viewModel = SympViewModel()
+    @State var moveToCalView = false
     @State var mensSympSelected = 0
     @State var mensAmtSelected = 0
     @State var emoLvSelected = 0
+    @Binding var selectedDate: Date
+    @State var selectedFromCalView = false
     let mensSympTitle = ["안 아파요", "아파요", "많이 아파요"]
     let mensAmtTitle = ["적어요", "보통이에요", "많아요"]
-    let emoLvTitle = ["적어요", "보통이에요", "많아요"]
+    let emoLvTitle = ["좋아요", "보통이에요", "나빠요"]
     let dateformat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY년 M월 d일 HH:mm:ss"
         return formatter
     }()
+    let dateOfMensFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        return formatter
+    }()
     var body: some View {
-            VStack(spacing: 20) {
+        // MARK: viewModel(TargetCalViewModel)에서 현재날짜로 getMensInfoForSelectedDate를 실행했을 때 값이 있을때/없을때 처리 필요
+        VStack(spacing: 20) {
+            if let user = viewModel.user {
                 TodayWithDayOfWeek()
                     .padding(.top, 5)
                 symptomViewByDevice
                 HStack {
                     Button(action: {
-                        mensInfoStore.addNewMensInfo(
-                            mensInfo: MensInfo(id: UUID().uuidString, imperID: "imperID", mensAmt: mensAmtTitle[mensAmtSelected],
-                                               mensSymp: mensSympTitle[mensSympSelected], emoLv: emoLvTitle[emoLvSelected], regDe: dateformat.string(from: Date())))
+                        // MARK: dateOfMens의 값은 메인화면에서 접근했을 경우 오늘 날짜로 지정, 달력에서 이동했을 경우 달력에서 선택한 값으로 설정
+                        viewModel.addMensInfo(
+                            mensSymp: "배가 \(mensSympTitle[mensSympSelected])",
+                            mensAmt: "생리양이 \(mensAmtTitle[mensAmtSelected])",
+                            emoLv: "기분이 \(emoLvTitle[emoLvSelected])",
+                            dateOfMens: selectedFromCalView ? dateOfMensFormat.string(from: selectedDate) : dateOfMensFormat.string(from: Date()))
+                        moveToCalView = true
                     }, label: {
                         RoundedRectangle(cornerRadius: 61)
                             .foregroundColor(.coral500)
@@ -41,11 +55,18 @@ struct SympView: View {
                             .shadow(color: .black500.opacity(0.15), radius: 4, x: 0, y: 4)
                     })
                 }
-                Spacer()
             }
-            .padding(.horizontal, 16)
-            .background(Color.white300)
-            .navigationBarBackButtonHidden()
+            Spacer()
+        }
+        .task {
+            try? await viewModel.loadCurrentUser()
+        }
+        .padding(.horizontal, 16)
+        .background(Color.white300)
+        .navigationBarBackButtonHidden()
+        .navigationDestination(isPresented: $moveToCalView) {
+            TargetCalView()
+        }
     }
 
     @ViewBuilder private var symptomViewByDevice: some View {
@@ -213,5 +234,5 @@ struct TodayWithDayOfWeek: View {
 }
 
 #Preview {
-    SympView()
+    SympView(selectedDate: .constant(.now))
 }
