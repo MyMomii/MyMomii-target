@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SympView: View {
     @StateObject private var viewModel = SympViewModel()
+    @StateObject private var targetCalViewModel = TargetCalViewModel()
     @State var moveToCalView = false
     @State var mensSympSelected = 0
     @State var mensAmtSelected = 0
@@ -32,17 +33,18 @@ struct SympView: View {
         // MARK: viewModel(TargetCalViewModel)에서 현재날짜로 getMensInfoForSelectedDate를 실행했을 때 값이 있을때/없을때 처리 필요
         VStack(spacing: 20) {
             if let user = viewModel.user {
-                TodayWithDayOfWeek()
-                    .padding(.top, 5)
+//                TodayWithDayOfWeek()
+//                    .padding(.top, 5)
                 symptomViewByDevice
                 HStack {
                     Button(action: {
                         // MARK: dateOfMens의 값은 메인화면에서 접근했을 경우 오늘 날짜로 지정, 달력에서 이동했을 경우 달력에서 선택한 값으로 설정
                         viewModel.addMensInfo(
+                            id: targetCalViewModel.mensInfosForSelectedDate != [] ? targetCalViewModel.mensInfosForSelectedDate[0].id : "",
                             mensSymp: "배가 \(mensSympTitle[mensSympSelected])",
                             mensAmt: "생리양이 \(mensAmtTitle[mensAmtSelected])",
                             emoLv: "기분이 \(emoLvTitle[emoLvSelected])",
-                            dateOfMens: selectedFromCalView ? dateOfMensFormat.string(from: selectedDate) : dateOfMensFormat.string(from: Date()))
+                            dateOfMens: dateOfMensFormat.string(from: selectedDate))
                         moveToCalView = true
                     }, label: {
                         RoundedRectangle(cornerRadius: 61)
@@ -61,11 +63,62 @@ struct SympView: View {
         .task {
             try? await viewModel.loadCurrentUser()
         }
+        .task {
+            try? await targetCalViewModel.getMensInfoForSelectedDate(selectedDate: dateOfMensFormat.string(from: selectedDate))
+            if targetCalViewModel.mensInfosForSelectedDate != [] {
+                mensSympSelected = selectedMensSymp(mensInfo: targetCalViewModel.mensInfosForSelectedDate[0])
+                mensAmtSelected = selectedMensAmt(mensInfo: targetCalViewModel.mensInfosForSelectedDate[0])
+                emoLvSelected = selectedEmoLv(mensInfo: targetCalViewModel.mensInfosForSelectedDate[0])
+            }
+        }
         .padding(.horizontal, 16)
         .background(Color.white300)
         .navigationBarBackButtonHidden()
         .navigationDestination(isPresented: $moveToCalView) {
             TargetCalView()
+        }
+        .navigationBarItems(leading: BackButton(backBtnTitleType: .titleImage, backButtonTitle: ""))
+    }
+
+    func selectedMensSymp(mensInfo: MensInfo) -> Int {
+        let mensSympTitle = ["배가 안 아파요", "배가 아파요", "배가 많이 아파요"]
+        switch mensInfo.mensSymp {
+        case mensSympTitle[0]:
+            return 0
+        case mensSympTitle[1]:
+            return 1
+        case mensSympTitle[2]:
+            return 2
+        default:
+            return 0
+        }
+    }
+
+    func selectedMensAmt(mensInfo: MensInfo) -> Int {
+        let mensAmtTitle = ["생리양이 적어요", "생리양이 보통이에요", "생리양이 많아요"]
+        switch mensInfo.mensAmt {
+        case mensAmtTitle[0]:
+            return 0
+        case mensAmtTitle[1]:
+            return 1
+        case mensAmtTitle[2]:
+            return 2
+        default:
+            return 0
+        }
+    }
+
+    func selectedEmoLv(mensInfo: MensInfo) -> Int {
+        let emoLvTitle = ["기분이 좋아요", "기분이 보통이에요", "기분이 나빠요"]
+        switch mensInfo.emoLv {
+        case emoLvTitle[0]:
+            return 0
+        case emoLvTitle[1]:
+            return 1
+        case emoLvTitle[2]:
+            return 2
+        default:
+            return 0
         }
     }
 
@@ -233,6 +286,6 @@ struct TodayWithDayOfWeek: View {
     }
 }
 
-#Preview {
-    SympView(selectedDate: .constant(.now))
-}
+//#Preview {
+//    SympView(selectedDate: .constant(.now))
+//}
