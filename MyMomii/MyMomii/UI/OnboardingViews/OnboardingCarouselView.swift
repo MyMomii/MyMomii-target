@@ -7,23 +7,26 @@
 
 import FirebaseAuth
 import SwiftUI
+import Lottie
 
 struct OnboardingCarouselView: View {
     var body: some View {
-        CarouselView(imageNames: ["OnBoard_01", "OnBoard_02", "OnBoard_03"])
+        CarouselView(imageNames: ["OnBoard_01","OnBoard_02","OnBoard_03" ])
+//        CarouselView(lottieFileNames: ["Confetti_01", "Confetti_02", "Confetti_01"])
     }
 }
 
 struct CarouselView: View {
     var imageNames: [String]
     @State private var selectedImageIndex: Int = 0
-    var isLastImage: Bool {
+    var isLastImage: Bool { 
         return selectedImageIndex == imageNames.count - 1
     }
     @State var goToMain = false
     @EnvironmentObject private var authModel: AuthViewModel
     @AppStorage("isOnBoarding") var isOnBoarding: Bool!
-    
+    @StateObject private var viewModel = AuthenticationViewModel()
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -32,10 +35,21 @@ struct CarouselView: View {
                         ZStack(alignment: .topLeading) {
                             if DeviceSize.width < DeviceSize.iPhone14 {
                                 VStack {
-                                    Image("\(imageNames[index])")
+                                    Image(imageNames[index])
                                         .resizable()
-                                        .tag(index)
-                                        .frame(width: 280, height: 365)
+                                        .scaledToFill()
+                                        .frame(width: 280, height: 418)
+//                                        .border(Color.black)
+//                                    LottieView(animation: .named(lottieFileNames[index]))
+//                                        .resizable()
+//                                        .configure { lottieAnimationView in
+//                                            lottieAnimationView.loopMode = .loop
+//                                            lottieAnimationView.contentMode = .scaleAspectFit
+//                                            lottieAnimationView.animationSpeed = 1.0
+//                                        }
+//                                        .playing()
+//                                        .frame(width: 280, height: 365)
+//                                        .border(Color.black)
                                     if index == 0 {
                                         Text("생리를 시작했다면,")
                                             .regular23White300()
@@ -59,11 +73,20 @@ struct CarouselView: View {
                                 }
                             } else {
                                 VStack {
-                                    Image("\(imageNames[index])")
+                                    Image(imageNames[index])
                                         .resizable()
                                         .scaledToFill()
-                                        .tag(index)
                                         .frame(width: 300, height: 493)
+//                                    LottieView(animation: .named(lottieFileNames[index]))
+//                                        .resizable()
+//                                        .configure { lottieAnimationView in
+//                                            lottieAnimationView.loopMode = .loop
+//                                            lottieAnimationView.contentMode = .scaleAspectFit
+//                                            lottieAnimationView.animationSpeed = 1.0
+//                                        }
+//                                        .playing()
+//                                        .frame(width: 300, height: 493)
+//                                        .border(Color.black)
                                     if index == 0 {
                                         Text("생리를 시작했다면,")
                                             .regular23White300()
@@ -93,7 +116,13 @@ struct CarouselView: View {
                 Button(action: {
                     goToMain = true
                     isOnBoarding = false
-//                    authModel.signInAnonymously()
+                    Task {
+                        do {
+                            try await viewModel.signInAnonymous()
+                        } catch {
+                            print(error)
+                        }
+                    }
                 }, label: {
                     if DeviceSize.width < DeviceSize.iPhone14 {
                         Rectangle()

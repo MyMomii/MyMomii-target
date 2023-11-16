@@ -12,11 +12,16 @@ struct SettingGuideView: View {
         VStack(alignment: .leading, spacing: 0) {
             SettingViewTitle(settingViewTitle: "사용 가이드")
             ScrollView {
-                Image(systemName: "pencil")  // not completed
-                    .resizable()
-                    .frame(height: 1500)
+                if DeviceSize.width < DeviceSize.iPhone14 {
+                    Image("iPhoneSEGuidingView")
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    Image("iPhone14GuidingView")
+                        .resizable()
+                        .scaledToFill()
+                }
             }
-            
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
