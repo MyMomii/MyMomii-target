@@ -67,6 +67,7 @@
 		7D97FE802AF9FCB9000608DA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7D97FE7F2AF9FCB9000608DA /* FirebaseStorage */; };
 		7D97FE822AF9FCB9000608DA /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 7D97FE812AF9FCB9000608DA /* FirebaseStorageCombine-Community */; };
 		7DADB0592AFBD0A700A6846B /* MensInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADB0552AFBD0A600A6846B /* MensInfo.swift */; };
+		DE2D6BBB2B04DB7E002AFBDC /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2D6BBA2B04DB7E002AFBDC /* NotificationManager.swift */; };
 		8E01FA3F2AFE7783002F77A4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA3E2AFE7783002F77A4 /* FSCalendar */; };
 		8E01FA422AFE77A2002F77A4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA412AFE77A2002F77A4 /* SnapKit */; };
 		8E01FA442AFE77A2002F77A4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8E01FA432AFE77A2002F77A4 /* SnapKit-Dynamic */; };
@@ -112,6 +113,7 @@
 		7D97FE302AF9DE4E000608DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D97FE332AF9DE4E000608DA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7DADB0552AFBD0A600A6846B /* MensInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MensInfo.swift; sourceTree = "<group>"; };
+		DE2D6BBA2B04DB7E002AFBDC /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		8E01FA6B2B0335EE002F77A4 /* TargetCalViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCalViewRepresentable.swift; sourceTree = "<group>"; };
 		DE4140562AFF72C300A20CC9 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		DE895D952B01BB8400FB2226 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				7D67F4122AFA3BEC00F7931D /* SettingGuideView.swift */,
 				7D67F4102AFA3BEC00F7931D /* SettingMainView.swift */,
 				7D67F40F2AFA3BEC00F7931D /* SettingNotiView.swift */,
+				DE2D6BBA2B04DB7E002AFBDC /* NotificationManager.swift */,
 			);
 			path = SettingViews;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				7D67F40C2AFA3BE000F7931D /* GestureModifier.swift in Sources */,
 				DE895D962B01BB8400FB2226 /* AuthViewModel.swift in Sources */,
 				7D67F4062AFA3BA600F7931D /* SympView.swift in Sources */,
+				DE2D6BBB2B04DB7E002AFBDC /* NotificationManager.swift in Sources */,
 				DE4140572AFF72C300A20CC9 /* LaunchScreenView.swift in Sources */,
 				7D35A2A92B02EB2600CE5C0D /* ProfileViewModel.swift in Sources */,
 				7D35A2B72B04CFD400CE5C0D /* TargetCalViewModel.swift in Sources */,

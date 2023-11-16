@@ -19,7 +19,7 @@ struct SettingMainView: View {
             DividingRectangle(dividingType: .naviTitleDivider)
             Group {
                 NavigationLink(destination: SettingNotiView()) {
-                    SettingList(listTitle: "알림 설정", listCaption: "알림 시간 설정 및 알람별 활성화 설정")
+                    SettingList(listTitle: "알림 설정", listCaption: "알림 시간 설정 및 알람별 활성화 설정") 
                 }
                 NavigationLink(destination: SettingGuideView()) {
                     SettingList(listTitle: "사용 가이드", listCaption: "앱 사용 가이드")
