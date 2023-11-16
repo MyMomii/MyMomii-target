@@ -34,18 +34,11 @@ class NotificationManager {
         content.subtitle = "생리 시작 알림"
         content.body = "오늘 생리가 시작돼요."
         content.sound = .default
-        
-//        // MARK: - time interval로 푸시알림 테스트
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5.0, repeats: false)
-//        let request = UNNotificationRequest(
-//            identifier: UUID().uuidString,
-//            content: content,
-//            trigger: trigger)
 
         // MARK: - date로 푸시알림 받기
         var dateComponents = DateComponents()
         dateComponents.hour = 9
-        dateComponents.minute = 0 
+        dateComponents.minute = 0
         dateComponents.year = Int(String(expectedDate.prefix(4)))
         dateComponents.month = Int(String(expectedDate.dropFirst(4).prefix(2)))
         dateComponents.day = Int(String(expectedDate.dropFirst(6).prefix(2)))
@@ -71,4 +64,3 @@ class NotificationManager {
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
 }
-
