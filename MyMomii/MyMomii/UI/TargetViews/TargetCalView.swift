@@ -307,12 +307,10 @@ struct MensDataRect: View {
         .frame(height: CalendarRect.mensSetHeight)
         .task {
             try? await viewModel.getMensInfoForSelectedDate(selectedDate: firestoreFormatter.string(from: selectedDate))
-            print(viewModel.mensInfosForSelectedDate)
         }
         .onChange(of: selectedDate) {
             Task {
                 try? await viewModel.getMensInfoForSelectedDate(selectedDate: firestoreFormatter.string(from: selectedDate))
-                print(viewModel.mensInfosForSelectedDate)
             }
         }
     }

@@ -18,9 +18,9 @@ final class SympViewModel: ObservableObject {
         self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
     }
 
-    func addMensInfo(mensSymp: String, mensAmt: String, emoLv: String, dateOfMens: String) {
+    func addMensInfo(id: String, mensSymp: String, mensAmt: String, emoLv: String, dateOfMens: String) {
         guard let user else { return }
-        let mensInfo = MensInfo(id: "", mensSymp: mensSymp, mensAmt: mensAmt, emoLv: emoLv, dateOfMens: dateOfMens, regDt: Date())
+        let mensInfo = MensInfo(id: id, mensSymp: mensSymp, mensAmt: mensAmt, emoLv: emoLv, dateOfMens: dateOfMens, regDt: Date())
         Task {
             try await UserManager.shared.addMensInfo(userId: user.userId, mensInfo: mensInfo)
         }
