@@ -21,7 +21,6 @@
 		7D5D05452AFC80CB0004D3F4 /* Confetti_02.json in Resources */ = {isa = PBXBuildFile; fileRef = 7D5D05432AFC80CB0004D3F4 /* Confetti_02.json */; };
 		7D5D05462AFC80CB0004D3F4 /* Confetti_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 7D5D05442AFC80CB0004D3F4 /* Confetti_01.json */; };
 		7D5D054C2AFCA3060004D3F4 /* DeviceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5D054B2AFCA3050004D3F4 /* DeviceSize.swift */; };
-		7D5D05542AFCB1010004D3F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D5D05532AFCB1010004D3F4 /* GoogleService-Info.plist */; };
 		7D67F3F32AFA0BBC00F7931D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7D67F3F22AFA0BBC00F7931D /* .swiftlint.yml */; };
 		7D67F4002AFA3B0900F7931D /* ModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F3FF2AFA3B0900F7931D /* ModelTest.swift */; };
 		7D67F4022AFA3B9B00F7931D /* TargetMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F4012AFA3B9B00F7931D /* TargetMainView.swift */; };
@@ -34,6 +33,7 @@
 		7D67F4172AFA3BED00F7931D /* SettingMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F4102AFA3BEC00F7931D /* SettingMainView.swift */; };
 		7D67F4192AFA3BED00F7931D /* SettingGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F4122AFA3BEC00F7931D /* SettingGuideView.swift */; };
 		7D67F41A2AFA3BED00F7931D /* SettingComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F4132AFA3BEC00F7931D /* SettingComponents.swift */; };
+		7D7C0FC02B06F44D00E2917A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D7C0FBF2B06F44D00E2917A /* GoogleService-Info.plist */; };
 		7D97FE2D2AF9DE4D000608DA /* MyMomiiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D97FE2C2AF9DE4D000608DA /* MyMomiiApp.swift */; };
 		7D97FE2F2AF9DE4D000608DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D97FE2E2AF9DE4D000608DA /* ContentView.swift */; };
 		7D97FE312AF9DE4E000608DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D97FE302AF9DE4E000608DA /* Assets.xcassets */; };
@@ -92,7 +92,6 @@
 		7D5D05432AFC80CB0004D3F4 /* Confetti_02.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Confetti_02.json; sourceTree = "<group>"; };
 		7D5D05442AFC80CB0004D3F4 /* Confetti_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Confetti_01.json; sourceTree = "<group>"; };
 		7D5D054B2AFCA3050004D3F4 /* DeviceSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceSize.swift; sourceTree = "<group>"; };
-		7D5D05532AFCB1010004D3F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7D67F3F22AFA0BBC00F7931D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7D67F3FF2AFA3B0900F7931D /* ModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTest.swift; sourceTree = "<group>"; };
 		7D67F4012AFA3B9B00F7931D /* TargetMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetMainView.swift; sourceTree = "<group>"; };
@@ -105,6 +104,7 @@
 		7D67F4102AFA3BEC00F7931D /* SettingMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingMainView.swift; sourceTree = "<group>"; };
 		7D67F4122AFA3BEC00F7931D /* SettingGuideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingGuideView.swift; sourceTree = "<group>"; };
 		7D67F4132AFA3BEC00F7931D /* SettingComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingComponents.swift; sourceTree = "<group>"; };
+		7D7C0FBF2B06F44D00E2917A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7D97FE292AF9DE4D000608DA /* MyMomii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMomii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D97FE2C2AF9DE4D000608DA /* MyMomiiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMomiiApp.swift; sourceTree = "<group>"; };
 		7D97FE2E2AF9DE4D000608DA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -220,10 +220,10 @@
 		7D97FE2B2AF9DE4D000608DA /* MyMomii */ = {
 			isa = PBXGroup;
 			children = (
+				7D7C0FBF2B06F44D00E2917A /* GoogleService-Info.plist */,
 				7D35A2A52B02D94600CE5C0D /* Profile */,
 				7D4ECAA02B02728D009E0B6B /* Authentication */,
 				7D4ECA9D2B023019009E0B6B /* Firestore */,
-				7D5D05532AFCB1010004D3F4 /* GoogleService-Info.plist */,
 				7D97FE3A2AF9DE9B000608DA /* Model */,
 				7DADB0522AFBD0A600A6846B /* LoFi */,
 				7D97FE3B2AF9DF0D000608DA /* UI */,
@@ -426,8 +426,8 @@
 				7D5D05452AFC80CB0004D3F4 /* Confetti_02.json in Resources */,
 				7D5D05462AFC80CB0004D3F4 /* Confetti_01.json in Resources */,
 				7D97FE342AF9DE4E000608DA /* Preview Assets.xcassets in Resources */,
+				7D7C0FC02B06F44D00E2917A /* GoogleService-Info.plist in Resources */,
 				7D97FE312AF9DE4E000608DA /* Assets.xcassets in Resources */,
-				7D5D05542AFCB1010004D3F4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,7 +641,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.AhnNyeong.MyMomii-target";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.AhnNyeong.MyMomii-target-AppStore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
