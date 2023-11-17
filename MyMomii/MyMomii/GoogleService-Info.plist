@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.AhnNyeong.MyMomii-target</string>
+	<string>com.AhnNyeong.MyMomii-target-AppStore</string>
 	<key>PROJECT_ID</key>
 	<string>mymomii-tar</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,7 +25,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:838112572466:ios:969527280a2c1fd6c3b82b</string>
+	<string>1:838112572466:ios:ed5dad28a7614603c3b82b</string>
 	<key>DATABASE_URL</key>
 	<string>https://mymomii-tar-default-rtdb.firebaseio.com</string>
 </dict>
