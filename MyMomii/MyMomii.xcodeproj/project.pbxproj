@@ -17,7 +17,6 @@
 		7D4ECAA22B0272B4009E0B6B /* AuthenticationUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4ECAA12B0272B4009E0B6B /* AuthenticationUIView.swift */; };
 		7D4ECAA42B0273C2009E0B6B /* SignInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4ECAA32B0273C2009E0B6B /* SignInEmailView.swift */; };
 		7D4ECAA62B027652009E0B6B /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4ECAA52B027652009E0B6B /* AuthenticationManager.swift */; };
-		7D4ECAA82B027CA1009E0B6B /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4ECAA72B027CA1009E0B6B /* RootView.swift */; };
 		7D5D05452AFC80CB0004D3F4 /* Confetti_02.json in Resources */ = {isa = PBXBuildFile; fileRef = 7D5D05432AFC80CB0004D3F4 /* Confetti_02.json */; };
 		7D5D05462AFC80CB0004D3F4 /* Confetti_01.json in Resources */ = {isa = PBXBuildFile; fileRef = 7D5D05442AFC80CB0004D3F4 /* Confetti_01.json */; };
 		7D5D054C2AFCA3060004D3F4 /* DeviceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5D054B2AFCA3050004D3F4 /* DeviceSize.swift */; };
@@ -88,7 +87,6 @@
 		7D4ECAA12B0272B4009E0B6B /* AuthenticationUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationUIView.swift; sourceTree = "<group>"; };
 		7D4ECAA32B0273C2009E0B6B /* SignInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailView.swift; sourceTree = "<group>"; };
 		7D4ECAA52B027652009E0B6B /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
-		7D4ECAA72B027CA1009E0B6B /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		7D5D05432AFC80CB0004D3F4 /* Confetti_02.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Confetti_02.json; sourceTree = "<group>"; };
 		7D5D05442AFC80CB0004D3F4 /* Confetti_01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Confetti_01.json; sourceTree = "<group>"; };
 		7D5D054B2AFCA3050004D3F4 /* DeviceSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceSize.swift; sourceTree = "<group>"; };
@@ -172,7 +170,6 @@
 		7D4ECA9D2B023019009E0B6B /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
-				7D4ECAA72B027CA1009E0B6B /* RootView.swift */,
 				7D4ECA9E2B023029009E0B6B /* UserManager.swift */,
 			);
 			path = Firestore;
@@ -476,7 +473,6 @@
 				7DADB0592AFBD0A700A6846B /* MensInfo.swift in Sources */,
 				8E36B6E62B060ED800EE7A30 /* LoadingView.swift in Sources */,
 				7D67F4022AFA3B9B00F7931D /* TargetMainView.swift in Sources */,
-				7D4ECAA82B027CA1009E0B6B /* RootView.swift in Sources */,
 				7D67F4172AFA3BED00F7931D /* SettingMainView.swift in Sources */,
 				7D67F40D2AFA3BE000F7931D /* TextModifier.swift in Sources */,
 				7D97FE2D2AF9DE4D000608DA /* MyMomiiApp.swift in Sources */,
