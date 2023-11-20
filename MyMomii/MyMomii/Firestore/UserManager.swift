@@ -9,18 +9,11 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct Movie: Codable {
-    let id: String
-    let title: String
-    let isPopular: Bool
-}
-
 struct DBUser: Codable {
     let userId: String
     let isAnonymous: Bool?
     let dateCreated: Date?
     let preferences: [String]?
-    let favoriteMovie: Movie?
     let mensInfo: MensInfo?
 
     init(auth: AuthDataResultModel) {
@@ -28,7 +21,6 @@ struct DBUser: Codable {
         self.isAnonymous = auth.isAnonymous
         self.dateCreated = Date()
         self.preferences = nil
-        self.favoriteMovie = nil
         self.mensInfo = nil
     }
 
@@ -37,14 +29,12 @@ struct DBUser: Codable {
         isAnonymous: Bool? = nil,
         dateCreated: Date? = nil,
         preferences: [String]? = nil,
-        favoriteMovie: Movie? = nil,
         mensInfo: MensInfo? = nil
     ) {
         self.userId = userId
         self.isAnonymous = isAnonymous
         self.dateCreated = dateCreated
         self.preferences = preferences
-        self.favoriteMovie = favoriteMovie
         self.mensInfo = mensInfo
     }
 
@@ -53,7 +43,6 @@ struct DBUser: Codable {
         case isAnonymous = "is_anonymous"
         case dateCreated = "date_created"
         case preferences = "preferences"
-        case favoriteMovie = "favorite_movie"
         case mensInfo = "mens_info"
     }
 
@@ -63,7 +52,6 @@ struct DBUser: Codable {
         self.isAnonymous = try container.decodeIfPresent(Bool.self, forKey: .isAnonymous)
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.preferences = try container.decodeIfPresent([String].self, forKey: .preferences)
-        self.favoriteMovie = try container.decodeIfPresent(Movie.self, forKey: .favoriteMovie)
         self.mensInfo = try container.decodeIfPresent(MensInfo.self, forKey: .mensInfo)
     }
 
@@ -73,7 +61,6 @@ struct DBUser: Codable {
         try container.encodeIfPresent(self.isAnonymous, forKey: .isAnonymous)
         try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
         try container.encodeIfPresent(self.preferences, forKey: .preferences)
-        try container.encodeIfPresent(self.favoriteMovie, forKey: .favoriteMovie)
         try container.encodeIfPresent(self.mensInfo, forKey: .mensInfo)
     }
 
@@ -136,26 +123,6 @@ final class UserManager {
         ]
 
         try await userDocument(userId: userId).updateData(data)
-    }
-
-    func addFavoriteMovie(userId: String, movie: Movie) async throws {
-        guard let data = try? encoder.encode(movie) else {
-            throw URLError(.badURL)
-        }
-
-        let dict: [String: Any] = [
-            DBUser.CodingKeys.favoriteMovie.rawValue: data
-        ]
-
-        try await userDocument(userId: userId).updateData(dict)
-    }
-
-    func removeFavoriteMovie(userId: String) async throws {
-        let data: [String: Any?] = [
-            DBUser.CodingKeys.favoriteMovie.rawValue: nil
-        ]
-
-        try await userDocument(userId: userId).updateData(data as [AnyHashable: Any])
     }
 
     func addMensInfo(userId: String, mensInfo: MensInfo) async throws {
