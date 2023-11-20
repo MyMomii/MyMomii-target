@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		7D35A2A22B02819900CE5C0D /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D35A2A12B02819900CE5C0D /* SettingView.swift */; };
 		7D35A2A42B02D63400CE5C0D /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D35A2A32B02D63400CE5C0D /* AuthenticationViewModel.swift */; };
-		7D35A2A72B02DAAA00CE5C0D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D35A2A62B02DAAA00CE5C0D /* ProfileView.swift */; };
-		7D35A2A92B02EB2600CE5C0D /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D35A2A82B02EB2600CE5C0D /* ProfileViewModel.swift */; };
 		7D35A2B12B037E5700CE5C0D /* SympViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D35A2B02B037E5700CE5C0D /* SympViewModel.swift */; };
 		7D35A2B72B04CFD400CE5C0D /* TargetCalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D35A2B62B04CFD400CE5C0D /* TargetCalViewModel.swift */; };
 		7D4ECA9F2B023029009E0B6B /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4ECA9E2B023029009E0B6B /* UserManager.swift */; };
@@ -79,8 +77,6 @@
 /* Begin PBXFileReference section */
 		7D35A2A12B02819900CE5C0D /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		7D35A2A32B02D63400CE5C0D /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
-		7D35A2A62B02DAAA00CE5C0D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		7D35A2A82B02EB2600CE5C0D /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		7D35A2B02B037E5700CE5C0D /* SympViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SympViewModel.swift; sourceTree = "<group>"; };
 		7D35A2B62B04CFD400CE5C0D /* TargetCalViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetCalViewModel.swift; sourceTree = "<group>"; };
 		7D4ECA9E2B023029009E0B6B /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -158,15 +154,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7D35A2A52B02D94600CE5C0D /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				7D35A2A62B02DAAA00CE5C0D /* ProfileView.swift */,
-				7D35A2A82B02EB2600CE5C0D /* ProfileViewModel.swift */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
 		7D4ECA9D2B023019009E0B6B /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,7 +205,6 @@
 			isa = PBXGroup;
 			children = (
 				7D7C0FBF2B06F44D00E2917A /* GoogleService-Info.plist */,
-				7D35A2A52B02D94600CE5C0D /* Profile */,
 				7D4ECAA02B02728D009E0B6B /* Authentication */,
 				7D4ECA9D2B023019009E0B6B /* Firestore */,
 				7D97FE3A2AF9DE9B000608DA /* Model */,
@@ -484,10 +470,8 @@
 				7D67F4062AFA3BA600F7931D /* SympView.swift in Sources */,
 				DE2D6BBB2B04DB7E002AFBDC /* NotificationManager.swift in Sources */,
 				DE4140572AFF72C300A20CC9 /* LaunchScreenView.swift in Sources */,
-				7D35A2A92B02EB2600CE5C0D /* ProfileViewModel.swift in Sources */,
 				7D35A2B72B04CFD400CE5C0D /* TargetCalViewModel.swift in Sources */,
 				DE895D982B01BB9B00FB2226 /* AuthenticationView.swift in Sources */,
-				7D35A2A72B02DAAA00CE5C0D /* ProfileView.swift in Sources */,
 				7D4ECAA42B0273C2009E0B6B /* SignInEmailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
