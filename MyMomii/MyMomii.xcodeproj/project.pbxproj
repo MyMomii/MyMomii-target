@@ -27,6 +27,7 @@
 		7D67F4192AFA3BED00F7931D /* SettingGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F4122AFA3BEC00F7931D /* SettingGuideView.swift */; };
 		7D67F41A2AFA3BED00F7931D /* SettingComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D67F4132AFA3BEC00F7931D /* SettingComponents.swift */; };
 		7D7C0FC02B06F44D00E2917A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D7C0FBF2B06F44D00E2917A /* GoogleService-Info.plist */; };
+		7D7C10002B0C5AFA00E2917A /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C0FFF2B0C5AFA00E2917A /* HapticManager.swift */; };
 		7D97FE2D2AF9DE4D000608DA /* MyMomiiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D97FE2C2AF9DE4D000608DA /* MyMomiiApp.swift */; };
 		7D97FE2F2AF9DE4D000608DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D97FE2E2AF9DE4D000608DA /* ContentView.swift */; };
 		7D97FE312AF9DE4E000608DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D97FE302AF9DE4E000608DA /* Assets.xcassets */; };
@@ -89,6 +90,7 @@
 		7D67F4122AFA3BEC00F7931D /* SettingGuideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingGuideView.swift; sourceTree = "<group>"; };
 		7D67F4132AFA3BEC00F7931D /* SettingComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingComponents.swift; sourceTree = "<group>"; };
 		7D7C0FBF2B06F44D00E2917A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7D7C0FFF2B0C5AFA00E2917A /* HapticManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		7D97FE292AF9DE4D000608DA /* MyMomii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMomii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D97FE2C2AF9DE4D000608DA /* MyMomiiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMomiiApp.swift; sourceTree = "<group>"; };
 		7D97FE2E2AF9DE4D000608DA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 		7D67F4092AFA3BBC00F7931D /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				7D7C0FFF2B0C5AFA00E2917A /* HapticManager.swift */,
 				7D5D054B2AFCA3050004D3F4 /* DeviceSize.swift */,
 				7D67F40A2AFA3BE000F7931D /* GestureModifier.swift */,
 				7D67F40B2AFA3BE000F7931D /* TextModifier.swift */,
@@ -410,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E01FA6C2B0335EE002F77A4 /* TargetCalViewRepresentable.swift in Sources */,
+				7D7C10002B0C5AFA00E2917A /* HapticManager.swift in Sources */,
 				7D67F41A2AFA3BED00F7931D /* SettingComponents.swift in Sources */,
 				7D97FE2F2AF9DE4D000608DA /* ContentView.swift in Sources */,
 				7D35A2A42B02D63400CE5C0D /* AuthenticationViewModel.swift in Sources */,
