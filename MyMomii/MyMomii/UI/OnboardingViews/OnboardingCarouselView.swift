@@ -23,7 +23,6 @@ struct CarouselView: View {
         return selectedImageIndex == imageNames.count - 1
     }
     @State var goToMain = false
-    @EnvironmentObject private var authModel: AuthViewModel
     @AppStorage("isOnBoarding") var isOnBoarding: Bool!
     @StateObject private var viewModel = AuthenticationViewModel()
 

@@ -25,12 +25,4 @@ final class SympViewModel: ObservableObject {
             try await UserManager.shared.addMensInfo(userId: user.userId, mensInfo: mensInfo)
         }
     }
-
-    func removeMensInfo() {
-        guard let user else { return }
-        Task {
-            try await UserManager.shared.removeFavoriteMovie(userId: user.userId)
-            self.user = try await UserManager.shared.getUser(userId: user.userId)
-        }
-    }
 }
