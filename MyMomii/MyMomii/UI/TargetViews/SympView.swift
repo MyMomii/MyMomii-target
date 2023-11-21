@@ -150,6 +150,7 @@ struct MensSympDetailView: View {
                     VStack {
                         Button(action: {
                             mensSympSelected = index
+                            HapticManager.instance.impact(style: .rigid)
                         }, label: {
                             if mensSympSelected == index {
                                 ZStack {
@@ -192,6 +193,7 @@ struct MensAmtDetailView: View {
                     VStack {
                         Button(action: {
                             mensAmtSelected = index
+                            HapticManager.instance.impact(style: .rigid)
                         }, label: {
                             if mensAmtSelected == index {
                                 ZStack {
@@ -234,6 +236,7 @@ struct MoodDetailView: View {
                     VStack {
                         Button(action: {
                             emoLvSelected = index
+                            HapticManager.instance.impact(style: .rigid)
                         }, label: {
                             if emoLvSelected == index {
                                 ZStack {
